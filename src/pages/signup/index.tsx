@@ -1,11 +1,14 @@
-
 import RegisterButton from '@/components/buttons/registerButton.tsx/RegisterButton';
 import SignError from '@/components/errors/SignError';
 import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
 import SocialCircle from '@/components/socialCircle/SocialCircle';
 import TermsCheckbox from '@/components/terms/terms';
 import { SignValueType } from '@/types/signType';
-import { checkEmail, checkNickName, checkPassword } from '@/utils/checkSignInSignOut';
+import {
+  checkEmail,
+  checkNickName,
+  checkPassword,
+} from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -54,12 +57,14 @@ function SignUp() {
   return (
     <FormProvider {...method}>
       <div className="w-full min-h-dvh bg-white flex-center">
-        <div className="max-w-390 flex-1 flex flex-col items-center gap-y-10 px-15 ">
+        <div className="max-w-390 flex-1 flex flex-col items-center gap-y-10 px-15">
           <div className="h-64 flex-center">
             <p className="text-green font-bold text-2xl">Read Me</p>
           </div>
           <p className="text-black font-bold text-xl">회원가입</p>
-          <div className="w-full flex flex-col items-center gap-y-20 text-gray-3 rounded-[10px] border-solid border-2 border-gray-1 py-5">
+          <div
+            className="w-full flex flex-col items-center gap-y-20 text-gray-3 rounded-[10px]
+              border-solid border-2 border-gray-1 py-5">
             <p className="text-center text-xs">
               SNS로 간편하게 로그인/회원가입
             </p>
@@ -79,10 +84,10 @@ function SignUp() {
               id="email"
               placeholder="이메일"
               register={register}
-              isRequired={true}
+              required={true}
               pattern={checkEmail}
             />
-            <SignError errors={errors} id="email" />        
+            <SignError errors={errors} id="email" />
             <label className="text-black text-16 font-bold text-left w-full">
               비밀번호
             </label>
@@ -93,11 +98,11 @@ function SignUp() {
               id="password"
               placeholder="비밀번호"
               register={register}
-              isRequired={true}
+              required={true}
               pattern={checkPassword}
               isError={errors.password}
             />
-            <SignError errors={errors} id="password" />           
+            <SignError errors={errors} id="password" />
             <label className="text-black text-16 font-bold text-left w-full">
               비밀번호확인
             </label>
@@ -105,10 +110,10 @@ function SignUp() {
               id="repassword"
               placeholder="비밀번호확인"
               register={register}
-              isRequired={true}
+              required={true}
               isError={errors.repassword}
             />
-            <SignError errors={errors} id="repassword" />    
+            <SignError errors={errors} id="repassword" />
             <label className="text-gray-6 text-16 font-bold text-left w-full">
               닉네임
             </label>
@@ -119,11 +124,11 @@ function SignUp() {
               id="nickname"
               placeholder="닉네임"
               register={register}
-              isRequired={true}
+              required={true}
               pattern={checkNickName}
               isError={errors.nickname}
             />
-           <SignError errors={errors} id="nickname" />       
+            <SignError errors={errors} id="nickname" />
             <TermsCheckbox />
             <RegisterButton>회원가입</RegisterButton>
           </form>

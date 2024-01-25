@@ -4,8 +4,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useRef, useState } from 'react';
 import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/signInput/SignInput';
-import RegisterButton from '@/components/button/registerButton';
 import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
+import RegisterButton from '@/components/buttons/registerButton.tsx/RegisterButton';
 
 function EditProfile({
   initialProfileImageUrl,

@@ -28,10 +28,10 @@ function SignIn() {
       type: 'manual',
       message: '아이디나 비밀번호가 일치하지 않습니다.',
     });
-  };   
+  };
   return (
     <div className="w-full min-h-dvh flex-center bg-white">
-      <div className="max-w-300 flex-1 flex flex-col items-center gap-y-10 ">
+      <div className="max-w-300 flex-1 flex flex-col items-center gap-y-10">
         <div className="h-64 flex-center">
           <p className="text-green font-bold text-2xl">Read Me</p>
         </div>
@@ -43,17 +43,17 @@ function SignIn() {
               id="email"
               placeholder="이메일"
               register={register}
-              isRequired={true}
+              required={true}
               pattern={checkEmail}
             />
             <PasswordInput
               id="password"
               placeholder="비밀번호"
               register={register}
-              isRequired={true}
+              required={true}
               isError={errors.password}
             />
-            <SignError errors={errors} id="password" />           
+            <SignError errors={errors} id="password" />
           </div>
           <div className="w-full flex">
             <input
@@ -64,7 +64,8 @@ function SignIn() {
             <label htmlFor="loginSaved " className="flex-center">
               <div
                 onClick={() => setIsClick(!isClick)}
-                className={`flex-center ${isClick ? 'bg-green' : ''} rounded-full w-20 h-20 border-solid border-2  border-gray-1 cursor-pointer`}>
+                className={`flex-center ${isClick ? 'bg-green' : ''} rounded-full w-20 h-20 border-solid
+                  border-2 border-gray-1 cursor-pointer`}>
                 {isClick && (
                   <Image
                     alt=""
@@ -86,7 +87,9 @@ function SignIn() {
           </Link>
         </div>
         <div className="flex flex-col gap-y-20">
-          <p className="text-center text-xs text-gray-3">SNS로 로그인/회원가입</p>
+          <p className="text-center text-xs text-gray-3">
+            SNS로 로그인/회원가입
+          </p>
           <div className="w-184 flex justify-between">
             <SocialCircle />
             <SocialCircle />

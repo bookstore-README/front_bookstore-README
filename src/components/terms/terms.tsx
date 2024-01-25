@@ -44,7 +44,7 @@ function TermsCheckbox() {
   }, [checkedStates, setValue]);
 
   return (
-    <div className="w-360 mobile:w-330 ">
+    <div className="w-360 mobile:w-330">
       <span className="font-bold inline-block pb-8">약관동의</span>
       <div className="h-48 flex items-center border-0 border-b-[1px] border-b-[#DBDBDB] gap-8 relative">
         <label htmlFor="selectAll" className="text-15 font-medium">
@@ -61,9 +61,8 @@ function TermsCheckbox() {
             {...register('selectAll')}
             checked={Object.values(checkedStates).every(Boolean)}
             onChange={handleSelectAll}
-            className="p-1 relative float-left mr-8 mt-0.5 w-20 h-20 rounded-full
-          border-2 border-solid border-gray-3 checked:bg-green checked:border-0
-          appearance-none "
+            className="p-1 relative float-left mr-8 mt-0.5 w-20 h-20 rounded-full border-2 border-solid
+              border-gray-3 checked:bg-green checked:border-0 appearance-none"
           />
           전체 동의
         </label>
@@ -91,9 +90,8 @@ function TermsCheckbox() {
                   type="checkbox"
                   checked={checkedStates[termsTitle]}
                   onChange={() => handleIndividualCheck(termsTitle)}
-                  className=" p-1 relative float-left mr-8 mt-0.5 w-20 h-20 rounded-full
-                border-2 border-solid border-gray-3 checked:bg-green checked:border-0
-                appearance-none "
+                  className="p-1 relative float-left mr-8 mt-0.5 w-20 h-20 rounded-full border-2 border-solid
+                    border-gray-3 checked:bg-green checked:border-0 appearance-none"
                 />
                 {termsTitle}
               </label>

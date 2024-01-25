@@ -1,4 +1,11 @@
-import { BaseSyntheticEvent, Dispatch, MutableRefObject, SetStateAction, useEffect, useState } from 'react';
+import {
+  BaseSyntheticEvent,
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 
 function useShowDropDown(
   ref: MutableRefObject<HTMLDivElement | null>,
@@ -24,4 +31,4 @@ function useShowDropDown(
   return [showOptions, setShowOptions];
 }
 
-export default useShowDropDown
+export default useShowDropDown;

@@ -1,7 +1,7 @@
 import { PasswordInput } from '@/components/signInput/SignInput';
 import { EditPasswordType } from '@/types/editProfileTypes';
 import { FormProvider, useForm } from 'react-hook-form';
-import RegisterButton from '@/components/button/registerButton';
+import RegisterButton from '@/components/buttons/registerButton.tsx/RegisterButton';
 
 function EditPassword() {
   const method = useForm<EditPasswordType>({
