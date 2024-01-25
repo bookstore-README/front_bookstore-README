@@ -11,9 +11,11 @@
   --black: 54 54 54;
   --white: 255 255 255;
   --gray-1: 219 219 219;
-  --gray-3: 168 168 168;
+  --gray-2: 168 168 168;
   --gray-3: 118 118 118;
   --gray-4: 80 80 80;
+  --gray-5: 245 245 245;
+  --gray-6: 54 54 54;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -23,11 +25,11 @@
     --background-end-rgb: 0 0 0;
   }
 } */
-/* 
+
 body {
   @apply text-black;
-}
-
+} 
+/* 
 @layer utilities {
   /* .text-balance {
     text-wrap: balance;
