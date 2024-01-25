@@ -21,8 +21,7 @@ function OrderCount({orderDate, orderCount}:OrderCountProps) {
         </div>
     </div>
   )
-}
-
+}  
 
 
 export default OrderCount
