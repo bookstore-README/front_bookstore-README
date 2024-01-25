@@ -69,7 +69,6 @@ function PasswordInput({
   ...props
 }: InputProps) {
   const [isView, setIsView] = useState(false);
-
   return (
     <div className="relative w-full">
       <button type="button" className="absolute top-18 right-14">
