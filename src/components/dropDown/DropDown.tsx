@@ -23,7 +23,7 @@ function DropDown() {
             {seletedItem}
             <div>            
             <Image
-              src={isClick ? 'icons/upArrow.svg' : 'icons/downArrow.svg'}
+              src={isClick ? 'icons/UpArrow.svg' : 'icons/DownArrow.svg'}
               alt=""
               width={20}
               height={20}
