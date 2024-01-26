@@ -3,6 +3,7 @@ import DefaultImage from '@/public/images/SampleBookCover4.jpeg';
 import BookLabel from '@/public/icons/BookLabelIcon.svg';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { useRef, useState } from 'react';
+import { IMAGE_SIZE } from 'src/constants/bookInfo';
 
 interface PreviewBookInfoProps {
   image?: string;
@@ -21,18 +22,6 @@ function PreviewBookInfo({
 }: PreviewBookInfoProps) {
   const bookImageRef = useRef<HTMLImageElement>(null);
   const [isLabelMove, setIsLabelMove] = useState(false);
-  const IMAGE_SIZE = {
-    lg: {
-      width: 'w-192',
-      height: 'h-291',
-      heightNumber: 291,
-    },
-    md: {
-      width: 'w-163',
-      height: 'h-246',
-      heightNumber: 246,
-    },
-  };
   const imageSize = IMAGE_SIZE[size];
 
   return (
@@ -43,7 +32,7 @@ function PreviewBookInfo({
         <div className="relative">
           {ranking && (
             <div
-              className={`absolute top-[-2px] left-17 ${isLabelMove ? 'top-29 left-17' : ''}`}>
+              className={`absolute  left-17 ${isLabelMove ? 'top-29 ' : 'top-[-2px]'}`}>
               <Image
                 src={BookLabel}
                 alt="베스트셀러 라벨 아이콘"
@@ -53,9 +42,7 @@ function PreviewBookInfo({
                 onLoad={() => {
                   if (
                     (bookImageRef.current?.height || 0) > imageSize.heightNumber
-                  ) {
-                    setIsLabelMove(true);
-                  }
+                  ) setIsLabelMove(true);
                 }}
               />
               <span className="text-white text-13 font-bold absolute top-0 left-9">
@@ -79,12 +66,10 @@ function PreviewBookInfo({
         </p>
       )}
       {authorList && (
-        <div className={`text-overflow2 ${size === 'md' ? 'text-center' : ''}`}>
           <BookAuthor
             authorList={authorList}
-            classNames={`flex flex-start ${imageSize.width} text-overflow2`}
+            classNames={`flex ${size === 'md' ? 'flex-center' : ''} ${imageSize.width} text-overflow2`}
           />
-        </div>
       )}
     </div>
   );

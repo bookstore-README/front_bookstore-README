@@ -3,12 +3,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CheckIcon from '@/public/icons/CheckIcon.svg';
 import RightArrowIcon from '@/public/icons/RightArrow.svg';
-
-const TERMS_TITLES = [
-  '만 14세이상 입니다',
-  '이용약관',
-  '개인정보 수집 및 이용동의',
-];
+import { TERMS_TITLES } from 'src/constants/sign';
 
 interface CheckedStates {
   [key: string]: boolean;
