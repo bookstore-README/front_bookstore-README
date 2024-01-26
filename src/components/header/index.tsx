@@ -1,10 +1,10 @@
-import CartButton from '@/components/header/cartButton';
-import SearchInput from '@/components/header/searchInput';
-import MyPageButton from '@/components/header/myPageButton';
-import SignInButton from '@/components/header/signInButton';
-import SignOutButton from '@/components/header/signOutButton';
-import SignUpButton from '@/components/buttons/signUpButton';
-import HeaderLayout from '@/containers/HeaderLayout';
+import CartButton from '@/components/button/cartButton';
+import SearchInput from '@/components/input/searchInput';
+import MyPageButton from '@/components/button/myPageButton';
+import SignInButton from '@/components/button/signInButton';
+import SignOutButton from '@/components/button/signOutButton';
+import SignUpButton from '@/components/button/signUpButton';
+import HeaderLayout from '../layout/headerLayout';
 
 export interface HeaderProps {
   isLoggedIn: boolean;

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-import BookRating from '@/components/bookComponents/bookRating/bookRating';
-import BookAuthor from '@/components/bookComponents/bookAuthor/bookAuthor';
+import BookRating from '@/components/book/bookRating/bookRating';
+import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { BookReviewType } from '@/types/bookReviewType';
-import KebabButton from '../buttons/kebabButton/kebabButton';
+import KebabButton from '@/components/button/kebab/kebabButton';
 
 function BookReviewCard({ book, review }: BookReviewType) {
   const [isSummarized, setIsSummarized] = useState(true);

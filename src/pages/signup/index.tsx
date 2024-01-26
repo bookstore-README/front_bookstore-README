@@ -1,9 +1,11 @@
-import RegisterButton from '@/components/buttons/registerButton.tsx/registerButton';
+import RegisterButton from '@/components/button/register/registerButton';
 import SignError from '@/components/errors/signError';
-
-import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
-import SocialCircle from '@/components/socialCircle/socialCircle';
-import TermsCheckbox from '@/components/terms/terms';
+import {
+  PasswordInput,
+  TextInput,
+} from '@/components/input/signInput/signInput';
+import SocialCircle from '@/components/chip/socialCircle';
+import TermsCheckbox from '@/components/container/terms/terms';
 import { SignValueType } from '@/types/signType';
 import {
   checkEmail,

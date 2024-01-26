@@ -28,15 +28,16 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
         readOnly
       />
       <Image
-        src="/icons/Calendar.svg"
+        src="/images/calendar.svg"
         width={20}
         height={20}
         alt="calendar"
-      
+        className=""
       />
     </div>
   );
 });
+
 function OrderDate({ pastDate, setSelectedItem }: OrderDateProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());

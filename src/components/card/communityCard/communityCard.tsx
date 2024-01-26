@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import EmojiButtonContainer from '@/components/communityCard/emoji/emojiButtonContainer';
-import KebabButton from '@/components/buttons/kebabButton/kebabButton';
+import EmojiButtonContainer from '@/components/card/communityCard/emoji/emojiButtonContainer';
+import KebabButton from '@/components/button/kebab/kebabButton';
 interface CommunityCardProps {
   profileImg: string;
   userNickname: string;

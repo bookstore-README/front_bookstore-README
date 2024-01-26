@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { BookOrderType } from '@/types/bookOrderType';
-import BookAuthor from '@/components/bookComponents/bookAuthor/bookAuthor';
+import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 
 function BookOrderCard({ book, order }: BookOrderType) {
   return (

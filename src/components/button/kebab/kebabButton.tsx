@@ -4,7 +4,7 @@ import { MutableRefObject, useRef } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import KebabDropDownButton, {
   KebabDropDownButtonProps,
-} from '@/components/buttons/kebabButton/kebabDropDownButton';
+} from '@/components/button/kebab/kebabDropDownButton';
 
 function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
   const ref = useRef() as MutableRefObject<HTMLImageElement>;
