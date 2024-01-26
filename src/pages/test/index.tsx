@@ -19,8 +19,7 @@ function TestPage() {
           '이름2',
           '이건엄청나게긴이름이다아아이아아아아아아',
         ]}
-        maxWidth={180}
-        maxHeight={291}
+        size="lg"
       />
       {/* <BookReviewCard /> */}
     </div>

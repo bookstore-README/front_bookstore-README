@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import DefaultImage from '@/public/images/SampleBookCover2.jpeg';
+import DefaultImage from '@/public/images/SampleBookCover4.jpeg';
 import BookLabel from '@/public/icons/BookLabelIcon.svg';
 import BookAuthor from '@/components/bookComponents/bookAuthor/bookAuthor';
 
@@ -8,22 +8,30 @@ interface PreviewBookInfoProps {
   title: string;
   authorList: string[];
   ranking?: number;
-  maxWidth: number;
-  maxHeight: number;
+  size: 'md' | 'lg';
 }
 function PreviewBookInfo({
   image,
   title,
   authorList,
   ranking,
-  maxWidth,
-  maxHeight,
+  size = 'md',
 }: PreviewBookInfoProps) {
+  const IMAGE_SIZE = {
+    lg: {
+      width: 'w-192',
+      height: 'h-291',
+    },
+    md: {
+      width: 'w-163',
+      height: 'h-246',
+    },
+  };
   return (
-    <div className={`flex w-${maxWidth} flex-col`}>
+    <div className={`flex ${IMAGE_SIZE[size].width} flex-col`}>
       <div
-        className={`h-${maxHeight} flex relative justify-center items-end border border-1
-          border-black`}>
+        className={`${IMAGE_SIZE[size].height} flex relative justify-center items-end border
+          border-1 border-black`}>
         <div className="relative">
           {ranking && (
             <div className="absolute top-[-2px] left-17">
@@ -51,7 +59,7 @@ function PreviewBookInfo({
         <div className="text-overflow2">
           <BookAuthor
             authorList={authorList}
-            classNames={`flex flex-start w-${maxWidth} text-overflow2`}
+            classNames={`flex flex-start ${IMAGE_SIZE[size].width} text-overflow2`}
           />
         </div>
       )}
