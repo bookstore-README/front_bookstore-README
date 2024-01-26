@@ -15,12 +15,12 @@ function BookAuthor({ authorList, classNames }: BookAuthorProps) {
       {authorList.map((author, index) => {
         const isLastAuthor = index === authorList.length - 1;
         const authorClass = isLastAuthor
-          ? 'text-gray-3 text-14 overflow-hidden truncate '
+          ? 'text-gray-3 text-14 hover:text-gray-7 overflow-hidden truncate '
           : 'text-gray-3 text-14 hover:text-gray-7 whitespace-nowrap';
         return (
-          <button key={author} className={authorClass}>
+          <button key={index} className={authorClass}>
             {author}
-            {index + 2 > authorList.length || ','}
+            {index < authorList.length - 1 && ', '}
           </button>
         );
       })}
