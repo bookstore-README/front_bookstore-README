@@ -1,5 +1,5 @@
 // import BookReviewCard from '@/components/bookReviewCard/bookReviewCard';
-import DropDown from '@/components/dropDown/DropDown';
+import DropDown from '@/components/dropDown/dropDown';
 import PreviewBookInfo from '@/components/previewBookInfo/previewBookInfo';
 
 function TestPage() {

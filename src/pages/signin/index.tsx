@@ -1,7 +1,8 @@
-import RegisterButton from '@/components/buttons/registerButton.tsx/RegisterButton';
-import SignError from '@/components/errors/SignError';
+import RegisterButton from '@/components/buttons/registerButton.tsx/registerButton';
+import SignError from '@/components/errors/signError';
+
 import { PasswordInput, TextInput } from '@/components/signInput/SignInput';
-import SocialCircle from '@/components/socialCircle/SocialCircle';
+import SocialCircle from '@/components/socialCircle/socialCircle';
 import { SignValueType } from '@/types/signType';
 import { checkEmail } from '@/utils/checkSignInSignOut';
 import Image from 'next/image';

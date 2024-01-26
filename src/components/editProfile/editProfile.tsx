@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/signInput/SignInput';
 import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
-import RegisterButton from '@/components/buttons/registerButton.tsx/RegisterButton';
+import RegisterButton from '@/components/buttons/registerButton.tsx/registerButton';
 
 function EditProfile({
   initialProfileImageUrl,

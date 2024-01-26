@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 import useShowDropDown from '@/hooks/useShowDropDown';
-import DropDownItem from './DropDownItem';
-import OrderDate from '@/components/orderDate/OrderDate';
 import Image from 'next/image';
+import OrderDate from '@/components/orderDate/orderDate';
+import DropDownItem from '@/components/dropDown/dropDownItem';
 
 function DropDown() {
-  const [seletedItem, setSeltedItem] = useState('전체보기');
+  const [seletedItem, setSelectedItem] = useState('전체보기');
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const handleClick = () => setShowOptions(!showOptions);
@@ -16,6 +16,7 @@ function DropDown() {
     '최근 3개월',
     '최근 6개월',
     '최근 1년',
+    '직접 입력',
   ];
 
   return (
@@ -25,7 +26,7 @@ function DropDown() {
           <button
             onClick={handleClick}
             className="flex justify-between flex-row items-center px-5 border-solid border-2
-              border-gray-1 w-150 h-42 text-left">
+              rounded-[5px] border-gray-1 w-150 h-42 text-left">
             {seletedItem}
             <div>
               <Image
@@ -44,7 +45,7 @@ function DropDown() {
                 <DropDownItem
                   key={menu}
                   menu={menu}
-                  setSeltedItem={setSeltedItem}
+                  setSeltedItem={setSelectedItem}
                   setIsClick={setShowOptions}
                 />
               );
@@ -53,7 +54,7 @@ function DropDown() {
         )}
       </div>
       <div className="flex-center">
-        <OrderDate pastDate={seletedItem} setSeltedItem={setSeltedItem} />
+        <OrderDate pastDate={seletedItem} setSelectedItem={setSelectedItem} />
       </div>
     </div>
   );

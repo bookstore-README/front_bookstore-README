@@ -15,19 +15,29 @@ import { getDateAgo } from '@/utils/getTimeAgo';
 
 type OrderDateProps = {
   pastDate: string;
-  setSeltedItem: Dispatch<SetStateAction<string>>;
+  setSelectedItem: Dispatch<SetStateAction<string>>;
 };
 
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
   return (
-    <div className="border-solid border-2 border-gray-1 w-135 h-42  flex-center px-9 rounded-[5px]">
-      <input {...props} ref={ref} className="focus:outline-none w-1 text-center flex-1" readOnly/>
-      <Image src="/images/calendar.svg" width={20} height={20} alt="calendar" className="" />
+    <div className="border-solid border-2 border-gray-1 w-135 h-42 flex-center px-9 rounded-[5px]">
+      <input
+        {...props}
+        ref={ref}
+        className="focus:outline-none w-1 text-center flex-1"
+        readOnly
+      />
+      <Image
+        src="/icons/Calendar.svg"
+        width={20}
+        height={20}
+        alt="calendar"
+      
+      />
     </div>
   );
 });
-
-function OrderDate({ pastDate, setSeltedItem }: OrderDateProps) {
+function OrderDate({ pastDate, setSelectedItem }: OrderDateProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const startDateRef = useRef<HTMLInputElement>(null);
@@ -71,7 +81,7 @@ function OrderDate({ pastDate, setSeltedItem }: OrderDateProps) {
         dateFormat="yy.MM.dd"
         onChange={(date) => {
           date && setStartDate(date);
-          setSeltedItem('직접 입력');
+          setSelectedItem('직접 입력');
         }}
         customInput={<CustomOrderInput ref={startDateRef} />}
       />
@@ -82,7 +92,7 @@ function OrderDate({ pastDate, setSeltedItem }: OrderDateProps) {
         dateFormat="yy.MM.dd"
         onChange={(date) => {
           date && setEndDate(date);
-          setSeltedItem('직접 입력');
+          setSelectedItem('직접 입력');
         }}
         customInput={<CustomOrderInput ref={endDateRef} />}
       />
