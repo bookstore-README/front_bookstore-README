@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import DefaultImage from '@/public/images/SampleBookCover4.jpeg';
 import BookLabel from '@/public/icons/BookLabelIcon.svg';
-import BookAuthor from '@/components/bookComponents/bookAuthor/bookAuthor';
+import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 
 interface PreviewBookInfoProps {
   image?: string;

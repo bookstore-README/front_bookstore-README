@@ -1,6 +1,6 @@
 // import BookReviewCard from '@/components/bookReviewCard/bookReviewCard';
 import DropDown from '@/components/dropDown/dropDown';
-import PreviewBookInfo from '@/components/previewBookInfo/previewBookInfo';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 
 function TestPage() {
   return (
