@@ -62,7 +62,7 @@ function PreviewBookInfo({
   return (
     <div className={`flex ${imageSize.width} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletWidth} flex-col`}>
       <div
-        className={`${imageSize.height} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletHeight} flex relative justify-center items-end border border-1
+        className={`${imageSize.height} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletHeight} flex relative justify-center items-end
           overflow-hidden`}>
         <div className="relative">
           {ranking && (
