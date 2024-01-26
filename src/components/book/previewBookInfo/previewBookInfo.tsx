@@ -3,14 +3,13 @@ import DefaultImage from '@/public/images/SampleBookCover4.jpeg';
 import BookLabel from '@/public/icons/BookLabelIcon.svg';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { useRef, useState } from 'react';
-import { IMAGE_SIZE } from 'src/constants/bookInfo';
 
 interface PreviewBookInfoProps {
   image?: string;
-  title: string;
-  authorList: string[];
+  title?: string;
+  authorList?: string[];
   ranking?: number;
-  size: 'md' | 'lg';
+  size: 'sm' |'md' | 'lg';
 }
 
 function PreviewBookInfo({
@@ -22,17 +21,53 @@ function PreviewBookInfo({
 }: PreviewBookInfoProps) {
   const bookImageRef = useRef<HTMLImageElement>(null);
   const [isLabelMove, setIsLabelMove] = useState(false);
+  const IMAGE_SIZE = {
+  lg: {
+    width: 'w-192',
+    height: 'h-291',
+    tabletWidth: 'w-157',
+    tabletHeight: 'h-237',
+    mobileWidth: 'w-160',
+    mobileHeight: 'h-228',
+    heightNumber: 291,
+    tabletHeightNumber: 237,
+    mobileHeightNumber: 228
+     
+  },
+  md: {
+    width: 'w-163',
+    height: 'h-246',
+    tabletWidth: 'w-122',
+    tabletHeight: 'h-184',
+    mobileWidth: 'w-142',
+    mobileHeight: 'h-202',
+    heightNumber: 246,
+    tabletHeightNumber: 184,
+    mobileHeightNumber: 202
+  },
+  sm: {
+    width: 'w-112',
+    height: 'h-170',
+    tabletWidth: 'w-122',
+    tabletHeight: 'h-165',
+    mobileWidth: 'w-93',
+    mobileHeight: 'h-141',
+    heightNumber: 170,
+    tabletHeightNumber: 165,
+    mobileHeightNumber: 141
+  },
+};
   const imageSize = IMAGE_SIZE[size];
-
+  
   return (
-    <div className={`flex ${imageSize.width} flex-col`}>
+    <div className={`flex ${imageSize.width} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletWidth} flex-col`}>
       <div
-        className={`${imageSize.height} flex relative justify-center items-end border border-1
+        className={`${imageSize.height} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletHeight} flex relative justify-center items-end border border-1
           overflow-hidden`}>
         <div className="relative">
           {ranking && (
             <div
-              className={`absolute  left-17 ${isLabelMove ? 'top-29 ' : 'top-[-2px]'}`}>
+              className={`absolute  left-17 ${(isLabelMove && size === 'sm') ? 'top-18' : size === 'md' ? 'top-29 ':'top-[-2px]'}`}>
               <Image
                 src={BookLabel}
                 alt="베스트셀러 라벨 아이콘"
@@ -60,7 +95,7 @@ function PreviewBookInfo({
       {title && (
         <p
           className={`text-black text-15 font-medium text-overflow2 mb-4 mt-12 ${
-            size === 'md' ? 'text-center font-bold' : ''
+            size === 'md' ? 'text-center font-bold' : '' }
           }`}>
           {title}
         </p>
@@ -68,7 +103,7 @@ function PreviewBookInfo({
       {authorList && (
           <BookAuthor
             authorList={authorList}
-            classNames={`flex ${size === 'md' ? 'flex-center' : ''} ${imageSize.width} text-overflow2`}
+            classNames={`flex ${size === 'md' ? 'flex-center' : ''} ${imageSize.width} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletWidth} text-overflow2`}
           />
       )}
     </div>

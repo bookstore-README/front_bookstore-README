@@ -8,7 +8,8 @@ function TestPage() {
       <PreviewBookInfo
         title="어머 이책 사야해!"
         authorList={['이승연']}
-        size="md"
+        size="sm"
+        ranking={1}
       />
     </div>
   );
