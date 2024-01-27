@@ -7,8 +7,19 @@ function TestPage() {
       <DropDown />
       <PreviewBookInfo
         title="어머 이책 사야해!"
-        authorList={['이승연']}
-        size="sm"
+        authorList={[
+          '이승연',
+          '작가얌',
+          '작가2',
+          '작가3',
+          '작가3',
+          '작가3',
+          '작가3',
+          '작가3',
+          '작가3',
+          '작가5',
+        ]}
+        size="lg"
         ranking={1}
       />
     </div>

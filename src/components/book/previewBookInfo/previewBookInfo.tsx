@@ -1,12 +1,12 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import DefaultImage from '@/public/images/SampleBookCover4.jpeg';
 import BookLabel from '@/public/icons/BookLabelIcon.svg';
-import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { useRef, useState } from 'react';
 
 interface PreviewBookInfoProps {
-  image?: string;
+  image?: string | StaticImageData; // TODO: 테스트 후 수정하기(string타입 필요없을지도?)
   title?: string;
+  alignCenter?: boolean;
   authorList?: string[];
   ranking?: number;
   size: 'sm' |'md' | 'lg';
@@ -17,11 +17,13 @@ function PreviewBookInfo({
   title,
   authorList,
   ranking,
+  alignCenter,
   size = 'md',
 }: PreviewBookInfoProps) {
   const bookImageRef = useRef<HTMLImageElement>(null);
   const [isLabelMove, setIsLabelMove] = useState(false);
   const IMAGE_SIZE = {
+
   lg: {
     width: 'w-192',
     height: 'h-291',
@@ -95,16 +97,18 @@ function PreviewBookInfo({
       {title && (
         <p
           className={`text-black text-15 font-medium text-overflow2 mb-4 mt-12 ${
-            size === 'md' ? 'text-center font-bold' : '' }
-          }`}>
+            alignCenter ? 'text-center font-bold' : '' }`}>
           {title}
         </p>
       )}
       {authorList && (
-          <BookAuthor
-            authorList={authorList}
-            classNames={`flex ${size === 'md' ? 'flex-center' : ''} ${imageSize.width} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletWidth} text-overflow2`}
-          />
+        <>
+          <div className='text-gray-3 text-14 hover:text-gray-7 truncate'>
+            {authorList.join(', ')}
+          </div>
+        </>
+
+
       )}
     </div>
   );
