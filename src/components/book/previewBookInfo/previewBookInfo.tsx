@@ -23,7 +23,6 @@ function PreviewBookInfo({
   const bookImageRef = useRef<HTMLImageElement>(null);
   const [isLabelMove, setIsLabelMove] = useState(false);
   const IMAGE_SIZE = {
-
   lg: {
     width: 'w-192',
     height: 'h-291',
@@ -34,7 +33,6 @@ function PreviewBookInfo({
     heightNumber: 291,
     tabletHeightNumber: 237,
     mobileHeightNumber: 228
-     
   },
   md: {
     width: 'w-163',
@@ -57,15 +55,14 @@ function PreviewBookInfo({
     heightNumber: 170,
     tabletHeightNumber: 165,
     mobileHeightNumber: 141
-  },
+    },
 };
   const imageSize = IMAGE_SIZE[size];
   
   return (
     <div className={`flex ${imageSize.width} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletWidth} flex-col`}>
       <div
-        className={`${imageSize.height} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletHeight} flex relative justify-center items-end
-          overflow-hidden`}>
+        className={`${imageSize.height} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletHeight} flex relative justify-center items-end overflow-hidden`}>
         <div className="relative">
           {ranking && (
             <div
@@ -95,20 +92,14 @@ function PreviewBookInfo({
         </div>
       </div>
       {title && (
-        <p
-          className={`text-black text-15 font-medium text-overflow2 mb-4 mt-12 ${
-            alignCenter ? 'text-center font-bold' : '' }`}>
+        <p className={`text-black text-15 font-medium text-overflow2 mb-4 mt-12 ${alignCenter ? 'text-center font-bold' : ''}`}>
           {title}
         </p>
       )}
       {authorList && (
-        <>
           <div className='text-gray-3 text-14 hover:text-gray-7 truncate'>
             {authorList.join(', ')}
           </div>
-        </>
-
-
       )}
     </div>
   );
