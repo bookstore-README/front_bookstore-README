@@ -7,18 +7,19 @@ function TestPage() {
       <DropDown />
       <PreviewBookInfo
         title="어머 이책 사야해!"
-        authorList={[
-          '이승연',
-          '작가얌',
-          '작가2',
-          '작가3',
-          '작가3',
-          '작가3',
-          '작가3',
-          '작가3',
-          '작가3',
-          '작가5',
-        ]}
+        authorList={['이승연', '작가얌', '작가2', '작가3', '작가3', '작가3']}
+        size="lg"
+        ranking={10}
+      />
+      <PreviewBookInfo
+        title="어머 이책 사야해!"
+        authorList={['이승연', '작가얌', '작가2', '작가333']}
+        size="md"
+        ranking={10}
+      />
+      <PreviewBookInfo
+        title="어머 이책 사야해!"
+        authorList={['이승연', '작가얌', '작가2', '작가3']}
         size="sm"
         ranking={10}
       />
