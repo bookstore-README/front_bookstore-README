@@ -12,7 +12,7 @@ function TestPage() {
         authorList={['이승연', '작가얌', '작가2', '작가3', '작가3', '작가3']}
         size="lg"
         ranking={10}
-        image={TestImage1}
+        // image={TestImage}
       />
       <PreviewBookInfo
         title="어머 이책 사야해!"
@@ -26,6 +26,7 @@ function TestPage() {
         authorList={['이승연', '작가얌', '작가2', '작가3']}
         size="sm"
         ranking={10}
+        image={TestImage1}
       />
     </div>
   );
