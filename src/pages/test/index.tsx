@@ -19,8 +19,8 @@ function TestPage() {
           '작가3',
           '작가5',
         ]}
-        size="lg"
-        ranking={1}
+        size="md"
+        ranking={10}
       />
     </div>
   );

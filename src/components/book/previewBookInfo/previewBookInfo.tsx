@@ -60,36 +60,38 @@ function PreviewBookInfo({
   const imageSize = IMAGE_SIZE[size];
   
   return (
-    <div className={`flex ${imageSize.width} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletWidth} flex-col`}>
+    <div className={`flex ${imageSize.width} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletWidth} flex-col`} >
       <div
         className={`${imageSize.height} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletHeight} flex relative justify-center items-end overflow-hidden`}>
         <div className="relative">
-          {ranking && (
-            <div
-              className={`absolute  left-17 ${(isLabelMove && size === 'sm') ? 'top-18' : size === 'md' ? 'top-29 ':'top-[-2px]'}`}>
-              <Image
-                src={BookLabel}
-                alt="베스트셀러 라벨 아이콘"
-                width={26}
-                height={34}
-                ref={bookImageRef}
-                onLoad={() => {
-                  if (
-                    (bookImageRef.current?.height || 0) > imageSize.heightNumber
-                  ) setIsLabelMove(true);
-                }}
-              />
-              <span className="text-white text-13 font-bold absolute top-0 left-9">
-                {ranking}
-              </span>
-            </div>
-          )}
           <Image
             src={image || DefaultImage}
             alt="책 미리보기 이미지"
             ref={bookImageRef}
           />
+          {ranking && (
+          <div
+            className={`absolute  left-17 ${(isLabelMove && size === 'sm') ? 'top-18' : size === 'md' ? 'top-29 ':'top-[-2px]'} `}>
+            <Image
+              src={BookLabel}
+              alt="베스트셀러 라벨 아이콘"
+              width={26}
+              height={34}
+              ref={bookImageRef}
+              onLoad={() => {
+                if (
+                  (bookImageRef.current?.height || 0) > imageSize.heightNumber
+                ) setIsLabelMove(true);
+              }}
+            />
+            <span className={`text-white text-13 font-bold absolute top-0 left-10 ${(ranking > 9 && 'tracking-[-0.5px] left-7') }`}>
+              {ranking}
+            </span>
+            </div>
+          )}
         </div>
+
+
       </div>
       {title && (
         <p className={`text-black text-15 font-medium text-overflow2 mb-4 mt-12 ${alignCenter ? 'text-center font-bold' : ''}`}>
