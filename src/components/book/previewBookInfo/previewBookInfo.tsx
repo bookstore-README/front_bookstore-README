@@ -64,12 +64,7 @@ function PreviewBookInfo({
       <div
         className={`${imageSize.height} mobile:${imageSize.mobileWidth} tablet:${imageSize.tabletHeight} flex relative justify-center items-end overflow-hidden`}>
         <div className="relative">
-          <Image
-            src={image || DefaultImage}
-            alt="책 미리보기 이미지"
-            ref={bookImageRef}
-          />
-          {ranking && (
+           {ranking && (
           <div
             className={`absolute  left-17 ${(isLabelMove && size === 'sm') ? 'top-18' : size === 'md' ? 'top-29 ':'top-[-2px]'} `}>
             <Image
@@ -84,11 +79,17 @@ function PreviewBookInfo({
                 ) setIsLabelMove(true);
               }}
             />
-            <span className={`text-white text-13 font-bold absolute top-0 left-10 ${(ranking > 9 && 'tracking-[-0.5px] left-7') }`}>
+            <span className={`text-white text-13 font-bold absolute top-0 left-10 ${(ranking > 9 && 'tracking-[-0.5px] left-5') }`}>
               {ranking}
             </span>
             </div>
           )}
+          <Image
+            src={image || DefaultImage}
+            alt="책 미리보기 이미지"
+            ref={bookImageRef}
+          />
+         
         </div>
 
 
