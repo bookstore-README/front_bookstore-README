@@ -1,5 +1,7 @@
 import DropDown from '@/components/dropDown/dropDown';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import TestImage1 from '@/public/images/SampleBookCover1.jpeg';
+import TestImage2 from '@/public/images/SampleBookCover3.jpeg';
 
 function TestPage() {
   return (
@@ -10,12 +12,14 @@ function TestPage() {
         authorList={['이승연', '작가얌', '작가2', '작가3', '작가3', '작가3']}
         size="lg"
         ranking={10}
+        image={TestImage1}
       />
       <PreviewBookInfo
         title="어머 이책 사야해!"
         authorList={['이승연', '작가얌', '작가2', '작가333']}
         size="md"
         ranking={10}
+        image={TestImage2}
       />
       <PreviewBookInfo
         title="어머 이책 사야해!"
