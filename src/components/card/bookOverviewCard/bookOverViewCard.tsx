@@ -1,15 +1,18 @@
-import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import { BookOverviewType } from '@/types/bookOverviewType';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import LikeButton from '@/components/button/likeButton';
 import { useState } from 'react';
-import BookRating from '../bookRating/bookRating';
+import BookRating from '@/components/book/bookRating/bookRating';
 import ActionButton from '@/components/button/actionButton';
+import { notify } from '@/components/toast/toast';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function BookOverviewCard({ book, like }: BookOverviewType) {
   const [isLiked, setIsLiked] = useState(like.userLiked || false);
   const [likeCount, setIsLikeCount] = useState(like.count || 0);
+  const router = useRouter();
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
@@ -18,7 +21,10 @@ function BookOverviewCard({ book, like }: BookOverviewType) {
   };
 
   const handleAddToCart = () => {
-    alert('장바구니에 추가했습니다.');
+    notify({
+      type: 'success',
+      text: '장바구니에 담았어요 🛒',
+    });
     //TODO
     //1. 유저 장바구니에 추가(서버연결)
     //2. 성공시 장바구니 아이콘 변경
@@ -27,17 +33,18 @@ function BookOverviewCard({ book, like }: BookOverviewType) {
   const handleAddForPayment = () => {
     //TODO
     //1. 유저결제 정보에 저장(상품id 넘겨주기)
-    //2. 결제페이지 이동
+    router.push('/payment'); //결제페이지로 이동
   };
 
   return (
     <div
       role="card-container"
-      className="flex flex-col justify-between h-220 border-gray-1 border-2 p-30 pb-20 rounded-xl
+      className="flex flex-col justify-between h-220 border-gray-1 border-2 p-30 rounded-xl
         mobile:p-15 mobile:pb-15 mobile:w-330 mobile:h-251 relative">
       <div role="book-info-container" className="flex relative">
-        <div
+        <Link
           role="book-img"
+          href={`bookdetail/${book.bookId}`}
           className="h-170 bg-white mobile:min-w-93 mobile:h-134 pt-2 overflow-hidden">
           <PreviewBookInfo
             size="sm"
@@ -45,7 +52,7 @@ function BookOverviewCard({ book, like }: BookOverviewType) {
             ranking={book.rank}
             itemsStart
           />
-        </div>
+        </Link>
 
         <div
           role="book-info"
@@ -65,6 +72,11 @@ function BookOverviewCard({ book, like }: BookOverviewType) {
                   </span>
                 );
               })}
+            </div>
+            <div>
+              {book.publisher && (
+                <span className="text-gray-3 text-14">| {book.publisher}</span>
+              )}
             </div>
             <div>
               <span className="text-gray-3 text-14 mobile:hidden"></span>
@@ -102,7 +114,8 @@ function BookOverviewCard({ book, like }: BookOverviewType) {
 
         <div
           role="buttons-div"
-          className="flex flex-col items-end gap-30 mobile:absolute mobile:bottom-16 mobile:right-0">
+          className="flex flex-col items-end gap-30 tablet:absolute tablet:right-0 mobile:absolute
+            mobile:bottom-16 mobile:right-0">
           <div role="like-button" className="flex-center flex-col gap-2">
             <LikeButton onClick={handleLikeClick} isLiked={isLiked} />
             <span className="text-black text-12">{likeCount}</span>

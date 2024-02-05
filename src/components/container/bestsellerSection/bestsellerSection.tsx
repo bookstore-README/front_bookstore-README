@@ -42,3 +42,7 @@ function BestSellerSection() {
 }
 
 export default BestSellerSection;
+
+}
+
+export default BestSellerSection;

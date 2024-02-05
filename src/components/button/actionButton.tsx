@@ -1,3 +1,5 @@
+import cls from "@/utils/cls";
+
 interface ActionButtonProps {
   classNames?: string;
   onClick?: () => void;
@@ -7,10 +9,6 @@ interface ActionButtonProps {
   mobile?: boolean;
 }
 
-function classNames<T>(...classes: Array<T>) {
-  return classes.filter(Boolean).join(' ');
-}
-
 function ActionButton({
   onClick,
   type,
@@ -18,7 +16,7 @@ function ActionButton({
   variant,
   mobile,
 }: ActionButtonProps) {
-  const ActionButtonClass = classNames(
+  const ActionButtonClass = cls(
     'w-130 h-40 flex-center rounded-md text-14 font-[500]',
     variant === 'primary'
       ? 'bg-white border-green border-2 text-green'

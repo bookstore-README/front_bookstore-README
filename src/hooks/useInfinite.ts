@@ -1,4 +1,4 @@
-import { LegacyRef, useEffect, useRef, useState } from 'react';
+import { LegacyRef, RefObject, useEffect, useRef, useState } from 'react';
 
 function useInfinite(): [LegacyRef<HTMLDivElement>, boolean] {
   const ref = useRef<HTMLDivElement>(null);
