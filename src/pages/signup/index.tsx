@@ -33,7 +33,6 @@ function SignUp() {
   } = method;
 
   const onSubmit = (data: SignValueType) => {
-    console.log(data);
     const { email, password, repassword, nickname } = data;
     if (!checkEmail.value.test(email)) {
       setError('email', {
