@@ -40,10 +40,7 @@ function SignUp() {
 
   const createMemberMutation = useMutation({
       mutationFn:(data:Signup) =>postSignup(data)
-  })
-
-
-  
+  })     
 
 
   const onSubmit = (data: SignUpValueType) => {
