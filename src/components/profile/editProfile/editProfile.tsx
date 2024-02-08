@@ -79,41 +79,38 @@ function EditProfile({
         <form
           className="flex flex-col gap-40 mobile:m-15"
           onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <h2 className="mb-20 font-bold">프로필 이미지</h2>
-            <div>
-              <div
-                className="relative h-200 w-200 cursor-pointer rounded-full bg-gray-2"
-                onClick={handleClickInput}>
-                <Image
-                  src={profileImageUrl || DefaultUserProfile}
-                  alt="프로필 이미지"
-                  width={200}
-                  height={200}
-                  className="max-h-200 max-w-200 rounded-full object-cover"
-                />
-                <input
-                  type="file"
-                  id="profileImage"
-                  className="hidden"
-                  ref={imageUploaderRef}
-                  onChange={(e) => {
-                    if (e.target.files) {
-                      handleImageChange(e.target.files[0]);
-                    }
-                  }}
-                  accept="image/*"
-                />
-                <Image
-                  src={CameraImageIcon}
-                  alt="카메라 이미지"
-                  width={52}
-                  height={52}
-                  className="absolute bottom-1 right-1"
-                />
-              </div>
-            </div>
+          <h2 className="mb-20 font-bold">프로필 이미지</h2>
+
+          <div
+            className="relative h-200 w-200 cursor-pointer rounded-full bg-gray-2"
+            onClick={handleClickInput}>
+            <Image
+              src={profileImageUrl || DefaultUserProfile}
+              alt="프로필 이미지"
+              className="rounded-full"
+              fill
+            />
+            <input
+              type="file"
+              id="profileImage"
+              className="hidden"
+              ref={imageUploaderRef}
+              onChange={(e) => {
+                if (e.target.files) {
+                  handleImageChange(e.target.files[0]);
+                }
+              }}
+              accept="image/*"
+            />
+            <Image
+              src={CameraImageIcon}
+              alt="카메라 이미지"
+              width={52}
+              height={52}
+              className="absolute bottom-1 right-1"
+            />
           </div>
+
           <div>
             <label className="w-full text-left text-16 font-bold text-black">
               이메일
