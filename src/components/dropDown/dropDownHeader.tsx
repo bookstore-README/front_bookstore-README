@@ -15,7 +15,7 @@ function DropDownHeader({handleDropDownClick, showOptions, selectedItem} : DropD
         onClick={handleDropDownClick}
         className={`flex h-42 w-full items-center justify-between border-2 border-solid border-gray-1 text-left
               ${showOptions ? 'rounded-t-[5px]' : 'rounded-[5px]'}`}>
-        <span className="w-85 pl-16 text-14">{selectedItem}</span>
+        <span className="pl-16 text-14">{selectedItem}</span>
         <div className="pr-12">
           <Image
             src={showOptions ? UpArrowIcon : DownArrowIcon}
