@@ -8,7 +8,7 @@ interface BookAuthorProps {
 }
 
 function BookAuthor({ authorList, publisher, fontSize }: BookAuthorProps) {
-  if (!authorList || authorList.length < 1) return;
+  if (!authorList || authorList.length < 1) return null;
   return (
     <div className="flex-center gap-4">
       {authorList.map((author) => {

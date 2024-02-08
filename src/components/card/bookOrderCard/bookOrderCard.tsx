@@ -4,7 +4,7 @@ import { BookOrderType } from '@/types/bookOrderType';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 
 function BookOrderCard({ book, order }: BookOrderType) {
-  if (!book || !order) return;
+  if (!book || !order) return null;
 
   return (
     <div

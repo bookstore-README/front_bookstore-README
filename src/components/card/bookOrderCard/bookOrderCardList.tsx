@@ -1,5 +1,5 @@
 import { BookOrderType } from '@/types/bookOrderType';
-import BookOrderCard from './bookOrderCard';
+import BookOrderCard from '@/components/card/bookOrderCard/bookOrderCard';
 import OrderCount from '@/components/container/orderDate/orderCount';
 
 export interface BookOrderCardListType {
@@ -12,7 +12,7 @@ export interface BookOrderCardListProps {
 }
 
 function BookOrderCardList({ orderData }: BookOrderCardListProps) {
-  if (!orderData) return;
+  if (!orderData) return null;
 
   return (
     <div className="flex max-w-[1080px] flex-col">

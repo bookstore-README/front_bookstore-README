@@ -94,3 +94,20 @@ export const bookOrderTestData: BookOrderCardListProps = {
     },
   ],
 };
+
+export const orderOverViewData = {
+  orderView: {
+    processing: 10,
+    shipping: 5,
+    completed: 20,
+    exchangeCompleted: 2,
+    purchased: 50,
+  },
+};
+
+export const personTestData = {
+  id: 1,
+  name: 'John Doe',
+  isPurchased: true,
+  firstPurchasedDate: '2022-01-01',
+};
