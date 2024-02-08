@@ -2,6 +2,7 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
 import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
+import { bookOrderTestData } from '../api/mock/bookOrderMock';
 const bookOverviews = bookOverviewsMock;
 
 function TestPage() {
