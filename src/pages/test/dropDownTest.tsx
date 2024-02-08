@@ -4,7 +4,10 @@ import React, { useState } from 'react'
 
 function dropDownTest() {  
   const [selectedItem, setSelectedItem] = useState('전체보기');
-  const onSelectedItem = (menu:string) => {setSelectedItem(menu)}
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const onSelectedItem = (menu: string) => { setSelectedItem(menu) }
+ 
   const menus = [
     "전체보기",
     "최근 1개월", 
@@ -17,9 +20,14 @@ function dropDownTest() {
     id:1,
     name: "yuna", 
     isPurchased: false, 
-    firstPurchasedDate: "2012-10-10"
-  }   
+    firstPurchasedDate: new Date("2012-10-10")
+  }    
 
+  useEffect(() => {
+    const postOrderData = async() => {
+        const res = await postdddd(person.id, startDate, endDate)
+     }
+   },[userid, selected])
   return (
     <div className="flex relative">
       <div className="w-[1000px]">
@@ -27,10 +35,14 @@ function dropDownTest() {
       </div>
       <div className="flex-center">
         {person && (
-        <OrderDate
-          pastDate={selectedItem}
-          setSelectedItem={setSelectedItem}
-          person={person}
+          <OrderDate
+            person={person}
+            pastDate={selectedItem}
+            // setSelectedItem={selectedItem}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+       
+       
         />
         )}   
         </div>

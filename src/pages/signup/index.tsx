@@ -6,7 +6,7 @@ import {
 } from '@/components/input/signInput/signInput';
 import SocialCircle from '@/components/chip/socialCircle';
 import TermsCheckbox from '@/components/container/terms/terms';
-import { SignUpValueType, SignValueType } from '@/types/signType';
+import { SignUpValueType  } from '@/types/signType';
 import {
   checkEmail,
   checkNickName,
@@ -14,6 +14,10 @@ import {
 } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { postSignup } from '@/api/member';
+
+
 
 function SignUp() {
   const method = useForm<SignUpValueType>({
@@ -32,6 +36,15 @@ function SignUp() {
     setError,
     formState: { errors },
   } = method;
+
+
+  const createMemberMutation = useMutation({
+      mutationFn:(data:Signup) =>postSignup(data)
+  })
+
+
+  
+
 
   const onSubmit = (data: SignUpValueType) => {
     const { email, password, repassword, nickname, selectAll } = data;
@@ -61,7 +74,8 @@ function SignUp() {
       });
     }
     if (!selectAll) return;
-  };
+  };    
+
 
   return (
     <FormProvider {...method}>

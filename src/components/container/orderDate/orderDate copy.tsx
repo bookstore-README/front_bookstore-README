@@ -16,10 +16,8 @@ import { Person } from '@/types/orderDateType';
 
 type OrderDateProps = {
   pastDate: string;
-  // setSelectedItem: Dispatch<SetStateAction<string>>;
+  setSelectedItem: Dispatch<SetStateAction<string>>;
   person: Person;
-  setStartDate: Dispatch<SetStateAction<Date>>
-  setEndDate: Dispatch<SetStateAction<Date>>
 };
 
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
@@ -36,9 +34,9 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
   );
 });
 
-function OrderDate({ person, pastDate,  setStartDate, setEndDate }: OrderDateProps) {
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
+function OrderDate({ person, pastDate, setSelectedItem }: OrderDateProps) {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
   const aMonthAgo = getDateAgo(30);

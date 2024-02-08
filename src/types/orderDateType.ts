@@ -2,5 +2,5 @@ export type Person = {
   id: number;
   name: string;
   isPurchased: boolean;
-  firstPurchasedDate: string;
+  firstPurchasedDate: Date
 };
