@@ -16,16 +16,18 @@ function EditProfile({
   const [profileImageUrl, setProfileImageUrl] = useState<string>(
     initialProfileImageUrl || '',
   );
+  const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
   const method = useForm<EditProfileType>({
     mode: 'onSubmit',
     defaultValues: {
-      ImageUrl: initialProfileImageUrl,
+      profileImage: initialProfileImageUrl,
       nickname: initialNickname,
     },
   });
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = method;
 
@@ -38,7 +40,8 @@ function EditProfile({
   };
 
   const onSubmit = () => {
-    // 프로필url과 닉네임을 서버로 보낼거에용
+    console.log(profileImageFile, getValues('nickname'));
+    // profileImageFile과 닉네임을 서버로 보낼거에용
   };
 
   const handleClickInput = () => {
@@ -55,18 +58,20 @@ function EditProfile({
         reader.onload = () => {
           if (typeof reader.result === 'string') {
             setProfileImageUrl(reader.result);
+            setProfileImageFile(file);
           }
           resolve();
         };
       });
     }
+
     return Promise.resolve();
   };
 
   return (
     <FormProvider {...method}>
       <div
-        className="max-h-745 max-w-440 rounded-[10px] border border-gray-1 bg-white
+        className="max-h-745 mobile:360 w-440 rounded-[10px] border border-gray-1 bg-white
           p-40 mobile:border-none">
         <div className="flex-center mb-40">
           <h1 className="text-20 font-bold"> 프로필 수정</h1>
@@ -89,6 +94,7 @@ function EditProfile({
                 />
                 <input
                   type="file"
+                  id="profileImage"
                   className="hidden"
                   ref={imageUploaderRef}
                   onChange={(e) => {
