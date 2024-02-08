@@ -1,5 +1,6 @@
+/** 책 상세페이지에 들어가는 별점 총평 카드 */
+
 import BookRating from '@/components/book/bookRating/bookRating';
-import Percentage from '@/components/book/percentage/percentage';
 import ReviewPercentageOverview from '@/components/book/percentage/reviewPercentageOverview';
 
 interface ReviewOverviewCardProps {
@@ -15,10 +16,10 @@ function ReviewOverviewCard({
 }: ReviewOverviewCardProps) {
   return (
     <div
-      className="bg-gray-5 h-210 max-w-[710px] w-full rounded-[10px] flex-center mobile:w-330
-        mobile:h-151 flex justify-between items-center px-87 mobile:px-15">
+      className="flex-center flex h-210 w-full max-w-[710px] items-center justify-between
+        rounded-[10px] bg-gray-5 px-87 mobile:h-151 mobile:w-330 mobile:px-15">
       <div className="flex-center flex-col gap-8">
-        <h3 className="font-bold text-[24px] text-gray-4">{rating}</h3>
+        <h3 className="text-[24px] font-bold text-gray-4">{rating}</h3>
         <BookRating rating={rating} size="md" />
       </div>
       <div>
