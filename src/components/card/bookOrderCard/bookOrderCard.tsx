@@ -2,6 +2,8 @@ import Image from 'next/image';
 
 import { BookOrderType } from '@/types/bookOrderType';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
+import BookPrice from '@/components/book/bookPrice/bookPrice';
+import BookTitle from '@/components/book/bookTitle/bookTitle';
 
 function BookOrderCard({ book, order }: BookOrderType) {
   if (!book || !order) return;
@@ -20,31 +22,32 @@ function BookOrderCard({ book, order }: BookOrderType) {
           <></>
         )}
       </div>
-      <div className="flex w-full flex-col items-start justify-start gap-4">
-        <div
-          role="book-title"
-          className="min-w-250 truncate whitespace-nowrap text-15 font-normal">
-          {book.title}
-        </div>
-        <BookAuthor authorList={book.authors} />
-        <div className="flex-center flex-col gap-10 whitespace-nowrap mobile:flex-row">
-          <div role="price-div" className="text-14 text-gray-4">
-            {book.cost} 원
+      <div className="flex w-full flex-col items-start justify-start gap-12 relative">
+        <div className='flex flex-col items-start justify-start gap-4 w-full'>
+          <BookTitle title={book.title} fontSize={15} classNames="w-[80%] truncate whitespace-nowrap" />
+          <BookAuthor authorList={book.authors} />
+          <div className='flex gap-8'>
+            <span className='text-gray-3 text-14'>
+              {order.orderCount} 개
+            </span>
+            <BookPrice price={book.cost} fontSize={14} fontColor='text-gray-3'/>
           </div>
-          <div role="delivery-div" className="text-14 text-green">
+        </div>
+          <div role="delivery-div" className="text-14 text-green mobile:absolute mobile:right-0 mobile:bottom-65">
             {order.deliveryStatus}
           </div>
-        </div>
       </div>
       <div
         role="service-div"
         className="flex-center absolute bottom-20 right-20 gap-12 mobile:bottom-0 mobile:left-0
           mobile:right-0">
-        <button
+        {order.deliveryStatus !== "구매 확정" &&
+          <button
           className="flex-center h-40 w-130 rounded-md border-2 border-green bg-white text-green
-            mobile:w-full">
+          mobile:w-full">
           교환/환불
         </button>
+            }
         <button
           className="flex-center h-40 w-130 rounded-md border-2 border-green bg-green text-white
             mobile:w-full">

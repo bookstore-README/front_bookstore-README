@@ -7,7 +7,7 @@ export const bookOrderTestData: BookOrderCardListProps = {
         {
           book: {
             productId: 1,
-            title: '첫 번째 책',
+            title: '첫 번째 책은 이름이 아아아아아아아아아아아아아아아아아아아아아아아아아아아주 길다!',
             imageUrl:
               'https://image.aladin.co.kr/product/33315/55/cover/8934920998_1.jpg',
             cost: 15000,
@@ -29,7 +29,7 @@ export const bookOrderTestData: BookOrderCardListProps = {
             authors: ['저자 C'],
           },
           order: {
-            deliveryStatus: '배송 완료',
+            deliveryStatus: '구매 확정',
             address: '서울시 서초구 반포동',
             orderCount: 3,
           },
