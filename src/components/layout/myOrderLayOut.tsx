@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface MyOrderPageLayoutProps {
-  header: ReactNode;
+  header?: ReactNode;
   overview: ReactNode;
   dropDown: ReactNode;
   main: ReactNode;
@@ -14,8 +14,7 @@ function MyOrderPageLayout({
   main,
 }: MyOrderPageLayoutProps) {
   return (
-    <div
-      role="container">
+    <div role="container">
       <div role="header">{header}</div>
       <div className="mx-auto flex max-w-[1080px] flex-col items-center px-40 py-60">
         <div
@@ -26,7 +25,9 @@ function MyOrderPageLayout({
         <div role="drop-down" className="mb-20">
           {dropDown}
         </div>
-        <div role="content">{main}</div>
+        <div role="content" className="">
+          {main}
+        </div>
       </div>
     </div>
   );
