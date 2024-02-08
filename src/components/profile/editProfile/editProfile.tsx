@@ -6,6 +6,7 @@ import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/input/signInput/signInput';
 import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
 import RegisterButton from '@/components/button/register/registerButton';
+import { notify } from '@/components/toast/toast';
 
 function EditProfile({
   initialProfileImageUrl,
@@ -42,6 +43,11 @@ function EditProfile({
   const onSubmit = () => {
     console.log(profileImageFile, getValues('nickname'));
     // profileImageFile과 닉네임을 서버로 보낼거에용
+    // 성공하면 토스트띄우기
+    notify({
+      type: 'success',
+      text: '프로필을 변경했어요 😘',
+    });
   };
 
   const handleClickInput = () => {
