@@ -7,14 +7,15 @@ import {
   useController,
 } from 'react-hook-form';
 
-interface TextareaProps {
+interface InputProps {
+  type?: string;
   height?: string;
   control: Control<FieldValues>;
   name: FieldPath<FieldValues>;
   as?: ReactNode;
 }
 
-function Textarea({ height, control, name, as = null }: TextareaProps) {
+function Input({ type='text', height, control, name, as = null }: InputProps) {
   const className = classNames(
     'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15 focus:border-green outline-none',
     height,
@@ -27,15 +28,15 @@ function Textarea({ height, control, name, as = null }: TextareaProps) {
         내용
       </label>
       {as ?? as}
-      <textarea
+      <input
         id={field.name}
         className={className}
         name={field.name}
         value={field.value}
         onChange={field.onChange}
-        placeholder="내용을 작성해주세요"></textarea>
+        placeholder="내용을 작성해주세요"></input>
     </div>
   );
 }
 
-export default Textarea;
+export default Input;

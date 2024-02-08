@@ -3,7 +3,7 @@ import Image from 'next/image';
 import LineIcon from '@/public/icons/Line.svg';
 import Radio from '@/components/input/radio';
 import RegisterButton from '@/components/button/register/registerButton';
-import Textarea from '@/components/input/textarea';
+import Input from '@/components/input/input';
 import useFormControl from '@/hooks/useFormControl';
 import DropDown from '@/components/dropDown/dropDown';
 import { REFUND } from 'src/constants/dropDownMenu';
@@ -37,10 +37,11 @@ function GetRefundForm() {
             title2="상품 회수"
           />
         </div>
-        <Textarea
+
+        <Input
           control={control}
           name="description"
-          as={<DropDown menus={REFUND}/>}
+          as={<DropDown menus={REFUND} />}
         />
         <div>환불금액 얼마</div>
       </form>

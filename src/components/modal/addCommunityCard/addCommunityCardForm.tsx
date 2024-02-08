@@ -1,6 +1,6 @@
 import RegisterButton from '@/components/button/register/registerButton';
 import useFormControl from '@/hooks/useFormControl';
-import Textarea from '@/components/input/textarea';
+import Input from '@/components/input/input';
 import ModalSearchInput from '@/components/input/modalSearchInput';
 import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
@@ -25,7 +25,7 @@ function AddCommunityCardForm() {
       <div className='flex-center flex-col gap-22 w-full h-323'>
         <PreviewBookInfoPagination />
       </div>
-      <Textarea height="h-100" control={control} name='description'/>
+      <Input height="h-100" control={control} name='description'/>
       <RegisterButton type='submit' disabled={isButtonActive ? true : false}>글쓰기</RegisterButton>
     </form>
   );

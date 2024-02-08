@@ -21,7 +21,7 @@ function Radio({ label, control, name, title1, title2 }: RadioProps) {
       <label htmlFor={field.name} className="text-16 text-b-b">
         {label}
       </label>
-      <input type='radio' name={field.name} value={title1}  />
+      <input type='radio' name={field.name} value={title1}/>
       <input type='radio' name={field.name} value={title2}/>
     </div>
   )
