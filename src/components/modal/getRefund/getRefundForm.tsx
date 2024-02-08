@@ -13,7 +13,7 @@ function GetRefundForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-40'>
+      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-40 overflow-scroll mobile:gap-30'>
         <TitleContentTable
           title1="책 제목"
           content1="스물 아홉 생일, 1년 후 죽기로 결심하다"
@@ -21,7 +21,7 @@ function GetRefundForm() {
           content2="이제니"
         />
         <Image src={LineIcon} alt="구분선" />
-        <div className="flex">
+        <div className="flex mobile:flex-col mobile:gap-40">
           <Radio
             title="신청 유형 선택"
             control={control}
@@ -37,15 +37,17 @@ function GetRefundForm() {
             label2="상품 회수"
           />
         </div>
-        <Input type="email" name="email" control={control} />
+        <Input type="email" title='이메일' name="email" control={control} description="처리 내역이 해당 이메일로 발송" />
         <Input
+          type='text'
+          title='내용'
           control={control}
           name="description"
           as={<DropDown menus={REFUND} />}
         />
         <div>환불금액 얼마</div>
       </form>
-      <RegisterButton>교환/환불 신청하기</RegisterButton>
+      <RegisterButton disabled={isButtonActive}>교환/환불 신청하기</RegisterButton>
     </>
   );
 }

@@ -8,14 +8,16 @@ import {
 } from 'react-hook-form';
 
 interface InputProps {
-  type?: string;
+  type: string;
+  title: string;
   height?: string;
   control: Control<FieldValues>;
   name: FieldPath<FieldValues>;
   as?: ReactNode;
+  description?: string;
 }
 
-function Input({ type='text', height, control, name, as = null }: InputProps) {
+function Input({ type, height, control, name, as = null, description }: InputProps) {
   const className = classNames(
     'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15 focus:border-green outline-none',
     height,
@@ -26,6 +28,7 @@ function Input({ type='text', height, control, name, as = null }: InputProps) {
     <div className="flex flex-col w-full gap-12">
       <label htmlFor={field.name} className="text-16 text-b-b">
         내용
+        {description && <span className='text-12 font-light text-gray-2 ml-8'>{description}</span>}
       </label>
       {as ?? as}
       <input

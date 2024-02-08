@@ -39,7 +39,7 @@ function AddReviewForm() {
             className="flex h-52 w-full items-center justify-start gap-13 mobile:gap-9"
           />
         </div>
-        <Input height="h-274" control={control} name="description" />
+        <Input type='text' title='내용' height="h-274" control={control} name="description" />
       </form>
       <RegisterButton type="submit" disabled={isButtonActive ? true : false}>
         리뷰 작성하기

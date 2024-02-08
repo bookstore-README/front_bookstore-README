@@ -25,7 +25,7 @@ function AddCommunityCardForm() {
       <div className='flex-center flex-col gap-22 w-full h-323'>
         <PreviewBookInfoPagination />
       </div>
-      <Input height="h-100" control={control} name='description'/>
+      <Input type='text' title='내용' height="h-100" control={control} name='description'/>
       <RegisterButton type='submit' disabled={isButtonActive ? true : false}>글쓰기</RegisterButton>
     </form>
   );
