@@ -1,7 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-const instance = axios.create({
-  baseURL: 'http://3.34.0.178:8080',
-});
+export const instance = axios.create({
+  baseURL: process.env.BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  }
+})
 
-export default instance;

@@ -6,7 +6,7 @@ import {
 } from '@/components/input/signInput/signInput';
 import SocialCircle from '@/components/chip/socialCircle';
 import TermsCheckbox from '@/components/container/terms/terms';
-import { SignValueType } from '@/types/signType';
+import { SignUpValueType, SignValueType } from '@/types/signType';
 import {
   checkEmail,
   checkNickName,
@@ -16,13 +16,14 @@ import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 
 function SignUp() {
-  const method = useForm<SignValueType>({
+  const method = useForm<SignUpValueType>({
     mode: 'onBlur',
     defaultValues: {
       email: '',
       password: '',
       repassword: '',
       nickname: '',
+      selectAll: false,
     },
   });
   const {
@@ -32,8 +33,8 @@ function SignUp() {
     formState: { errors },
   } = method;
 
-  const onSubmit = (data: SignValueType) => {
-    const { email, password, repassword, nickname } = data;
+  const onSubmit = (data: SignUpValueType) => {
+    const { email, password, repassword, nickname, selectAll } = data;
     if (!checkEmail.value.test(email)) {
       setError('email', {
         type: 'manual',
@@ -59,6 +60,7 @@ function SignUp() {
         message: '비밀번호가 다릅니다',
       });
     }
+    if (!selectAll) return;
   };
 
   return (
