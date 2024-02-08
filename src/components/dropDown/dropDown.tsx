@@ -1,53 +1,52 @@
-import { useRef} from 'react';
-import useShowDropDown from '@/hooks/useShowDropDown';
-import DropDownItem from '@/components/dropDown/dropDownItem';  
-import Image from 'next/image';     
+import DropDownItem from '@/components/dropDown/dropDownItem';
+import OrderDate from '@/components/container/orderDate/orderDate';
+import useDropDownSelect from '@/hooks/useDropDownSelect';
+import { Person } from '@/types/orderDateType';
+import DropDownHeader from '@/components/dropDown/dropDownHeader';
 
-type DropDownTypes = {  
-  menus: string[];     
-  selectedItem: string;
-  onSelectedItem:  (menu:string) => void
+type DropDownTypes = {
+  person?: Person;
+  menus: string[];
+  orderDate?: boolean;
 };
 
-function DropDown({  menus, selectedItem, onSelectedItem }: DropDownTypes) {  
-  const ref = useRef(null);
-  const [showOptions, setShowOptions] = useShowDropDown(ref, false);
-  const handleClick = () => setShowOptions(!showOptions);   
-
-  return (  
-      <div ref={ref} className="relative"> 
-        <div>
-          <button
-            onClick={handleClick}
-            className={`flex justify-between h-42 w-full items-center border-2 border-solid border-gray-1 text-left
-              ${showOptions ? 'rounded-t-[5px]' : 'rounded-[5px]'}`}>
-            <span className="w-85 pl-16 text-14">{selectedItem}</span>
-            <div className="pr-12">
-              <Image
-                src={showOptions ? '/icons/UpArrow.svg' : '/icons/DownArrow.svg'}
-                alt=""
-                width={20}
-                height={20}
-              />
-            </div>
-          </button>
-        </div>
+function DropDown({ menus, orderDate, person }: DropDownTypes) {
+  const {
+    ref,
+    showOptions,
+    setShowOptions,
+    selectedItem,
+    setSelectedItem,
+    handleDropDownClick,
+    handleSelectedItem,
+  } = useDropDownSelect(menus[0]);
+  return (
+    <>
+      <div ref={ref} className="relative w-full">
+        <DropDownHeader handleDropDownClick={handleDropDownClick} showOptions={showOptions} selectedItem={selectedItem} />
         {showOptions && (
-          <ul className="absolute w-full rounded-b-[5px] border-2 border-solid border-gray-1 text-14 bg-white">
+          <ul className="absolute w-full rounded-b-[5px] border-2 border-solid border-gray-1 bg-white text-14">
             {menus.map((menu) => {
-              return (               
-                <DropDownItem  
+              return (
+                <DropDownItem
                   key={menu}
                   menu={menu}
-                  onSelectedItem ={onSelectedItem}
-                  setIsClick={setShowOptions}      
+                  onSelectedItem={handleSelectedItem}
+                  setIsClick={setShowOptions}
                 />
               );
             })}
           </ul>
         )}
-      </div>  
-   
+      </div>
+      {orderDate && (
+        <OrderDate
+          pastDate={selectedItem}
+          setSelectedItem={setSelectedItem}
+          person={person}
+        />
+      )}
+    </>
   );
 }
 

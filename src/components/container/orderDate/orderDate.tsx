@@ -17,7 +17,7 @@ import { Person } from '@/types/orderDateType';
 type OrderDateProps = {
   pastDate: string;
   setSelectedItem: Dispatch<SetStateAction<string>>;
-  person: Person;
+  person?: Person;
 };
 
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
@@ -68,7 +68,7 @@ function OrderDate({ person, pastDate, setSelectedItem }: OrderDateProps) {
       setEndDate(endDate);
     }
     if (pastDate === '전체보기') {
-      if (!person.isPurchased) {
+      if (!person?.isPurchased) {
         setStartDate(new Date());
         setEndDate(new Date());
       } else if (person.isPurchased === true) {
