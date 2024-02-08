@@ -24,7 +24,7 @@ function BookOrderCard({ book, order }: BookOrderType) {
       </div>
       <div className="flex w-full flex-col items-start justify-start gap-12 relative">
         <div className='flex flex-col items-start justify-start gap-4 w-full'>
-          <BookTitle title={book.title} fontSize={15} classNames="w-[80%] truncate whitespace-nowrap" />
+          <BookTitle title={book.title} fontSize={15} classNames="w-[70vw] truncate whitespace-nowrap" />
           <BookAuthor authorList={book.authors} />
           <div className='flex gap-8'>
             <span className='text-gray-3 text-14'>
