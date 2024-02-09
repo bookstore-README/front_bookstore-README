@@ -15,8 +15,11 @@ import {
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { postSignup } from '@/api/member';
-
+import { postSignup  } from '@/api/member';
+import { Signup } from '@/types/api/member';
+import axios from 'axios';
+import { useEffect } from 'react';
+// https://velog.io/@olwooz/React-React-Query-10%EB%B6%84%EB%A7%8C%EC%97%90-%EB%B0%B0%EC%9B%8C%EC%84%9C-%EC%93%B0%EA%B8%B0
 
 
 function SignUp() {
@@ -33,18 +36,24 @@ function SignUp() {
   const {
     register,
     handleSubmit,
-    setError,
-    formState: { errors },
+    setError, 
+    reset,
+    formState: { errors,isSubmitSuccessful },
   } = method;
 
-
   const createMemberMutation = useMutation({
-      mutationFn:(data:Signup) =>postSignup(data)
-  })     
-
-
+    mutationFn: async (personData: Signup) => {
+      const response = await axios.post("http://3.34.0.178:8080/member", personData)
+      return response.data
+    },
+    onSuccess() {
+      console.log("성공적으로 써밋됬습니다")
+      // success이후 처리를 어떻게 할 것인지..? 
+    }
+  })          
   const onSubmit = (data: SignUpValueType) => {
-    const { email, password, repassword, nickname, selectAll } = data;
+  const { email, password, repassword, nickname, selectAll } = data;       
+
     if (!checkEmail.value.test(email)) {
       setError('email', {
         type: 'manual',
@@ -56,8 +65,7 @@ function SignUp() {
         type: 'manual',
         message: checkPassword.message,
       });
-    }
-
+    } 
     if (!checkNickName.value.test(nickname)) {
       setError('nickname', {
         type: 'manual',
@@ -70,9 +78,26 @@ function SignUp() {
         message: '비밀번호가 다릅니다',
       });
     }
-    if (!selectAll) return;
-  };    
+    if (!selectAll) alert("약관동의를 해주세요!")
 
+  const personData = {
+        name: "없어져야하는필드입니다",
+        email: email, 
+        password: password, 
+        nickname: nickname,
+    };   
+   createMemberMutation.mutate(personData);  
+
+};    
+    useEffect(() => {
+         reset({
+          email: '',
+          password: '',
+          repassword: '',
+          nickname: '',
+          selectAll: false,
+      })
+   }, [isSubmitSuccessful])
 
   return (
     <FormProvider {...method}>
@@ -85,7 +110,7 @@ function SignUp() {
           <div
             className="mb-40 flex h-125 w-full flex-col items-center justify-center
               rounded-[10px] border-2 border-solid border-gray-1 py-5 text-gray-3">
-            <p className="mb-20 text-center text-12">
+            <p className="mb-20 text-center text-12" >
               SNS로 간편하게 로그인/회원가입
             </p>
             <div className="flex w-184 justify-between">
