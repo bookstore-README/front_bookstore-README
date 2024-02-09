@@ -1,5 +1,9 @@
-import MainLayout from "@/components/layout/mainLayout";
+import SettingPageLayout from '@/components/layout/settingPageLayout';
+import Header from '@/components/header';
+import GenreSection from '@/components/container/genreSection/genreSection';
 
-export default function SelectGenre() {
-  return <MainLayout>장르 선택</MainLayout>;
+export default function EditProfilePage() {
+  return (
+    <SettingPageLayout header={<Header isLoggedIn />} main={<GenreSection />} />
+  );
 }
