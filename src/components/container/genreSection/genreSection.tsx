@@ -15,7 +15,7 @@ function GenreSection() {
     if (isEditMode) {
       notify({
         type: 'success',
-        text: '선호장를 변경했어요 📙',
+        text: '선호장를 변경했어요 ⭐️',
       });
     }
   };
