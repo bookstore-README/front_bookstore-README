@@ -14,7 +14,7 @@ import Image from 'next/image';
 import { getDateAgo } from '@/utils/getTimeAgo';
 import { Person } from '@/types/orderDateType';
 
-type OrderDateProps = {
+export type OrderDateProps = {
   pastDate: string;
   setSelectedItem: Dispatch<SetStateAction<string>>;
   person: Person;
@@ -44,7 +44,7 @@ function OrderDate({ person, pastDate, setSelectedItem }: OrderDateProps) {
   const sixMonthAgo = getDateAgo(180);
   const aYearAgo = getDateAgo(365);
 
-  const seltectdAgo = [
+  const selectedAgo = [
     ['전체보기', endDate],
     ['최근 1개월', aMonthAgo],
     ['최근 3개월', threeMonthAgo],
@@ -54,7 +54,7 @@ function OrderDate({ person, pastDate, setSelectedItem }: OrderDateProps) {
   ];
 
   const findMonthAgo = useMemo(
-    () => seltectdAgo.find((item) => item[0] === pastDate)![1],
+    () => selectedAgo.find((item) => item[0] === pastDate)![1],
     [pastDate],
   );
 
