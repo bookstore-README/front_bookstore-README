@@ -61,6 +61,7 @@ function EditPassword() {
                 id="password"
                 placeholder="비밀번호"
                 register={register}
+                required={true}
                 requiredMessage={PASSWORD_RULES.required}
                 pattern={{
                   value: PASSWORD_RULES.pattern.value,
@@ -82,6 +83,7 @@ function EditPassword() {
                 id="checkPassword"
                 placeholder="비밀번호확인"
                 register={register}
+                required={true}
                 requiredMessage={PASSWORD_RULES.required}
                 isError={errors.checkPassword}
                 validate={PASSWORD_RULES.validate}

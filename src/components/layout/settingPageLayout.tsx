@@ -8,7 +8,7 @@ interface SettingPageLayoutProps {
 function SettingPageLayout({ header, main }: SettingPageLayoutProps) {
   return (
     <>
-      <div role="container" className="flex flex-col gap-40">
+      <div role="container" className="mb-40 flex flex-col gap-40">
         <div role="header">{header}</div>
         <div role="content" className="flex-center">
           {main}
