@@ -13,7 +13,6 @@ function SettingPageLayout({
   isTopButton,
 }: SettingPageLayoutProps) {
   return (
-    <>
       <div role="container" className="flex flex-col gap-40">
         <div role="header">{header}</div>
         <div role="content" className="flex-center">
@@ -21,7 +20,6 @@ function SettingPageLayout({
         </div>
         {isTopButton && <ScrollToTopButton />}
       </div>
-    </>
   );
 }
 
