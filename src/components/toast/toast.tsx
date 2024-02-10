@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-interface NotifyProps {
+export interface NotifyProps {
   text: string;
   type: string;
 }

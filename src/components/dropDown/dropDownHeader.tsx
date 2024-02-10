@@ -12,6 +12,7 @@ function DropDownHeader({handleDropDownClick, showOptions, selectedItem} : DropD
   return (
     <div>
       <button
+        type="button"
         onClick={handleDropDownClick}
         className={`flex h-42 w-full items-center justify-between border-2 border-solid border-gray-1 text-left
               ${showOptions ? 'rounded-t-[5px]' : 'rounded-[5px]'}`}>

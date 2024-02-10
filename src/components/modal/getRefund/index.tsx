@@ -7,7 +7,7 @@ function GetRefund({ onClick }: OnClickProps) {
   return (
     <ModalLayout onClick={onClick}>
       <ModalContainer onClick={onClick} title="교환/환불 신청하기">
-        <GetRefundForm />
+        <GetRefundForm refundPrice='19,800'/>
       </ModalContainer>
     </ModalLayout>
   );
