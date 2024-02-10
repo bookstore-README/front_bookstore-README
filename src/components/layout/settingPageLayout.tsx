@@ -5,6 +5,7 @@ interface SettingPageLayoutProps {
   main: ReactNode;
 }
 
+
 function SettingPageLayout({ header, main }: SettingPageLayoutProps) {
   return (
     <>
