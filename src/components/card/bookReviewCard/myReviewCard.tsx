@@ -12,7 +12,7 @@ function MyReviewCard({ book, review }: MyReviewType) {
   const [isSummarized, setIsSummarized] = useState(true);
 
   return (
-    <div className="flex min-h-140 w-full min-w-330 max-w-[1080px] flex-col mobile:min-h-115 ">
+    <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 ">
       <div
         role="card-container"
         className="relative flex justify-start gap-12
