@@ -2,6 +2,7 @@ import CommunityCard from '@/components/card/communityCard/communityCard';
 import MainLayout from '@/components/layout/mainLayout';
 import PageTab from '@/components/header/pageTab';
 import { CommunityCardProps } from '@/types/communityCardType';
+import CommunityCardList from '../card/communityCard/communityCardList';
 
 interface CommunityLayoutProps {
   communityData: CommunityCardProps[];
@@ -25,20 +26,7 @@ function CommunityLayout({
           addHref="/community/writeme"
           isSelected={isSelected}
         />
-        <div className="grid auto-rows-auto grid-cols-3 gap-20 mobile:grid-cols-1 tablet:grid-cols-2">
-          {communityData.map((card) => (
-            <CommunityCard
-              key={card.id}
-              profileImg={card.profileImg}
-              userNickname={card.userNickname}
-              createAt={card.createAt}
-              bookCover={card.bookCover}
-              bookTitle={card.bookTitle}
-              review={card.review}
-              kebab={kebab}
-            />
-          ))}
-        </div>
+        <CommunityCardList communityData={communityData} kebab={kebab} />
         {/* <div className='h-100 w-300 border border-1 border-red' ref={ref}/> */}
       </div>
     </MainLayout>

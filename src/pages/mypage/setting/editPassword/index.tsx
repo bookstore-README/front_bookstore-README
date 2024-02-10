@@ -1,5 +1,9 @@
-import MainLayout from '@/components/layout/mainLayout';
+import SettingPageLayout from '@/components/layout/settingPageLayout';
+import Header from '@/components/header';
+import EditPassword from '@/components/profile/editPassword/editPassword';
 
-export default function EditPassword() {
-  return <MainLayout> 비밀번호 수정</MainLayout>;
+export default function EditPasswordPage() {
+  return (
+    <SettingPageLayout header={<Header isLoggedIn />} main={<EditPassword />} />
+  );
 }
