@@ -6,23 +6,26 @@ import {
 } from '@/components/input/signInput/signInput';
 import SocialCircle from '@/components/chip/socialCircle';
 import TermsCheckbox from '@/components/container/terms/terms';
-import { SignUpValueType  } from '@/types/signType';
+import { SignUpValueType } from '@/types/signType';
 import {
   checkEmail,
+  checkEmailValidation,
+  checkMatchPasswordValidation,
   checkNickName,
+  checkNickNameValidation,
   checkPassword,
+  checkPasswordValidation,
 } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { postSignup  } from '@/api/member';
-import { Signup } from '@/types/api/member';
-import axios from 'axios';
-import { useEffect } from 'react';
-// https://velog.io/@olwooz/React-React-Query-10%EB%B6%84%EB%A7%8C%EC%97%90-%EB%B0%B0%EC%9B%8C%EC%84%9C-%EC%93%B0%EA%B8%B0
+import { postLogin, postSignup } from '@/api/member';
+import { Login, Signup } from '@/types/api/member';
+import { useRouter } from 'next/router';    
 
 
-function SignUp() {
+function SignUp() {  
+  const router = useRouter()  
   const method = useForm<SignUpValueType>({
     mode: 'onBlur',
     defaultValues: {
@@ -36,70 +39,88 @@ function SignUp() {
   const {
     register,
     handleSubmit,
-    setError, 
-    reset,
-    formState: { errors,isSubmitSuccessful },
-  } = method;
+    setError,   
+    formState: { errors },
+  } = method;   
+
 
   const createMemberMutation = useMutation({
     mutationFn: async (personData: Signup) => {
-      const response = await axios.post("http://3.34.0.178:8080/member", personData)
-      return response.data
+      await postSignup(personData)
+      return personData
     },
-    onSuccess() {
-      console.log("성공적으로 써밋됬습니다")
-      // success이후 처리를 어떻게 할 것인지..? 
+    onSuccess(data) {
+      loginMutation.mutate({
+        email: data.email,
+        password: data.password,
+      })
     }
-  })          
-  const onSubmit = (data: SignUpValueType) => {
-  const { email, password, repassword, nickname, selectAll } = data;       
+  })
 
-    if (!checkEmail.value.test(email)) {
+
+  const loginMutation = useMutation({
+    mutationFn: (data: Login) => postLogin(data),
+    onSuccess: () => router.push("/")
+  })
+
+
+  const onSubmit = (data: SignUpValueType) => {
+    const { email, password, repassword, nickname, selectAll } = data;
+    const checkValidataion = {
+      email: checkEmailValidation(email),
+      password: checkPasswordValidation(password),
+      repassword: checkMatchPasswordValidation(password, repassword),
+      nickname: checkNickNameValidation(nickname),
+      selectAll: selectAll,
+
+    }
+
+    if (!checkValidataion.email) {
       setError('email', {
         type: 'manual',
         message: checkEmail.message,
       });
     }
-    if (!checkPassword.value.test(password)) {
+    if (!checkValidataion.password) {
       setError('password', {
         type: 'manual',
         message: checkPassword.message,
       });
-    } 
-    if (!checkNickName.value.test(nickname)) {
+    }
+    if (!checkValidataion.nickname) {
       setError('nickname', {
         type: 'manual',
         message: checkNickName.message,
       });
     }
-    if (password !== repassword) {
+
+    if (!checkValidataion.repassword) {
       setError('repassword', {
         type: 'manual',
         message: '비밀번호가 다릅니다',
       });
     }
-    if (!selectAll) alert("약관동의를 해주세요!")
 
-  const personData = {
-        name: "없어져야하는필드입니다",
-        email: email, 
-        password: password, 
-        nickname: nickname,
-    };   
-   createMemberMutation.mutate(personData);  
+    if (!checkValidataion.selectAll) {
+      alert("약관동의를해주세요")
+    }
 
-};    
-    useEffect(() => {
-         reset({
-          email: '',
-          password: '',
-          repassword: '',
-          nickname: '',
-          selectAll: false,
-      })
-   }, [isSubmitSuccessful])
+    const personData = {
+      name: "없어져야하는필드입니다",
+      email: email,
+      password: password,
+      nickname: nickname,      
+    };  
 
-  return (
+    const filterValidation = Object.values(checkValidataion).filter((data) => data); 
+    if (filterValidation.length === Object.values(checkValidataion).length) {
+      createMemberMutation.mutate(personData);
+    }      
+
+  };
+
+
+  return (    
     <FormProvider {...method}>
       <div className="flex-center min-h-dvh w-full bg-white">
         <div className="flex max-w-390 flex-1 flex-col items-center px-15">
