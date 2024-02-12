@@ -15,6 +15,8 @@ returns: component
 
 import { InputHTMLAttributes, useState } from 'react';
 import Image from 'next/image';
+import EyeOpenImage from '@/public/icons/EyeOpen.svg';
+import EyeCloseImage from '@/public/icons/EyeClose.svg';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -75,7 +77,7 @@ function PasswordInput({
       <button type="button" className="absolute bottom-12 right-8">
         <Image
           onClick={() => setIsView(!isView)}
-          src={isView ? 'icons/EyeOpen.svg' : 'icons/EyeClose.svg'}
+          src={isView ? EyeOpenImage : EyeCloseImage}
           alt="eye"
           width={24}
           height={24}

@@ -3,20 +3,10 @@ import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
 import { myWishListData } from '@/pages/api/wishMock';
+import { WishListData } from '@/types/wishPageType';
 import Image from 'next/image';
 import { SetStateAction, useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
-
-type WishListData = {
-  id: number;
-  image: string;
-  title: string;
-  author: string;
-  rating: number;
-  genre: string;
-  price: number;
-  clicked?: number;
-};
 
 type WishListNavProps = {
   wishListData: WishListData[];
@@ -140,6 +130,8 @@ function CartPage() {
     acc += item.clicked || 1;
     return acc;
   }, 0);
+
+  console.log('선택', selectedItemArr, '장부가누', wishListData);
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -299,6 +291,8 @@ function CartPage() {
                 totalAmount={totalAmount}
                 totalDiscount={totalDiscount}
                 bookTotalCount={bookTotalCount}
+                selectedItemArr={selectedItemArr}
+                wishListData={wishListData}
               />
             </div>
           </div>

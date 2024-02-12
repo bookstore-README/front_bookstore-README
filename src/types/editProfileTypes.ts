@@ -1,5 +1,5 @@
 export interface EditProfileType {
-  ImageUrl?: string | null;
+  profileImage?: string | null;
   nickname?: string | null;
 }
 

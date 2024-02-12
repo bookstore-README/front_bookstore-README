@@ -1,17 +1,30 @@
-import React from 'react';
+import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';
+import { WishListData } from '@/types/wishPageType';
+
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
 
 type CartPaymentProps = {
   totalAmount: number;
   totalDiscount: number;
   bookTotalCount: number;
+  selectedItemArr: WishListData[];
+  wishListData: WishListData[];
 };
 
 function CartPayment({
   totalAmount,
   totalDiscount,
   bookTotalCount,
+  selectedItemArr,
+  wishListData,
 }: CartPaymentProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+  const handleAlertModalOpenClick = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   const calculateDeliveryFee = (totalAmount: number, totalDiscount: number) => {
     return totalAmount - totalDiscount >= 30000 ? 3000 : 0;
   };
@@ -57,11 +70,24 @@ function CartPayment({
           원
         </span>
       </div>
-      <div className="bottom-0 left-0 w-full bg-white mobile:fixed mobile:px-15 mobile:py-10">
-        <button className="w-full rounded-[5px] bg-green py-15 text-center text-white">
+      <div className="w-full mobile:fixed left-0 bottom-0 mobile:px-15 mobile:py-10 bg-white">
+        <button
+          className="w-full text-center bg-green text-white rounded-[5px] py-15"
+          onClick={() => {
+            selectedItemArr.length
+              ? // 결제페이지로 이동
+                router.push('/')
+              : handleAlertModalOpenClick();
+          }}>
           결제하기({bookTotalCount})
         </button>
       </div>
+      <CartPaymentModal
+        wishListDataLength={wishListData.length}
+        selectedItemArrLength={selectedItemArr.length}
+        isModalOpen={isModalOpen}
+        handleAlertModalOpenClick={handleAlertModalOpenClick}
+      />
     </div>
   );
 }

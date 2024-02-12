@@ -1,4 +1,8 @@
 import { BookOrderCardListProps } from '@/components/card/bookOrderCard/bookOrderCardList';
+import { OrderDateProps } from '@/components/container/orderDate/orderDate';
+import { OrderOverViewProps } from '@/components/container/orderDate/orderOverView';
+import { Person } from '@/types/orderDateType';
+import { Dispatch, SetStateAction } from 'react';
 
 export const bookOrderTestData: BookOrderCardListProps = {
   orderData: [
@@ -8,8 +12,7 @@ export const bookOrderTestData: BookOrderCardListProps = {
           book: {
             productId: 1,
             title: '첫 번째 책',
-            imageUrl:
-              'https://image.aladin.co.kr/product/33315/55/cover/8934920998_1.jpg',
+            imageUrl: null,
             cost: 15000,
             authors: ['저자 A', '저자 B'],
           },
@@ -36,6 +39,7 @@ export const bookOrderTestData: BookOrderCardListProps = {
         },
       ],
       orderDate: '2023-01-01',
+      orderId: 2,
     },
     {
       bookData: [
@@ -71,6 +75,7 @@ export const bookOrderTestData: BookOrderCardListProps = {
         },
       ],
       orderDate: '2023-01-02',
+      orderId: 1,
     },
     {
       bookData: [
@@ -91,6 +96,37 @@ export const bookOrderTestData: BookOrderCardListProps = {
         },
       ],
       orderDate: '2023-01-03',
+      orderId: 3,
     },
   ],
+};
+
+export const orderOverViewData: OrderOverViewProps = {
+  orderView: {
+    processing: 10,
+    shipping: 5,
+    completed: 20,
+    exchangeCompleted: 2,
+    purchased: 50,
+  },
+};
+
+// Person 타입의 테스트 데이터
+const personTestData: Person = {
+  id: 1,
+  name: 'John Doe',
+  isPurchased: true,
+  firstPurchasedDate: '2022-01-01',
+};
+
+// setSelectedItem 함수의 간단한 구현 예시
+const setSelectedItemMock: Dispatch<SetStateAction<string>> = (value) => {
+  // 실제 애플리케이션에서는 상태 업데이트 로직이 위치할 것입니다.
+};
+
+// OrderDateProps 타입의 테스트 데이터
+const orderDateTestData: OrderDateProps = {
+  pastDate: '2022-01-01',
+  setSelectedItem: setSelectedItemMock,
+  person: personTestData,
 };
