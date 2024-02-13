@@ -38,15 +38,13 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
   );
 });
 
-function OrderDate({ person, pastDate, startDate, endDate, setSelectedItem, setStartDate, setEndDate}: OrderDateProps) {
-
+function OrderDate({ person, pastDate, startDate, endDate, setSelectedItem, setStartDate, setEndDate}: OrderDateProps) {  
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
   const aMonthAgo = getDateAgo(30);
   const threeMonthAgo = getDateAgo(90);
   const sixMonthAgo = getDateAgo(180);
-  const aYearAgo = getDateAgo(365);
-
+  const aYearAgo = getDateAgo(365);  
   const selectedAgo = [
     ['전체보기', endDate],
     ['최근 1개월', aMonthAgo],
