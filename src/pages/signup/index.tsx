@@ -71,8 +71,7 @@ function SignUp() {
       password: checkPasswordValidation(password),
       repassword: checkMatchPasswordValidation(password, repassword),
       nickname: checkNickNameValidation(nickname),
-      selectAll: selectAll,
-
+      selectAll: selectAll,  
     }
 
     if (!checkValidataion.email) {
@@ -117,8 +116,7 @@ function SignUp() {
       createMemberMutation.mutate(personData);
     }      
 
-  };
-
+  };  
 
   return (    
     <FormProvider {...method}>
