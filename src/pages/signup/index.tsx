@@ -55,14 +55,12 @@ function SignUp() {
         password: data.password,
       })
     }
-  })
-
+  })  
 
   const loginMutation = useMutation({
     mutationFn: (data: Login) => postLogin(data),
     onSuccess: () => router.push("/")
-  })
-
+  })  
 
   const onSubmit = (data: SignUpValueType) => {
     const { email, password, repassword, nickname, selectAll } = data;
