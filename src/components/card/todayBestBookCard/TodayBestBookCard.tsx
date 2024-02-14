@@ -38,7 +38,7 @@ const STYLE = {
   img: `${SIZE.desktop.img} ${SIZE.mobile.img}`,
 };
 
-function TodayBestBook({ bookId, bookImgUrl, bookTitle, price, authors, averageRating, categories }: TodayBestBookCardProp) {
+function TodayBestBook({  bookId, bookImgUrl, bookTitle, price, authors, averageRating, categories }: TodayBestBookCardProp) {
   return (
     <div
       role="container"
