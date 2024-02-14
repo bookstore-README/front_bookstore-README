@@ -3,7 +3,6 @@ import BookOverViewCardList from '@/components/card/bookOverviewCard/bookOverVie
 import Header from '@/components/header';
 import BestSellerPageLayout from '@/components/layout/bestSellerLayout';
 import Sidebar from '@/components/sidebar/sidebar';
-import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import { BookData } from '@/types/api/book';
 
 //임시로 전체 데이터 넣어놓음
@@ -14,8 +13,11 @@ const INITIAL_PARAMS = {
 };
 
 function BestSellerPage() {
-  const { data } = useGetBook({ endpoint: '0/main', params: INITIAL_PARAMS });
-  const bookData: BookData[] = data?.data?.books ?? [];
+  const { data: book } = useGetBook({
+    endpoint: '0/main',
+    params: INITIAL_PARAMS,
+  });
+  const bookData: BookData[] = book?.data?.books ?? [];
 
   return (
     <div>

@@ -11,9 +11,9 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
 
-function BookOverviewCard({ book, like, rank }: BookOverviewType2) {
+function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setIsLikeCount] = useState(0);
+  const [likeCount, setIsLikeCount] = useState(book.bookmarkCount);
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
 
