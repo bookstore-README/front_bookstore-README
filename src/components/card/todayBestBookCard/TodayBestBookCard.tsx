@@ -1,14 +1,12 @@
 /* 실시간 인기도서 책 컴포넌트 */
 
 import Link from 'next/link';
-import Image from 'next/image';
 
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookRating from '@/components/book/bookRating/bookRating';
 import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookCategory from '@/components/book/bookCategory/bookCategory';
 
-import { BookDetailCardType } from '@/types/cardType';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 
 const SIZE = {
@@ -30,7 +28,7 @@ const STYLE = {
   img: `${SIZE.desktop.img} ${SIZE.mobile.img}`,
 };
 
-function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, categoryList }: BookDetailCardType) {
+function TodayBestBook({ bookId, bookImgUrl, bookTitle, price, authors, averageRating, categories }) {
   return (
     <div
       role="container"
@@ -42,8 +40,8 @@ function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, catego
         <div
           role="img-section"
           className={`flex-center relative bg-white ${STYLE.img}`}>
-          {imageUrl ? (
-          <PreviewBookInfo size='sm' image={imageUrl} itemsStart/>
+          {bookImgUrl ? (
+          <PreviewBookInfo size='sm' image={bookImgUrl} itemsStart/>
           ) : (
             <div className={`bg-gray-1 ${STYLE.img}`}></div>
           )}
@@ -52,11 +50,11 @@ function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, catego
           <div
             role="bookTitle"
             className="text-gray-7 line-clamp-2 w-full text-15 font-bold leading-tight">
-            {title}
+            {bookTitle}
           </div>
-          <BookAuthor authorList={authors} fontSize={14} />
-          <BookRating rating={rating} />
-          <BookCategory categories={categoryList} fontSize={13}/>
+          <BookAuthor authorList={authors} fontSize={14} classNames=' line-clamp-2 mobile:w-125 mobile:line-clamp-1'/>
+          <BookRating rating={averageRating} />
+          <BookCategory categories={categories} fontSize={13} classNames=' line-clamp-2 mobile:w-125 mobile:line-clamp-1'/>
           <BookPrice price={price}  fontSize={14} isBold hasUnit/>
         </div>
       </Link>

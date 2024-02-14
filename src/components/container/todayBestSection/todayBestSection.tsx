@@ -1,13 +1,12 @@
 /* 메인 페이지에 들어갈 실시간 인기 도서 코너 컴포넌트 */
 
-// TODO - props 없이 내부에서 data fetching을 받도록 구현할 예정으로, 지금은 목업데이터를 쓰게끔 함
-
 import TodayBestBook from '@/components/card/todayBestBookCard/TodayBestBookCard';
 import TodayBestSlider from '@/components/container/todayBestSection/todayBestSlider';
 import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
 
 import SkeletonTodayBestBook from '@/components/skeleton/todayBestBookSkeleton/skeletonTodayBestBook';
 import { TodayBestBookListMock } from '@/pages/api/mock/todayBestSectionMock';
+import { useGetBook } from '@/api/book';
 
 // width, height, top, bottom, left, right 관련 속성을 모아둔 SIZE 객체
 const SIZE = {
@@ -37,16 +36,21 @@ const STYLE = {
 };
 
 function TodayBestSection() {
-  // const { data: bookList, isLoading } = useQuery({
-  //     queryKey: [""],
-  //     queryFn: () => { },
-  // });
-  const isLoading = false;
-  const bookList = TodayBestBookListMock;
+  const { data, isLoading, isError } = useGetBook({
+    endpoint: "0/main",
+    params: {
+      bookId: "0",
+      limit: "6",
+      sort: "STAR",
+      ascending: false,
+    },
+  });
+
+  const bookList = data ? data.data.books : [];
   const { dynamicWid } = useWindowInnerWidth();
 
   // isLoading 시 스켈레톤 ui 렌더링
-  if (isLoading) {
+  if (isLoading || isError) {
     return (
       <div
         role="container"
@@ -91,21 +95,15 @@ function TodayBestSection() {
       </div>
       <div role="card-section" className={`absolute ${STYLE['card-section']}`}>
         <div className="grid grid-flow-col grid-rows-2 gap-20 mobile:hidden tablet:grid-rows-3">
-          {bookList ? (
-            <>
-              {bookList?.map((book, ind) => {
-                return (
-                  <div
-                    key={book.bookId}
-                    className={`${ind === 2 || ind === 3 ? `relative top-40` : ``} mobile:static tablet:static`}>
-                    <TodayBestBook {...book} />
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            <></>
-          )}
+          {bookList.map((book, ind) => {
+            return (
+              <div
+                key={book.bookId}
+                className={`${ind === 2 || ind === 3 ? `relative top-40` : ``} mobile:static tablet:static`}>
+                <TodayBestBook {...book} />
+              </div>
+            );
+          })}
         </div>
         <div className="hidden mobile:block">
           <TodayBestSlider
