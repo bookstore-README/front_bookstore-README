@@ -7,7 +7,7 @@ import { BookData } from '@/types/api/book';
 
 const INITIAL_PARAMS = {
   limit: '100',
-  sort: 'STAR' as const,
+  sort: 'BESTSELLER' as const,
   ascending: false,
 };
 

@@ -9,7 +9,7 @@ import { BookData } from '@/types/api/book';
 //임시로 전체 데이터 넣어놓음
 const INITIAL_PARAMS = {
   limit: '100',
-  sort: 'STAR' as const,
+  sort: 'BESTSELLER' as const,
   ascending: false,
 };
 

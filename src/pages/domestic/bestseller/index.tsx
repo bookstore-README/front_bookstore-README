@@ -7,13 +7,14 @@ import { BookData } from '@/types/api/book';
 
 const INITIAL_PARAMS = {
   limit: '100',
-  sort: 'STAR' as const,
+  sort: 'BESTSELLER' as const,
   ascending: false,
 };
 
 function BestSellerPage() {
   const { data } = useGetBook({ endpoint: '0/main', params: INITIAL_PARAMS });
   const bookData: BookData[] = data?.data?.books ?? [];
+  console.log(bookData);
 
   return (
     <BestSellerPageLayout
