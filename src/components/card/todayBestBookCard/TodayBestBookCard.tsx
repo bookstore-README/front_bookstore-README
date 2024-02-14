@@ -6,9 +6,8 @@ import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookRating from '@/components/book/bookRating/bookRating';
 import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookCategory from '@/components/book/bookCategory/bookCategory';
-
-import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
+import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 
 const SIZE = {
   desktop: {
@@ -48,7 +47,7 @@ function TodayBestBook({ bookId, bookImgUrl, bookTitle, price, authors, averageR
           )}
         </div>
         <div className="flex flex-col items-start justify-start gap-4">
-          <BookTitle title={bookTitle} isBold fontSize={15} classNames='line-clam-2 mobile:w-125 mobile:line-clamp-1' />
+          <BookTitle title={bookTitle} isBold fontSize={15} classNames='line-clamp-2 mobile:w-125 mobile:line-clamp-1' />
           <BookAuthor authorList={authors} fontSize={14} classNames=' line-clamp-2 mobile:w-125 mobile:line-clamp-1'/>
           <BookRating rating={averageRating} />
           <BookCategory categories={categories} fontSize={13} classNames=' line-clamp-2 mobile:w-125 mobile:line-clamp-1'/>
