@@ -6,12 +6,13 @@
 interface BookCategoryProps {
   categories: [string, string];
   fontSize?: number;
+  classNames?: string;
 }
 
-function BookCategory({ categories, fontSize }: BookCategoryProps) {
+function BookCategory({ categories, fontSize, classNames }: BookCategoryProps) {
   return (
     <div
-      className="text-16 text-gray-4"
+      className={`${classNames ?? ``} text-16 text-gray-4`}
       style={{
         fontSize: fontSize ?? 16,
       }}>{`[${categories[0]}/${categories[1]}]`}</div>

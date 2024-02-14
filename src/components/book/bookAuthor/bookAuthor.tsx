@@ -5,15 +5,16 @@ interface BookAuthorProps {
   authorList?: string[] | null;
   publisher?: string;
   fontSize?: number;
+  classNames?: string;
 }
 
-function BookAuthor({ authorList, publisher, fontSize }: BookAuthorProps) {
+function BookAuthor({ authorList, publisher, fontSize , classNames }: BookAuthorProps) {
   if (!authorList || authorList.length < 1) return;
 
   let nameList = authorList.join(', ');
   nameList += publisher ? ` | ${publisher}` : '';
   return (
-    <div className="text-14 text-gray-3" style={{ fontSize: fontSize }}>
+    <div className={`${classNames ?? ``} text-14 text-gray-3`} style={{ fontSize: fontSize }}>
       {nameList}
 
     </div>
