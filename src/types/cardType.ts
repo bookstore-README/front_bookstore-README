@@ -1,10 +1,10 @@
 interface BookDetailCardType {
   bookId: number;
-  publishedAt: string;
+  publishedDate: string;
   orderNum: number;
-  categoryList: [string, string];
-  title: string;
-  imageUrl?: string | null;
+  categories: [string, string];
+  bookTitle: string;
+  bookImgUrl: string;
   price: number;
   authors?: string[] | [];
   translator?: string;
@@ -12,7 +12,7 @@ interface BookDetailCardType {
   views: number;
   bookmarkNum: number;
   reviewNum: number;
-  rating: number;
+  averageRating: number;
   isBookmarked: boolean;
 }
 

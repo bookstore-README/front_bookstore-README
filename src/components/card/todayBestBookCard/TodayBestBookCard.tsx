@@ -9,6 +9,16 @@ import BookCategory from '@/components/book/bookCategory/bookCategory';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 
+interface TodayBestBookCardProps {
+  bookId: number;
+  bookImgUrl: string;
+  bookTitle: string;
+  price: number;
+  authors?: string[];
+  averageRating: number;
+  categories: [string, string];
+}
+
 const SIZE = {
   desktop: {
     container: 'w-347 h-240',
@@ -28,7 +38,7 @@ const STYLE = {
   img: `${SIZE.desktop.img} ${SIZE.mobile.img}`,
 };
 
-function TodayBestBook({ bookId, bookImgUrl, bookTitle, price, authors, averageRating, categories }) {
+function TodayBestBook({ bookId, bookImgUrl, bookTitle, price, authors, averageRating, categories }: TodayBestBookCardProps) {
   return (
     <div
       role="container"
