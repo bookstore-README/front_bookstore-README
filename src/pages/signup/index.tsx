@@ -6,17 +6,27 @@ import {
 } from '@/components/input/signInput/signInput';
 import SocialCircle from '@/components/chip/socialCircle';
 import TermsCheckbox from '@/components/container/terms/terms';
-import { SignUpValueType, SignValueType } from '@/types/signType';
+import { SignUpValueType } from '@/types/signType';
 import {
   checkEmail,
+  checkEmailValidation,
+  checkMatchPasswordValidation,
   checkNickName,
+  checkNickNameValidation,
   checkPassword,
+  checkPasswordValidation,
 } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
-import { TERMS_TITLES } from 'src/constants/sign';
+import { useMutation } from '@tanstack/react-query';
+import { postLogin, postSignup } from '@/api/member';
+import { Login, Signup } from '@/types/api/member';
+import { useRouter } from 'next/router';    
+import useSignUpMutation from '@/hooks/useSignUpMutation';
+import { TERMS_TITLES } from '@/constants/sign';
 
-function SignUp() {
+
+function SignUp() {    
   const method = useForm<SignUpValueType>({
     mode: 'onBlur',
     defaultValues: {
@@ -30,41 +40,68 @@ function SignUp() {
   const {
     register,
     handleSubmit,
-    setError,
+    setError,   
     formState: { errors },
-  } = method;
+  } = method;       
+
+
+  const { createMemberMutation } = useSignUpMutation()  
 
   const onSubmit = (data: SignUpValueType) => {
     const { email, password, repassword, nickname, selectAll } = data;
-    if (!checkEmail.value.test(email)) {
+    const checkValidataion = {
+      email: checkEmailValidation(email),
+      password: checkPasswordValidation(password),
+      repassword: checkMatchPasswordValidation(password, repassword),
+      nickname: checkNickNameValidation(nickname),
+      selectAll: selectAll,  
+    }
+
+    if (!checkValidataion.email) {
       setError('email', {
         type: 'manual',
         message: checkEmail.message,
       });
     }
-    if (!checkPassword.value.test(password)) {
+    if (!checkValidataion.password) {
       setError('password', {
         type: 'manual',
         message: checkPassword.message,
       });
     }
-
-    if (!checkNickName.value.test(nickname)) {
+    if (!checkValidataion.nickname) {
       setError('nickname', {
         type: 'manual',
         message: checkNickName.message,
       });
     }
-    if (password !== repassword) {
+
+    if (!checkValidataion.repassword) {
       setError('repassword', {
         type: 'manual',
         message: '비밀번호가 다릅니다',
       });
     }
-    if (!selectAll) return;
-  };
 
-  return (
+    if (!checkValidataion.selectAll) {
+      alert("약관동의를해주세요")
+    }
+
+    const personData = {
+      name: "없어져야하는필드입니다",
+      email: email,
+      password: password,
+      nickname: nickname,      
+    };  
+
+    const filterValidation = Object.values(checkValidataion).filter((data) => data); 
+    if (filterValidation.length === Object.values(checkValidataion).length) {
+      createMemberMutation.mutate(personData);
+    }      
+
+  };  
+
+  return (    
     <FormProvider {...method}>
       <div className="flex-center min-h-dvh w-full bg-white">
         <div className="flex max-w-390 flex-1 flex-col items-center px-15">
@@ -75,7 +112,7 @@ function SignUp() {
           <div
             className="mb-40 flex h-125 w-full flex-col items-center justify-center
               rounded-[10px] border-2 border-solid border-gray-1 py-5 text-gray-3">
-            <p className="mb-20 text-center text-12">
+            <p className="mb-20 text-center text-12" >
               SNS로 간편하게 로그인/회원가입
             </p>
             <div className="flex w-184 justify-between">

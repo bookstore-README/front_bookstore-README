@@ -8,5 +8,13 @@ export const checkPassword = {
 };
 export const checkNickName = {
   value: /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]{3,8}$/i,
-  message: '닉네임은 3자 이상, 8자 이하로 지어주세요.',
+  message: '닉네임은 특수문자제외, 3자 이상, 8자 이하로 지어주세요.',
 };
+
+
+export const checkEmailValidation = (email: string) => checkEmail.value.test(email)
+export const checkPasswordValidation = (password: string) => checkPassword.value.test(password)
+export const checkMatchPasswordValidation = (password:string, repassword:string) => password === repassword
+export const checkNickNameValidation = (nickname: string) => checkNickName.value.test(nickname)
+
+
