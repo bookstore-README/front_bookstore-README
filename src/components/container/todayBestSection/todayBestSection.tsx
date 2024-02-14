@@ -5,8 +5,8 @@ import TodayBestSlider from '@/components/container/todayBestSection/todayBestSl
 import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
 
 import SkeletonTodayBestBook from '@/components/skeleton/todayBestBookSkeleton/skeletonTodayBestBook';
-import { TodayBestBookListMock } from '@/pages/api/mock/todayBestSectionMock';
 import { useGetBook } from '@/api/book';
+import { BookDetailCardType } from '@/types/cardType';
 
 // width, height, top, bottom, left, right 관련 속성을 모아둔 SIZE 객체
 const SIZE = {
@@ -46,7 +46,7 @@ function TodayBestSection() {
     },
   });
 
-  const bookList = data ? data.data.books : [];
+  const bookList: Array<BookDetailCardType> = data ? data.data.books : [];
   const { dynamicWid } = useWindowInnerWidth();
 
   // isLoading 시 스켈레톤 ui 렌더링
@@ -100,7 +100,15 @@ function TodayBestSection() {
               <div
                 key={book.bookId}
                 className={`${ind === 2 || ind === 3 ? `relative top-40` : ``} mobile:static tablet:static`}>
-                <TodayBestBook {...book} />
+                <TodayBestBook
+                    bookId={book.bookId}
+                  bookImgUrl={book.bookImgUrl}
+                  bookTitle={book.bookTitle}
+                  price={book.price}
+                  authors={book.authors}
+                  averageRating={book.averageRating}
+                  categories={book.categories}
+                />
               </div>
             );
           })}
