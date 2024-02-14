@@ -1,11 +1,12 @@
 /* 메인 페이지에 들어갈 실시간 인기 도서 코너 컴포넌트 */
 
-import { useGetBook } from '@/api/book';
 import TodayBestBook from '@/components/card/todayBestBookCard/TodayBestBookCard';
 import TodayBestSlider from '@/components/container/todayBestSection/todayBestSlider';
 import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
+
 import SkeletonTodayBestBook from '@/components/skeleton/todayBestBookSkeleton/skeletonTodayBestBook';
-import { BookDetailCardType } from '@/types/cardType';
+import { TodayBestBookListMock } from '@/pages/api/mock/todayBestSectionMock';
+import { useGetBook } from '@/api/book';
 
 // width, height, top, bottom, left, right 관련 속성을 모아둔 SIZE 객체
 const SIZE = {
@@ -45,7 +46,7 @@ function TodayBestSection() {
     },
   });
 
-  let bookList: Array<BookDetailCardType> = data ? data.data.books : [];
+  const bookList = data ? data.data.books : [];
   const { dynamicWid } = useWindowInnerWidth();
 
   // isLoading 시 스켈레톤 ui 렌더링
@@ -99,15 +100,7 @@ function TodayBestSection() {
               <div
                 key={book.bookId}
                 className={`${ind === 2 || ind === 3 ? `relative top-40` : ``} mobile:static tablet:static`}>
-                <TodayBestBook
-                  bookId={book.bookId}
-                  bookImgUrl={book.bookImgUrl}
-                  bookTitle={book.bookTitle}
-                  price={book.price}
-                  authors={book.authors}
-                  averageRating={book.averageRating}
-                  categories={book.categories}
-                />
+                <TodayBestBook {...book} />
               </div>
             );
           })}
