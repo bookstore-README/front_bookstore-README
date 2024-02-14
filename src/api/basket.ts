@@ -15,12 +15,12 @@ export const useGetCart = (memberId: number) => {
 
 //장바구니 추가
 const postBasket = async (option: PostBasketParams) => {
-  const { bookId, memberId } = option;
-  const result = await instance.post(`basket/${bookId}/${memberId}`);
+  const { bookId } = option;
+  const result = await instance.post(`basket/${bookId}`);
   return result.data;
 };
 
-export const usePostCart = (option: PostBasketParams) => {
+export const usePostBasket = (option: PostBasketParams) => {
   return usePost(postBasket, option);
 };
 

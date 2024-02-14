@@ -10,17 +10,16 @@ import { useRouter } from 'next/router';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
-import { usePostCart } from '@/api/basket';
-import { PostBasketParams } from '@/types/api/basket';
+import { usePostBasket } from '@/api/basket';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setIsLikeCount] = useState(book.bookmarkCount);
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
-
   // 임시 멤버 아이디
-  const memberId = 99;
+  const memberId = 104;
+  const mutation = usePostBasket({ bookId: book.bookId });
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
@@ -28,15 +27,13 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     else setIsLikeCount((prevCount) => prevCount - 1);
   };
 
-  const handleAddToCart = ({ bookId, memberId }: PostBasketParams) => {
-    const response = usePostCart({ bookId, memberId });
+  const handleAddToCart = () => {
+    const data = mutation.mutate();
+    console.log(data);
     notify({
       type: 'success',
       text: '장바구니에 담았어요 🛒',
     });
-    //TODO
-    //1. 유저 장바구니에 추가(서버연결)
-    //2. 성공시 장바구니 아이콘 변경
   };
 
   const handleAddForPayment = () => {
@@ -137,9 +134,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
             <ActionButton
               label="장바구니"
               variant="primary"
-              onClick={() =>
-                handleAddToCart({ memberId: memberId, bookId: book.bookId })
-              }
+              onClick={handleAddToCart}
             />
             <ActionButton
               label="구매하기"
@@ -158,9 +153,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
             label="장바구니"
             variant="primary"
             mobile
-            onClick={() =>
-              handleAddToCart({ memberId: memberId, bookId: book.bookId })
-            }
+            onClick={handleAddToCart}
           />
           <ActionButton
             label="구매하기"

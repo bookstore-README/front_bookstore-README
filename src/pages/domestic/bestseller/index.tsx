@@ -14,7 +14,6 @@ const INITIAL_PARAMS = {
 function BestSellerPage() {
   const { data } = useGetBook({ endpoint: '0/main', params: INITIAL_PARAMS });
   const bookData: BookData[] = data?.data?.books ?? [];
-  console.log(bookData);
 
   return (
     <BestSellerPageLayout
