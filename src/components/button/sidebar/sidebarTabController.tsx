@@ -22,7 +22,7 @@ function SidebarTabController({pageName}: SidebarProps) {
   const { env } = useCarouselEnv();
   const [categoryList,] = useAtom(CategoryListAtom);
   const [locatedCategory] = useAtom(LocatedCategoryAtom);
-  const locatedTitle = locatedCategory.subId ? categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"][locatedCategory.subId-1].subName : '전체보기';
+  const locatedTitle = (locatedCategory.subId && categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"] && categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"].length > 0)? categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"][locatedCategory.subId-1].subName : '전체보기';
 
   const handleClick = () => setShowOptions(!showOptions);
 

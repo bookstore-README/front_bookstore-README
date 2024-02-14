@@ -38,7 +38,11 @@ function MainCategoryBookList() {
     selectFunc: (data) => {
       return (data.pages ?? []).flatMap(page => {
         if (page?.data?.books.length < 2) return page?.data?.books;
-        return page?.data?.books.slice(0, page.data.books.length - 1)
+        if (hasNextPage) { 
+          return page?.data?.books.slice(0, page.data.books.length - 1)
+        } else {
+          return page?.data?.books.slice(0, page.data.books.length);
+        }
       })
     },
   })

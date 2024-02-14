@@ -4,6 +4,7 @@ import EventSection from '@/components/container/eventSection/eventSection';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
 import { carouselMockData } from '@/pages/api/mock/carouselMock';
 import { responsive } from '@/utils/checkResponsiveEnv';
+import SubCategoryBookList from '@/components/container/categoryBookList/subCategoryBookList';
 
 function CategoryPage() {
   return (
@@ -23,8 +24,9 @@ function CategoryPage() {
             className="h-[500px] w-[895px] bg-gray-1 mobile:w-[330px]
             tablet:w-[511px]"></div>
         </article>        
-        <Spacing height={[120, 80, 80]} />
-
+      <Spacing height={[120, 80, 80]} />
+      
+        <SubCategoryBookList />
       </SidebarLayout>
   );
 }
