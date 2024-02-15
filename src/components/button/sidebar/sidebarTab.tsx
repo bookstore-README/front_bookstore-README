@@ -23,7 +23,7 @@ function SidebarTab({ pageName}: SidebarProps) {
         href={`/${locatedCategory.mainId === 0 ? 'domestic' : 'foreign'}`}>
         전체보기
       </Link>
-      {(categoryList) && categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"].map((el, ind) => {
+      {(categoryList) && (categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"] ?? []).map((el, ind) => {
         return (
           <Link
               onClick={() => {

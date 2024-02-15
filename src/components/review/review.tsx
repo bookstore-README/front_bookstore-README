@@ -6,9 +6,13 @@ import { ReviewListMock1 } from '@/pages/api/mock/bookDetailMock';
 import ReviewOverviewCard from '../card/bookReviewCard/reviewOverviewCard';
 import BookReviewCard from '../card/bookReviewCard/bookReviewCard';
 
-function Review({ bookId = '' }) {
-  // TODO react query를 통해 book 상세 정보와 review 리스트를 받아올 것
-
+interface ReviewProps {
+  reviewNum: number;
+  rating?: number;
+  ratingDist?: [number, number, number, number, number];
+  reviewList?: any[];
+}
+function Review({ reviewNum, rating=0, ratingDist=[0,0,0,0,0], reviewList = [] }: ReviewProps) {
   return (
     <section className="mobile:flex-center flex flex-col gap-20">
       <h3
@@ -16,16 +20,16 @@ function Review({ bookId = '' }) {
           text-gray-4 mobile:w-330">
         리뷰
         <span className="pl-10 text-20 font-bold text-green">
-          {ReviewListMock1.reviewNum}
+          {reviewNum}
         </span>
       </h3>
       <ReviewOverviewCard
-        rating={ReviewListMock1.averageRating}
-        reviewNum={ReviewListMock1.reviewNum}
-        ratingDist={ReviewListMock1.ratingDist}
+        rating={rating}
+        reviewNum={reviewNum}
+        ratingDist={ratingDist}
       />
       <article className="flex flex-col gap-20 w-full pt-40 mobile:flex-center mobile:gap-10">
-        {ReviewListMock1.reviewList.map((el) => {
+        {reviewList.map((el) => {
           return (
             <BookReviewCard
               key={el.reviewId}

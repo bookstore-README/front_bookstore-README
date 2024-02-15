@@ -29,6 +29,7 @@ function MainCategoryBookList() {
     endpoint: `${locatedCategory.mainId}/main`,
     queryKey: [selectedOrder, String(locatedCategory.mainId), "main-category-book-list"],
     queryFunc: getBook,
+    initialCursorId: 0,
     cursorName: "bookId",
     sort: currentOrder.sort,
     ascending: currentOrder.ascending,
@@ -37,7 +38,11 @@ function MainCategoryBookList() {
     selectFunc: (data) => {
       return (data.pages ?? []).flatMap(page => {
         if (page?.data?.books.length < 2) return page?.data?.books;
-        return page?.data?.books.slice(0, page.data.books.length - 1)
+        if (hasNextPage) { 
+          return page?.data?.books.slice(0, page.data.books.length - 1)
+        } else {
+          return page?.data?.books.slice(0, page.data.books.length);
+        }
       })
     },
   })

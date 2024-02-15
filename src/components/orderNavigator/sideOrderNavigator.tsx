@@ -7,7 +7,6 @@ interface SideOrderNavigatorProps {
   orderCount: number;
   setOrderCount: (s: number) => void;
   price: number;
-  bookId: string;
   isBookmarked: boolean;
 }
 
@@ -15,7 +14,6 @@ function SideOrderNavigator({
   orderCount,
   setOrderCount,
   price,
-  bookId,
   isBookmarked,
 }: SideOrderNavigatorProps) {
   const [checkBookmarked, setIsBookmarked] = useState(isBookmarked || false);
