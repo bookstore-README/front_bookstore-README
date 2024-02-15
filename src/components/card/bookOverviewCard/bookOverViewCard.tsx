@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
-import { usePostBasket } from '@/api/basket';
+import { postBasket } from '@/api/basket';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
@@ -18,28 +18,29 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
 
-  // 임시로 제가 받은 토큰값을 넣어놨어요. 테스트시 교체해 주세용
-  // TODO: 토큰관리 적용하기
-  const mutation = usePostBasket({
-    bookId: book.bookId,
-    token:
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1NfVE9LRU4iLCJpYXQiOjE3MDc5NzI1MjEsImV4cCI6MTcwODA1ODkyMSwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIn0.cPnOU9qU2phcdWAQiiYc-kmzjS4f_o-MMLlAhzyTv-6G31Q7AcemGNg2bhaRWaXXbkBu-ok1ZFSC6SHpFwn9ww',
-  });
-
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
     if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
     else setIsLikeCount((prevCount) => prevCount - 1);
   };
 
-  const handleAddToCart = () => {
-    const data = mutation.mutate();
-
-    console.log(data);
-    notify({
-      type: 'success',
-      text: '장바구니에 담았어요 🛒',
-    });
+  const handleAddToCart = async () => {
+    try {
+      await postBasket({
+        bookId: book.bookId,
+        token:
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1NfVE9LRU4iLCJpYXQiOjE3MDc5NzI1MjEsImV4cCI6MTcwODA1ODkyMSwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIn0.cPnOU9qU2phcdWAQiiYc-kmzjS4f_o-MMLlAhzyTv-6G31Q7AcemGNg2bhaRWaXXbkBu-ok1ZFSC6SHpFwn9ww',
+      });
+      notify({
+        type: 'success',
+        text: '장바구니에 담았어요 🛒',
+      });
+    } catch (error) {
+      notify({
+        type: 'error',
+        text: '장바구니 담기에 실패했어요. 😭',
+      });
+    }
   };
 
   const handleAddForPayment = () => {

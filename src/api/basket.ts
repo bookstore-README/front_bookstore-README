@@ -14,7 +14,7 @@ export const useGetCart = (memberId: number) => {
 };
 
 //장바구니 추가
-const postBasket = async ({ bookId, token }: PostBasketParams) => {
+export const postBasket = async ({ bookId, token }: PostBasketParams) => {
   const result = await instance.post(
     `/basket/${bookId}`,
     {},
