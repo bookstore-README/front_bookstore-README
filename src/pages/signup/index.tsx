@@ -17,11 +17,7 @@ import {
   checkPasswordValidation,
 } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
-import { FormProvider, useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
-import { postLogin, postSignup } from '@/api/member';
-import { Login, Signup } from '@/types/api/member';
-import { useRouter } from 'next/router';    
+import { FormProvider, useForm } from 'react-hook-form';  
 import useSignUpMutation from '@/hooks/useSignUpMutation';
 import { TERMS_TITLES } from '@/constants/sign';
 

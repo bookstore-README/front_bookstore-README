@@ -1,4 +1,4 @@
-import { WishListData } from '@/types/wishPageType';
+import { WishListData } from '@/types/bookMarkType';
 
 export const calcBookPlusCount = (
   wishList: WishListData[],

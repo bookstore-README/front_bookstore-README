@@ -1,11 +1,9 @@
 /* 카테고리 페이지의 사이드바 '국내 외국' 선택 버튼 */
 
 import Link from 'next/link';
-import { useAtom } from 'jotai';
 
-import useSetLocatedCategory from '@/hooks/useSetLocatedCategory';
 import { SidebarProps } from '@/types/sidebarType';
-import { LocatedCategoryAtom } from '@/store/state';
+import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 
 function classNames<T>(...classes: Array<T>) {
   return classes.filter(Boolean).join(' ');
@@ -28,14 +26,9 @@ function StyledLink({
       : 'pl-12 mobile:rounded-r-lg -left-1',
   );
 
-  const { updateLocatedCategory } = useSetLocatedCategory();
 
   return (
     <Link
-      onClick={() => {
-        let main = title === "국내" ? 0 : 1;
-        updateLocatedCategory(main);
-      }}
       className={SidebarLinkClassNames} href={link}>
       {title}
     </Link>
@@ -43,7 +36,7 @@ function StyledLink({
 }
 
 function SidebarRegionButton({ pageName }: SidebarProps) {
-  const [locatedCategory] = useAtom(LocatedCategoryAtom);
+  const { mainId } = useCheckCategoryUrl();
   
   return (
     <div className="mobile:flex-center flex items-center justify-start">
@@ -51,14 +44,14 @@ function SidebarRegionButton({ pageName }: SidebarProps) {
         title="국내"
         link={`/domestic/${pageName ?? ''}`}
         isLeft={true}
-        isSelected={locatedCategory.mainId === 0}
+        isSelected={mainId === 0}
       />
       <div className="relative z-10 h-11 w-[1px] bg-gray-1 mobile:h-37 mobile:bg-green"></div>
       <StyledLink
         title="외국"
         link={`/foreign/${pageName ?? ''}`}
         isLeft={false}
-        isSelected={locatedCategory.mainId === 1}
+        isSelected={mainId === 1}
       />
     </div>
   );

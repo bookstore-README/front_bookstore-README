@@ -53,9 +53,9 @@ function CustomPage() {
 
   return (
     <div className="flex-1">
-      <div className="w-full flex flex-col items-center">
-        <div className="max-w-[1200px] w-full">
-          <MainLayout>
+      <div className="w-full flex flex-col items-center">        
+        <MainLayout>
+            <div className="max-w-[1200px] w-full">
             <CustomPageContentsLayout>
               <div
                 className="flex flex-wrap w-full gap-8 mt-30 mb-40 mobile:flex-nowrap
@@ -126,10 +126,10 @@ function CustomPage() {
                 })}
               </div>
             </CustomPageContentsLayout>
+            </div>
           </MainLayout>
         </div>
-      </div>
-    </div>
+      </div>     
   );
 }
 

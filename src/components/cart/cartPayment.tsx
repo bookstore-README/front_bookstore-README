@@ -1,5 +1,5 @@
 import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';
-import { WishListData } from '@/types/wishPageType';
+import { WishListData } from '@/types/bookMarkType';
 
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';

@@ -14,15 +14,17 @@ import SidebarTab from '@/components/button/sidebar/sidebarTab';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import useCarouselEnv from '@/hooks/useCarouselEnv';
 import { SidebarProps } from '@/types/sidebarType';
-import { CategoryListAtom, LocatedCategoryAtom } from '@/store/state';
+import { CategoryListAtom } from '@/store/state';
+import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 
 function SidebarTabController({pageName}: SidebarProps) {
   const ref = useRef(null);
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const { env } = useCarouselEnv();
   const [categoryList,] = useAtom(CategoryListAtom);
-  const [locatedCategory] = useAtom(LocatedCategoryAtom);
-  const locatedTitle = (locatedCategory.subId && categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"] && categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"].length > 0)? categoryList[locatedCategory.mainId === 0 ? "domestic" : "foreign"][locatedCategory.subId-1].subName : '전체보기';
+  const { mainId, subId, categoryId, subName } = useCheckCategoryUrl();
+
+  const locatedTitle = subName ?? '전체보기';
 
   const handleClick = () => setShowOptions(!showOptions);
 

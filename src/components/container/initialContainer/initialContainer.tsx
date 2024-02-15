@@ -2,7 +2,7 @@ import useGetCategory from "@/hooks/useGetCategory"
 
 function InitialContainer() {
   useGetCategory();
-  return (<></>)
+  return (null)
 }
 
 export default InitialContainer

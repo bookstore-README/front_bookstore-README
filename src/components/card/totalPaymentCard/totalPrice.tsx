@@ -5,11 +5,12 @@ interface TotalPriceProps {
   price: string;
   font?: string;
   text?: string;
+  color?: string;
 }
 
-function TotalPrice({ title, price, font, text }: TotalPriceProps) {
+function TotalPrice({ title, price, font, text, color}: TotalPriceProps) {
   return (
-    <div className="flex items-center justify-between text-15">
+    <div className={cls(`flex items-center justify-between text-15 ${color ? color : 'text-black'}`)}>
       <span className={cls(`${font ? font : 'font-light'}`)}>{title}</span>
       <span
         className={cls(`${text ? `${text} font-bold` : 'text-15 font-bold'}`)}>

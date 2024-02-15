@@ -1,18 +1,16 @@
 import { useState } from "react";
 import Link from "next/link";
-import { useAtom } from "jotai";
 
 import { getBook } from "@/api/book";
 import PreviewBookInfo from "@/components/book/previewBookInfo/previewBookInfo";
 import DropDown from "@/components/dropDown/dropDown";
 import SkeletonPreviewBookInfo from "@/components/skeleton/previewBookInfo/skeleton";
 import useCarouselEnv from "@/hooks/useCarouselEnv";
-import useGetCategoryId from "@/hooks/useGetCategoryId";
 import useInfinite from "@/hooks/useInfinite";
 import useCustomInfiniteQuery from "@/hooks/useCustomInfiniteQuery";
-import { LocatedCategoryAtom } from "@/store/state";
 
 import { BOOK_OLDER_STANDARD } from "src/constants/orderList";
+import useCheckCategoryUrl from "@/hooks/useCheckCategoryUrl";
 
 const CURRENT_ORDER = {
   sort: "VIEW",
@@ -21,15 +19,14 @@ const CURRENT_ORDER = {
 
 function SubCategoryBookList() {
   const { env } = useCarouselEnv();
-  const [locatedCategory,] = useAtom(LocatedCategoryAtom);
   const [selectedOrder, setSelectedOrder] = useState("조회순");
   const [currentOrder, setCurrentOrder] = useState(CURRENT_ORDER);
   const [apiRef, isIntersecting] = useInfinite();
-  const searchId = useGetCategoryId(locatedCategory.mainId, locatedCategory.subId as number);
+  const { mainId, subId, categoryId } = useCheckCategoryUrl();
 
   const { data, isFetchingNextPage, hasNextPage } = useCustomInfiniteQuery({
-    endpoint: `${searchId}/sub`,
-    queryKey: [selectedOrder, String(searchId), "main-category-book-list"],
+    endpoint: `${categoryId}/sub`,
+    queryKey: [selectedOrder, String(categoryId), "main-category-book-list"],
     queryFunc: getBook,
     cursorName: "bookId",
     sort: currentOrder.sort,

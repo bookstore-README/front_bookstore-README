@@ -3,7 +3,7 @@ import CartPayment from '@/components/cart/cartPayment';
 import OrderBookCount from '@/components/cart/orderBookCount';
 import MainLayout from '@/components/layout/mainLayout';
 import { myWishListData } from '@/pages/api/wishMock';
-import { WishListData } from '@/types/wishPageType';
+import { WishListData } from '@/types/bookMarkType';
 import Image from 'next/image';
 import { SetStateAction, useEffect, useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
@@ -135,8 +135,9 @@ function CartPage() {
 
   return (
     <div className="flex w-full flex-col items-center">
-      <div className="w-full max-w-[1200px]">
-        <MainLayout>
+   
+      <MainLayout>
+           <div className="w-full max-w-[1200px]">
           <div className="relative w-full">
             <div
               className="flex gap-x-30 px-60 mobile:flex-col mobile:gap-x-10 mobile:px-15 tablet:gap-x-20
@@ -296,9 +297,9 @@ function CartPage() {
               />
             </div>
           </div>
+          </div>
         </MainLayout>
-      </div>
-    </div>
+      </div>  
   );
 }
 
