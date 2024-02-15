@@ -1,17 +1,13 @@
 import BookOverViewCardList from '@/components/card/bookOverviewCard/bookOverViewCardList';
 import Header from '@/components/header';
 import BestSellerPageLayout from '@/components/layout/bestSellerLayout';
-import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import Sidebar from '@/components/sidebar/sidebar';
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
+import { useInitialBestNewestParams } from '@/hooks/useInitialParams';
 
 // 임시로 전체 데이터 넣어놓음
-const INITIAL_PARAMS = {
-  limit: '100',
-  sort: 'NEWEST' as const,
-  ascending: false,
-};
+const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'NEWEST' });
 
 function NewestPage() {
   const { data } = useGetBook({ endpoint: '0/main', params: INITIAL_PARAMS });

@@ -14,14 +14,21 @@ export const useGetCart = (memberId: number) => {
 };
 
 //장바구니 추가
-const postBasket = async (option: PostBasketParams) => {
-  const { bookId } = option;
-  const result = await instance.post(`basket/${bookId}`);
+const postBasket = async ({ bookId, token }: PostBasketParams) => {
+  const result = await instance.post(
+    `/basket/${bookId}`,
+    {},
+    {
+      headers: {
+        Authorization: token,
+      },
+    },
+  );
   return result.data;
 };
 
-export const usePostBasket = (option: PostBasketParams) => {
-  return usePost(postBasket, option);
+export const usePostBasket = ({ bookId, token }: PostBasketParams) => {
+  return usePost(postBasket, { bookId, token });
 };
 
 //장바구니 물건 삭제

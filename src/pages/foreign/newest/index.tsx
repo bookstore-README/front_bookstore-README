@@ -3,13 +3,10 @@ import BookOverViewCardList from '@/components/card/bookOverviewCard/bookOverVie
 import Header from '@/components/header';
 import BestSellerPageLayout from '@/components/layout/bestSellerLayout';
 import Sidebar from '@/components/sidebar/sidebar';
+import { useInitialBestNewestParams } from '@/hooks/useInitialParams';
 import { BookData } from '@/types/api/book';
 
-const INITIAL_PARAMS = {
-  limit: '100',
-  sort: 'NEWEST' as const,
-  ascending: false,
-};
+const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'NEWEST' });
 
 function NewestPage() {
   const { data } = useGetBook({ endpoint: '1/main', params: INITIAL_PARAMS });

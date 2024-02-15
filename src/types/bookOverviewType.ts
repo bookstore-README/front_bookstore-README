@@ -24,10 +24,6 @@ interface BookOverviewType {
 
 interface BookOverviewType2 {
   book: BookData;
-  like?: {
-    userLiked: boolean;
-    count: number;
-  };
   rank?: number;
 }
 

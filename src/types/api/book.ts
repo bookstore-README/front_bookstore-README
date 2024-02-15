@@ -1,6 +1,4 @@
-export interface BookParams {
-  bookId?: string; // 현재 조회를 시작할 도서 아이디입니다.
-  limit?: string; // 페이지당 가져올 데이터 수 입니다.
+export interface SortType {
   sort?:
     | 'STAR'
     | 'REVIEW'
@@ -10,6 +8,11 @@ export interface BookParams {
     | 'NEWEST'
     | 'BESTSELLER'
     | 'ID'; // 정렬 기준입니다(STAR REVIEW VIEW POPULATION PRICE ID)
+}
+
+export interface BookParams extends SortType {
+  bookId?: string; // 현재 조회를 시작할 도서 아이디입니다.
+  limit?: string; // 페이지당 가져올 데이터 수 입니다.
   ascending?: true | false; //정렬 오름차(true) 내림차(false) 기준입니다.
   search?: string;
 }
