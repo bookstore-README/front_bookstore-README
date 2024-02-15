@@ -25,7 +25,7 @@ function BestSellerPageLayout({
   return (
     <div
       role="container"
-      className="basis-0pxr flex w-full shrink-0 grow flex-col overflow-hidden">
+      className="basis-0pxr flex w-full shrink-0 grow flex-col">
       <div role="header">{header}</div>
       <div
         role="sidebar-container"
