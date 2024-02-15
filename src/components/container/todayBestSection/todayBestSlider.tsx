@@ -2,10 +2,10 @@
 
 import useWithSlider from '@/hooks/useWithSlider';
 import TodayBestBook from '@/components/card/todayBestBookCard/TodayBestBookCard';
-import { BookDetailCardType } from '@/types/cardType';
+import { BookData } from '@/types/api/book';
 
 interface SliderProps {
-  dataList: Array<BookDetailCardType>;
+  dataList: Array<BookData>;
   sliderWidth: number;
   sliderHeight: number;
   componentWidth: number;

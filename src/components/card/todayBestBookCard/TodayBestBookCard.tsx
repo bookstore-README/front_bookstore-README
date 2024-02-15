@@ -1,15 +1,14 @@
 /* 실시간 인기도서 책 컴포넌트 */
 
 import Link from 'next/link';
-import Image from 'next/image';
 
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 import BookRating from '@/components/book/bookRating/bookRating';
 import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookCategory from '@/components/book/bookCategory/bookCategory';
-
-import { BookDetailCardType } from '@/types/cardType';
+import BookTitle from '@/components/book/bookTitle/bookTitle';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
+import { BookData } from '@/types/api/book';
 
 const SIZE = {
   desktop: {
@@ -30,7 +29,7 @@ const STYLE = {
   img: `${SIZE.desktop.img} ${SIZE.mobile.img}`,
 };
 
-function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, categoryList }: BookDetailCardType) {
+function TodayBestBook({ bookId, bookImgUrl, bookTitle, price, authors, averageRating, categories }: BookData) {
   return (
     <div
       role="container"
@@ -42,21 +41,17 @@ function TodayBestBook({ bookId, imageUrl, title, price, authors, rating, catego
         <div
           role="img-section"
           className={`flex-center relative bg-white ${STYLE.img}`}>
-          {imageUrl ? (
-          <PreviewBookInfo size='sm' image={imageUrl} itemsStart/>
+          {bookImgUrl ? (
+          <PreviewBookInfo size='sm' image={bookImgUrl} itemsStart/>
           ) : (
             <div className={`bg-gray-1 ${STYLE.img}`}></div>
           )}
         </div>
         <div className="flex flex-col items-start justify-start gap-4">
-          <div
-            role="bookTitle"
-            className="text-gray-7 line-clamp-2 w-full text-15 font-bold leading-tight">
-            {title}
-          </div>
-          <BookAuthor authorList={authors} fontSize={14} />
-          <BookRating rating={rating} />
-          <BookCategory categories={categoryList} fontSize={13}/>
+          <BookTitle isBold fontSize={15} title={bookTitle} classNames='line-clamp-2 mobile:line-clamp-1' />
+          <BookAuthor authorList={authors} fontSize={14} classNames='line-clamp-1 mobile:hidden'/>
+          <BookRating rating={averageRating} />
+          <BookCategory categories={categories} fontSize={13} classNames='line-clamp-2'/>
           <BookPrice price={price}  fontSize={14} isBold hasUnit/>
         </div>
       </Link>

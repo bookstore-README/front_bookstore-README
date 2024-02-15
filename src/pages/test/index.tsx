@@ -1,5 +1,6 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
+import ShippingAddressSection from '@/components/container/shippingAddressSection/shippingAddressSection';
 import SkeletonBookOverviewCard from '@/components/skeleton/bookOverviewCard/skeleton';
 import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
@@ -71,6 +72,7 @@ function TestPage() {
         <SkeletonPreviewBookImage size="md" />
         <SkeletonPreviewBookImage size="sm" />
       </div>
+      <ShippingAddressSection />
     </div>
   );
 }

@@ -1,18 +1,17 @@
-import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';
-import { WishListData } from '@/types/bookMarkType';
-
+import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';  
+import { CartItem } from '@/types/cartType';  
+import {useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
-
+import { basketItemList} from '@/store/state';
 type CartPaymentProps = {
   totalAmount: number;
   totalDiscount: number;
   bookTotalCount: number;
-  selectedItemArr: WishListData[];
-  wishListData: WishListData[];
-};
-
+  selectedItemArr: CartItem[];
+  wishListData: CartItem[];
+};  
 function CartPayment({
   totalAmount,
   totalDiscount,
@@ -36,10 +35,18 @@ function CartPayment({
       calculateDeliveryFee(totalAmount, totalDiscount)
     );
   };
+     
 
+  const setBasketItemList = useSetAtom(basketItemList)
+
+  const handleMovePayMentPage = () => {
+    setBasketItemList(selectedItemArr)
+    // 결제페이지
+    router.push("/payment")
+  }   
   return (
     <div
-      className="sticky top-297 mt-107 flex h-fit w-340 flex-col rounded-[10px]
+      className="sticky top- mt-127 flex h-fit w-340 flex-col rounded-[10px]
         border-2 border-solid border-gray-1 p-30 mobile:mb-165 mobile:mt-20 mobile:w-full mobile:p-20
         tablet:w-216 tablet:p-20">
       <div className="mb-20 flex justify-between">
@@ -75,8 +82,8 @@ function CartPayment({
           className="w-full text-center bg-green text-white rounded-[5px] py-15"
           onClick={() => {
             selectedItemArr.length
-              ? // 결제페이지로 이동
-                router.push('/')
+              ? 
+                handleMovePayMentPage()                 
               : handleAlertModalOpenClick();
           }}>
           결제하기({bookTotalCount})

@@ -1,13 +1,11 @@
 /* 메인 페이지에 들어갈 실시간 인기 도서 코너 컴포넌트 */
 
-// TODO - props 없이 내부에서 data fetching을 받도록 구현할 예정으로, 지금은 목업데이터를 쓰게끔 함
-
 import TodayBestBook from '@/components/card/todayBestBookCard/TodayBestBookCard';
 import TodayBestSlider from '@/components/container/todayBestSection/todayBestSlider';
-import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
-
 import SkeletonTodayBestBook from '@/components/skeleton/todayBestBookSkeleton/skeletonTodayBestBook';
-import { TodayBestBookListMock } from '@/pages/api/mock/todayBestSectionMock';
+import useWindowInnerWidth from '@/hooks/useWindowInnerWidth';
+import { useGetBook } from '@/api/book';
+import { BookData } from '@/types/api/book';
 
 // width, height, top, bottom, left, right 관련 속성을 모아둔 SIZE 객체
 const SIZE = {
@@ -37,16 +35,20 @@ const STYLE = {
 };
 
 function TodayBestSection() {
-  // const { data: bookList, isLoading } = useQuery({
-  //     queryKey: [""],
-  //     queryFn: () => { },
-  // });
-  const isLoading = false;
-  const bookList = TodayBestBookListMock;
+  const { data, isLoading, isError } = useGetBook({
+    endpoint: "0/main",
+    params: {
+      bookId: "0",
+      limit: "6",
+      sort: "POPULATION",
+      ascending: false,
+    }
+  })
+  const bookList: Array<BookData> = data ? data.data.books : [];
   const { dynamicWid } = useWindowInnerWidth();
 
   // isLoading 시 스켈레톤 ui 렌더링
-  if (isLoading) {
+  if (isLoading || isError) {
     return (
       <div
         role="container"

@@ -1,7 +1,6 @@
 import BookRating from '@/components/book/bookRating/bookRating';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import BookMarkedHeader from '@/components/header/bookmarkedHeader';
-import MainLayout from '@/components/layout/mainLayout';
+import BookMarkedHeader from '@/components/header/bookmarkedHeader';  
 import useBookMarkInfiniteQuery from '@/hooks/useBookMarkInfiniteQuery';
 import useDeleteBookMarkMuation from '@/hooks/useDeleteBookMarkMuation';
 import useInfinite from '@/hooks/useInfinite';
@@ -11,31 +10,27 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import CheckedCheckBoxIcon from "@/public/icons/CheckedCheckBox.svg"
 import CheckBoxIcon from "@/public/icons/CheckBox.svg"
+import Header from '@/components/header';
+
 
 function BookMarkedPage() {
   const [wishListData, setWishListData] = useState<BookMarkListData[]>([]);
   const [selectedItemArr, setSelectedItemArr] = useState<BookMarkListData[]>([]);
   const [ref, isIntersecting] = useInfinite()   
 
-  const {data, isError, status, fetchNextPage, hasNextPage} = useBookMarkInfiniteQuery()   
-
+  const {data, isError, status, fetchNextPage, hasNextPage} = useBookMarkInfiniteQuery()     
   const deleteBookMarkItemMutation = useDeleteBookMarkMuation()
 
   useEffect(() => {
-    if (data && status === "success") {
-      const bookmarkList = data?.pages.reduce((sum, page) => {
-        if (Array.isArray(page?.data?.bookmarks)) {
-          return [...sum, ...page.data.bookmarks];
-        }
-        return sum;
-      }, []);
-      setWishListData(bookmarkList);
+    if (data && status === "success") {  
+      const bookmarkList = data.pages[data.pages.length - 1].data.bookmarks  
+      console.log("ddd",bookmarkList)
+      setWishListData((prev) => [...prev, ...bookmarkList]);
     }
   }, [data]);  
 
 
-  useEffect(() => {
-
+  useEffect(() => {    
     if (isIntersecting && hasNextPage) {
       fetchNextPage()
     }
@@ -49,23 +44,29 @@ function BookMarkedPage() {
   const filteredDataByNotTargetId = (arr: BookMarkListData[], targetId: number) =>
     arr.filter((arrItem) => arrItem.bookmarkId !== targetId);
 
-  const handleDeleteSelectedItems = () => {
+
+
+  const handleDeleteSelectedItems = () => {     
     const selectedBookMarkIds = selectedItemArr.map((item) => item.bookmarkId)
-    deleteBookMarkItemMutation.mutate(selectedBookMarkIds.join(","))
-    const filteredData = wishListData.filter((item) => {
-      return selectedItemArr.map((picked) => picked.bookmarkId).indexOf(item.bookmarkId) === -1;
-    });
-    setWishListData(filteredData);
+    deleteBookMarkItemMutation.mutate(selectedBookMarkIds.join(","))       
+
+    
+    const filteredData = wishListData.filter((item) => {         
+        return selectedItemArr.map((picked) => picked.bookmarkId).indexOf(item.bookmarkId) === -1;
+      });
+    setWishListData(filteredData);     
     resetSelectedItemArr();
   };
+
+
 
   if (isError) return "error"  
 
   return (
     <div className="flex w-full flex-col items-center"> 
-      <MainLayout>
+     <Header isLoggedIn={true} /> 
         <div className="w-full max-w-[1200px]">
-          <div className="flex w-full flex-col px-60 mobile:px-15 tablet:px-40">
+          <div className="mt-60 flex w-full flex-col px-60 mobile:px-15 tablet:px-40">
             <div className="text-20 font-bold text-black">
               찜목록{wishListData.length > 0 && `(${wishListData.length})`}
             </div>
@@ -158,12 +159,11 @@ function BookMarkedPage() {
               </div>
             ) : (
               <div className="mt-120 w-full">
-                <p className="text-center text-gray-4">찜한 상품이 없어요</p>
+                <p className="text-center text-gray-4">찜한 상품이 없어요!</p>
               </div>
             )}
           </div>
-          </div>
-        </MainLayout>      
+          </div>        
       <div ref={ref} className="h-5"></div>
     </div>
   );

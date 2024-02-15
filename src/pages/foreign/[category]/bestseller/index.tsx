@@ -7,12 +7,10 @@ import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 import { useInitialBestNewestParams } from '@/hooks/useInitialParams';
 import { BookData } from '@/types/api/book';
 
-//임시로 전체 데이터 넣어놓음
 const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'BESTSELLER' });
 
 function BestSellerPage() {
   const { categoryId } = useCheckCategoryUrl();
-
   const { data } = useGetBook({
     endpoint: `${categoryId}/sub`,
     params: INITIAL_PARAMS,
