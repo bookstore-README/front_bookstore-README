@@ -11,7 +11,6 @@ const INITIAL_PARAMS = useInitialBestNewestParams({ sort: 'NEWEST' });
 
 function NewestPage() {
   const { mainId } = useCheckCategoryUrl();
-  console.log(mainId);
   const { data } = useGetBook({
     endpoint: `${mainId}/main`,
     params: INITIAL_PARAMS,
