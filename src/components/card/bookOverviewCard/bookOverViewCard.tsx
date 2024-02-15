@@ -17,6 +17,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [likeCount, setIsLikeCount] = useState(book.bookmarkCount);
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
+  const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN as string;
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
@@ -28,8 +29,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     try {
       await postBasket({
         bookId: book.bookId,
-        token:
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1NfVE9LRU4iLCJpYXQiOjE3MDc5NzI1MjEsImV4cCI6MTcwODA1ODkyMSwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIn0.cPnOU9qU2phcdWAQiiYc-kmzjS4f_o-MMLlAhzyTv-6G31Q7AcemGNg2bhaRWaXXbkBu-ok1ZFSC6SHpFwn9ww',
+        token: token,
       });
       notify({
         type: 'success',
