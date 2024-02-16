@@ -20,7 +20,6 @@ function BestSellerPage() {
 
   return (
     <BestSellerPageLayout
-      header={<Header isLoggedIn={true} />}
       sideBar={<Sidebar pageName="bestseller" />}
       main={
         <BookOverViewCardList

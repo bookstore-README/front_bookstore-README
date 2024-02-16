@@ -6,16 +6,11 @@ import { pointVisibleAtom } from '@/store/state';
 import MainLayout from './mainLayout';
 
 interface BestSellerPageLayoutProps {
-  header: ReactNode;
   sideBar?: ReactNode;
   main?: ReactNode;
 }
 
-function BestSellerPageLayout({
-  header,
-  sideBar,
-  main,
-}: BestSellerPageLayoutProps) {
+function BestSellerPageLayout({ sideBar, main }: BestSellerPageLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
   const [, setPointVisible] = useAtom(pointVisibleAtom);
 
