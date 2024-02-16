@@ -2,7 +2,6 @@ import { PasswordInput } from '@/components/input/signInput/signInput';
 import { EditPasswordType } from '@/types/editProfileTypes';
 import { FormProvider, useForm } from 'react-hook-form';
 import RegisterButton from '@/components/button/register/registerButton';
-import { notify } from '@/components/toast/toast';
 import { useEditPassword } from '@/hooks/api/useEditPassword';
 
 function EditPassword() {

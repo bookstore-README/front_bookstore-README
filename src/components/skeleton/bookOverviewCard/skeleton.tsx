@@ -6,8 +6,8 @@ function SkeletonBookOverviewCard({ size }: PreviewBookInfoSizeProps) {
   return (
     <div
       role="card-container"
-      className="relative flex h-220 animate-pulse flex-col justify-between rounded-lg border-2
-        border-gray-1 p-30 mobile:h-251 mobile:w-330 mobile:p-15 mobile:pb-15">
+      className="relative flex h-220 animate-pulse flex-col justify-between rounded-lg border-2 border-gray-1
+        p-30 mobile:h-251 mobile:w-330 mobile:p-15 mobile:pb-15 tablet:w-[511px]">
       <div role="book-info-container" className="relative flex">
         <SkeletonPreviewBookImage size={size} />
         <div
