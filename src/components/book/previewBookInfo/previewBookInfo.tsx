@@ -30,16 +30,6 @@ function PreviewBookInfo({
     width: `${IMAGE_SIZE[size].widthOnly}`,
     height: `h-${IMAGE_SIZE[size].heightNumber.pc} tablet:h-${IMAGE_SIZE[size].heightNumber.tablet} mobile:h-${IMAGE_SIZE[size].heightNumber.mobile} `,
   };
-  const isLoading = false;
-  // const { data: bookList, isLoading } = useQuery({
-  //     queryKey: [""],
-  //     queryFn: () => { },
-  // });
-
-  // isLoading 시 스켈레톤 ui 렌더링
-  if (isLoading) {
-    return <SkeletonPreviewBookImage size={size} />;
-  }
 
   return (
     <Link href={`/bookdetail/${bookId}`}>
