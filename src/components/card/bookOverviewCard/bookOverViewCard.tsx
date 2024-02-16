@@ -9,7 +9,8 @@ import { useRouter } from 'next/router';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
-import { useAddToBasket } from '@/hooks/api/usePostBasket';
+import { useAddToBasket } from '@/hooks/api/useAddToBasket';
+import MobileBookOverViewCard from './bookOverviewMobile';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
@@ -144,24 +145,12 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
       </div>
 
       {/* 모바일에서만 보이는 컴포넌트(장바구니/구매하기 버튼)*/}
-      <div role="mobile-section" className="pt-10 tablet:hidden pc:hidden">
-        <div className="border-b-1 absolute bottom-70 left-0 w-328 border border-gray-1"></div>
-        <div role="mobile-cart-button" className="flex gap-10">
-          <ActionButton
-            label="장바구니"
-            variant="primary"
-            mobile
-            onClick={handleAddToBasket}
-            disabled={isAddToBasketPending}
-          />
-          <ActionButton
-            label="구매하기"
-            variant="secondary"
-            mobile
-            onClick={handleAddForPayment}
-          />
-        </div>
-      </div>
+      <MobileBookOverViewCard
+        basketOnClick={handleAddToBasket}
+        buyOnClick={handleAddForPayment}
+        // TODO: 구매하기 버튼 pending 값도 함께 넣기
+        disabled={isAddToBasketPending}
+      />
     </div>
   );
 }
