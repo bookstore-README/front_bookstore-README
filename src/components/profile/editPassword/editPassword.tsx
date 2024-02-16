@@ -41,8 +41,8 @@ function EditPassword() {
   return (
     <FormProvider {...method}>
       <div
-        className="max-h-745 w-440 rounded-[10px] border border-gray-1 bg-white
-          p-40 mobile:border-none mobile:p-0">
+        className="max-h-745 w-440 rounded-[10px] border border-gray-1 bg-white p-40
+          mobile:w-360 mobile:border-none mobile:p-0">
         <div className="flex-center mb-40">
           <h1 className="text-20 font-bold">비밀번호 변경</h1>
         </div>
