@@ -1,7 +1,8 @@
 export type NewBook = {
-  imageUrl: string;
-  title: string;
-  authorList: string[];
+  bookId: number;
+  bookImgUrl: string;
+  bookTitle: string;
+  authors: string[];
 };
 
 export type ResponSive = {

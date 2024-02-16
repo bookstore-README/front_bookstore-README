@@ -22,7 +22,7 @@ function CarouselCard({
   bookId,
 }: CarouselCardProps) {
   const { width } = imageSize;
-  console.log('title', title);
+
   return (
     <div>
       <div
