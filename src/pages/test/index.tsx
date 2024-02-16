@@ -1,7 +1,5 @@
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
-import BookOverviewCard from '@/components/card/bookOverviewCard/bookOverViewCard';
 import ShippingAddressSection from '@/components/container/shippingAddressSection/shippingAddressSection';
-import SkeletonBookOverviewCard from '@/components/skeleton/bookOverviewCard/skeleton';
 import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import { bookOverviewsMock } from '@/pages/api/mock/bestSellerMock';
 import { useState } from 'react';
@@ -38,9 +36,6 @@ function TestPage() {
 
   return (
     <div className="flex flex-col gap-20 p-20">
-      {/* <SkeletonPreviewBookImage size="sm" />
-      <SkeletonPreviewBookImage size="md" />
-      <SkeletonPreviewBookImage size="lg" /> */}
       <PreviewBookInfo
         title="하이용"
         authorList={['얌얌', '능이버섯']}
@@ -69,7 +64,6 @@ function TestPage() {
         // itemsStart
       />
 
-      <SkeletonBookOverviewCard />
       <div className="flex gap-10">
         <SkeletonPreviewBookImage size="lg" />
         <SkeletonPreviewBookImage size="md" />
