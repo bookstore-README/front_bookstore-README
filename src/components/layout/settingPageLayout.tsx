@@ -3,16 +3,11 @@ import ScrollToTopButton from '../button/scrollToTopButton';
 import MainLayout from './mainLayout';
 
 interface SettingPageLayoutProps {
-  header: ReactNode;
   main: ReactNode;
   isTopButton?: boolean;
 }
 
-function SettingPageLayout({
-  header,
-  main,
-  isTopButton,
-}: SettingPageLayoutProps) {
+function SettingPageLayout({ main, isTopButton }: SettingPageLayoutProps) {
   return (
     <MainLayout>
       <div role="content" className="flex-center pb-40">

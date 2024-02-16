@@ -13,7 +13,6 @@ const { orderData } = bookOrderTestData;
 function MyOrderPage() {
   return (
     <MyOrderPageLayout
-      header={<Header isLoggedIn numItemsOfCart={1} />}
       // orderDate={<OrderDate />}
       overview={<OrderOverView orderView={orderOverViewData.orderView} />}
       main={

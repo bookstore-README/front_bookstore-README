@@ -3,7 +3,5 @@ import Header from '@/components/header';
 import GenreSection from '@/components/container/genreSection/genreSection';
 
 export default function SelectGenrePage() {
-  return (
-    <SettingPageLayout header={<Header isLoggedIn />} main={<GenreSection />} />
-  );
+  return <SettingPageLayout main={<GenreSection />} />;
 }

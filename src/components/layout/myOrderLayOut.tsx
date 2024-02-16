@@ -6,14 +6,12 @@ import useInfinite from '@/hooks/useInfinite';
 import MainLayout from './mainLayout';
 
 interface MyOrderPageLayoutProps {
-  header?: ReactNode;
   overview: ReactNode;
   orderDate?: ReactNode;
   main: ReactNode;
 }
 
 function MyOrderPageLayout({
-  header,
   overview,
   orderDate,
   main,
