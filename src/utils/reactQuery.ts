@@ -14,22 +14,55 @@ export const useFetch = <T>(
   return context;
 };
 
-export const useDelete = <T>(mutationFn: (option: T) => Promise<any>, option: T) => {
+export const useDelete = <T>(
+  mutationFn: (option: T) => Promise<any>,
+  option: T,
+) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: () => mutationFn(option),
-    onSuccess : () => queryClient.invalidateQueries(),
+    onSuccess: () => queryClient.invalidateQueries(),
   });
-  return mutation
+  return mutation;
 };
 
-export const usePost = <T>(mutationFn: (option : T) => Promise<any>, option: T) => {
+// export const usePost = <T>(mutationFn: (option : T) => Promise<any>, option: T) => {
+//   const queryClient = useQueryClient();
+//   const mutation = useMutation({
+//     mutationFn: () => mutationFn(option),
+//     onSuccess : () => queryClient.invalidateQueries(),
+//   });
+//   return mutation
+// };
+
+//테스트용
+
+export interface usePostType {
+  onSuccess?: (data: any) => void;
+  onError?: (error: any) => void;
+  onSettled?: (data?: any, error?: any) => void;
+}
+export const usePost = <T>(
+  mutationFn: (option: T) => Promise<any>,
+  option: T,
+  { onSuccess, onError, onSettled }: usePostType = {},
+) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: () => mutationFn(option),
-    onSuccess : () => queryClient.invalidateQueries(),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries();
+      if (onSuccess) onSuccess(data);
+    },
+    onError: (error) => {
+      if (onError) onError(error);
+    },
+    onSettled: (data, error) => {
+      if (onSettled) onSettled(data, error);
+    },
   });
-  return mutation
+
+  return mutation;
 };
 
 export const usePut = <T>(

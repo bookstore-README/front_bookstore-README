@@ -8,15 +8,21 @@ interface BookAuthorProps {
   classNames?: string;
 }
 
-function BookAuthor({ authorList, publisher, fontSize, classNames }: BookAuthorProps) {
+function BookAuthor({
+  authorList,
+  publisher,
+  fontSize,
+  classNames,
+}: BookAuthorProps) {
   if (!authorList || authorList.length < 1) return;
 
   let nameList = authorList.join(', ');
   nameList += publisher ? ` | ${publisher}` : '';
   return (
-    <div className={`${classNames ?? ``} text-14 text-gray-3`} style={{ fontSize: fontSize }}>
+    <div
+      className={`${classNames ?? ``} text-14 text-gray-3`}
+      style={{ fontSize: fontSize }}>
       {nameList}
-
     </div>
   );
 }

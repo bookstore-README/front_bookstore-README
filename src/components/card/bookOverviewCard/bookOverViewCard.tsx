@@ -4,13 +4,12 @@ import LikeButton from '@/components/button/likeButton';
 import { useState } from 'react';
 import BookRating from '@/components/book/bookRating/bookRating';
 import ActionButton from '@/components/button/actionButton';
-import { notify } from '@/components/toast/toast';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
-import { postBasket } from '@/api/basket';
+import { useAddToBasket } from '@/hooks/api/usePostBasket';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
@@ -18,29 +17,19 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
   const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN as string;
+  const { addToBasket, isAddToBasketPending } = useAddToBasket({
+    bookId: book.bookId,
+    token: token,
+  });
 
-  const handleLikeClick = () => {
+  const handleAddToBookmark = () => {
     setIsLiked(!isLiked);
     if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
     else setIsLikeCount((prevCount) => prevCount - 1);
   };
 
-  const handleAddToCart = async () => {
-    try {
-      await postBasket({
-        bookId: book.bookId,
-        token: token,
-      });
-      notify({
-        type: 'success',
-        text: '장바구니에 담았어요 🛒',
-      });
-    } catch (error) {
-      notify({
-        type: 'error',
-        text: '장바구니 담기에 실패했어요. 😭',
-      });
-    }
+  const handleAddToBasket = async () => {
+    addToBasket();
   };
 
   const handleAddForPayment = () => {
@@ -133,7 +122,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
           className="flex flex-col items-end gap-30 mobile:absolute mobile:bottom-16 mobile:right-0
             tablet:absolute tablet:right-0">
           <div role="like-button" className="flex-center flex-col gap-2">
-            <LikeButton onClick={handleLikeClick} isLiked={isLiked} />
+            <LikeButton onClick={handleAddToBookmark} isLiked={isLiked} />
             <span className="text-12 text-black">{likeCount}</span>
           </div>
           <div
@@ -142,7 +131,8 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
             <ActionButton
               label="장바구니"
               variant="primary"
-              onClick={handleAddToCart}
+              onClick={handleAddToBasket}
+              disabled={isAddToBasketPending}
             />
             <ActionButton
               label="구매하기"
@@ -161,7 +151,8 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
             label="장바구니"
             variant="primary"
             mobile
-            onClick={handleAddToCart}
+            onClick={handleAddToBasket}
+            disabled={isAddToBasketPending}
           />
           <ActionButton
             label="구매하기"

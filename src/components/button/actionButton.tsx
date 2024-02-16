@@ -7,6 +7,7 @@ interface ActionButtonProps {
   label?: string;
   variant: 'primary' | 'secondary';
   mobile?: boolean;
+  disabled?: boolean;
 }
 
 function ActionButton({
@@ -15,6 +16,7 @@ function ActionButton({
   label,
   variant,
   mobile,
+  disabled,
 }: ActionButtonProps) {
   const ActionButtonClass = cls(
     'w-130 h-40 flex-center rounded-md text-14 font-[500]',
@@ -24,7 +26,11 @@ function ActionButton({
     mobile ? 'w-140' : '',
   );
   return (
-    <button type={type} className={ActionButtonClass} onClick={onClick}>
+    <button
+      type={type}
+      className={ActionButtonClass}
+      onClick={onClick}
+      disabled={disabled}>
       {label}
     </button>
   );

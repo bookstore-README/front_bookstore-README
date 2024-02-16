@@ -5,7 +5,6 @@ import BookLabelGreenIcon from '@/public/icons/BookLabelIGreenIcon.svg';
 import BookLabelBottomIcon from '@/public/icons/BookLabelBottomIcon.svg';
 import BookLabelBottomGrayIcon from '@/public/icons/BookLabelBottomGrayIcon.svg';
 import { PreviewBookInfoProps } from '@/types/previewBookInfoType';
-import SkeletonPreviewBookImage from '@/components/skeleton/previewBookImage/skeleton';
 import { IMAGE_SIZE } from 'src/constants/style/previewBookImageSize';
 import BookTitle from './title';
 import BookAuthors from './authors';
