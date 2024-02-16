@@ -1,12 +1,8 @@
 import { usePostBasket } from '@/api/basket';
 import { notify } from '@/components/toast/toast';
+import { PostBasketParams } from '@/types/api/basket';
 
-interface useAddToBasketProps {
-  bookId: number;
-  token: string;
-}
-
-export const useAddToBasket = ({ bookId, token }: useAddToBasketProps) => {
+export const useAddToBasket = ({ bookId, token }: PostBasketParams) => {
   const { mutate, isPending } = usePostBasket(
     { bookId, token },
     {

@@ -1,6 +1,6 @@
 import { QUERY_KEY } from '@/constants/queryKey';
 import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
-import { useFetch, usePut } from '@/utils/reactQuery';
+import { useFetch, usePut, usePostType } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //회원가입
@@ -22,17 +22,28 @@ const getMember = async (id: number) => {
 };
 
 export const useGetMember = (id: number) => {
-  return useFetch(QUERY_KEY.member, getMember, id)
+  return useFetch(QUERY_KEY.member, getMember, id);
 };
 
 //비밀번호 수정
-const putPassword = async (data: ChangePassword) => {
-  const result = await instance.put('/member/password', data);
+const putPassword = async ({ newPassword, token }: ChangePassword) => {
+  const result = await instance.put('/member/password', newPassword, {
+    headers: {
+      Authorization: token,
+    },
+  });
   return result.data;
 };
 
-export const usePutPassword = (data: ChangePassword) => {
-  return usePut(putPassword, data);
+export const usePutPassword = (
+  { newPassword, token }: ChangePassword,
+  { onSuccess, onError, onSettled }: usePostType,
+) => {
+  return usePut(
+    putPassword,
+    { newPassword, token },
+    { onSuccess, onError, onSettled },
+  );
 };
 
 //프로필이미지 수정

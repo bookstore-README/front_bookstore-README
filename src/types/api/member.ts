@@ -11,8 +11,8 @@ export interface Login {
 }
 
 export interface ChangePassword {
-  memberId: number;
   newPassword: string;
+  token: string;
 }
 
 export interface ChangeImage {
