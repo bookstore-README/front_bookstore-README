@@ -3,16 +3,15 @@ import ScrollToTopButton from '../button/scrollToTopButton';
 import { useAtom } from 'jotai';
 import { pointVisibleAtom } from '@/store/state';
 import useInfinite from '@/hooks/useInfinite';
+import MainLayout from './mainLayout';
 
 interface MyOrderPageLayoutProps {
-  header?: ReactNode;
   overview: ReactNode;
   orderDate?: ReactNode;
   main: ReactNode;
 }
 
 function MyOrderPageLayout({
-  header,
   overview,
   orderDate,
   main,
@@ -24,9 +23,8 @@ function MyOrderPageLayout({
     setPointVisible(isIntersecting);
   }, [isIntersecting]);
   return (
-    <>
+    <MainLayout>
       <div role="container">
-        <div role="header">{header}</div>
         <div className="mx-auto flex max-w-[1080px] flex-col items-center px-40 py-60">
           <div
             role="overview"
@@ -43,7 +41,7 @@ function MyOrderPageLayout({
           </div>
         </div>
       </div>
-    </>
+    </MainLayout>
   );
 }
 

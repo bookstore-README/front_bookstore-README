@@ -26,17 +26,6 @@ export const useDelete = <T>(
   return mutation;
 };
 
-// export const usePost = <T>(mutationFn: (option : T) => Promise<any>, option: T) => {
-//   const queryClient = useQueryClient();
-//   const mutation = useMutation({
-//     mutationFn: () => mutationFn(option),
-//     onSuccess : () => queryClient.invalidateQueries(),
-//   });
-//   return mutation
-// };
-
-//테스트용
-
 export interface usePostType {
   onSuccess?: (data: any) => void;
   onError?: (error: any) => void;

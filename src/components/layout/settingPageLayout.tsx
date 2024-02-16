@@ -1,25 +1,20 @@
 import { ReactNode } from 'react';
 import ScrollToTopButton from '../button/scrollToTopButton';
+import MainLayout from './mainLayout';
 
 interface SettingPageLayoutProps {
-  header: ReactNode;
   main: ReactNode;
   isTopButton?: boolean;
 }
 
-function SettingPageLayout({
-  header,
-  main,
-  isTopButton,
-}: SettingPageLayoutProps) {
+function SettingPageLayout({ main, isTopButton }: SettingPageLayoutProps) {
   return (
-    <div role="container" className="flex flex-col gap-40">
-      <div role="header">{header}</div>
+    <MainLayout>
       <div role="content" className="flex-center pb-40">
         {main}
       </div>
       {isTopButton && <ScrollToTopButton />}
-    </div>
+    </MainLayout>
   );
 }
 

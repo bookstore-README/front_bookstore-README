@@ -20,7 +20,6 @@ function NewestPage() {
   return (
     <div>
       <BestSellerPageLayout
-        header={<Header isLoggedIn={true} />}
         sideBar={<Sidebar pageName="newest" />}
         main={
           <BookOverViewCardList
