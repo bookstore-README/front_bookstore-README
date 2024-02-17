@@ -98,9 +98,7 @@ function EditPassword() {
               )}
             </div>
           </div>
-          <RegisterButton type="submit" disabled={isPending}>
-            비밀번호 변경
-          </RegisterButton>
+          <RegisterButton type="submit">비밀번호 변경</RegisterButton>
         </form>
       </div>
     </FormProvider>
