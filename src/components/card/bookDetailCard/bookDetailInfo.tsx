@@ -1,55 +1,50 @@
 import Image from 'next/image';
+
 import BookCategory from '@/components/book/bookCategory/bookCategory';
 import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookRating from '@/components/book/bookRating/bookRating';
 import LikeButton from '@/components/button/likeButton';
 import Spacing from '@/components/container/spacing/spacing';
-import React, { useState } from 'react';
 import BookAuthor from '@/components/book/bookAuthor/bookAuthor';
 
-interface TempProps {
-  title: string;
-  categoryList: [string, string];
+interface BookDetailInfoProps {
+  bookTitle: string;
+  categories: [string, string];
   isBookmarked: boolean;
-  bookmarkNum: number;
-  authors?: [] | string[];
+  bookmarkCount: number;
+  authors?: string[];
   publisher?: string;
-  publishedAt: string;
-  rating: number;
-  reviewNum: number;
+  publishedDate: string;
+  averageRating: number;
+  reviewCount: number;
   price: number;
 }
 
 function BookDetailInfo({
-  title,
-  categoryList,
-  isBookmarked: myBookmarked,
-  bookmarkNum,
+  bookTitle,
+  categories,
+  isBookmarked,
+  bookmarkCount,
   authors,
-  publishedAt,
+  publishedDate,
   publisher,
-  rating,
-  reviewNum,
+  averageRating,
+  reviewCount,
   price,
-}: TempProps) {
-  const [isBookmarked, setIsBookmarked] = useState(myBookmarked || false);
-  const [bookmarkCount, setIsBookmarkCount] = useState(bookmarkNum || 0);
+}: BookDetailInfoProps) {
 
   const handleBookmarkClick = () => {
-    setIsBookmarked(!isBookmarked);
-    if (!isBookmarked) setIsBookmarkCount((prevCount) => prevCount + 1);
-    else setIsBookmarkCount((prevCount) => prevCount - 1);
   };
 
   return (
     <article
       role="info"
-      className="flex flex-col justify-start items-start grow mobile:w-full">
-      <BookCategory categories={categoryList} />
+      className="flex flex-col max-w-[525px] justify-start items-start grow mobile:w-full">
+      <BookCategory categories={categories} />
       <Spacing height={[4, 4, 4]} />
       <div className="flex justify-between items-center w-full gap-20">
         <h3 className="font-bold text-[22px] text-gray-4 text-pretty">
-          {title}
+          {bookTitle}
         </h3>
         <div className="flex justify-center gap-24">
           <div className="flex-center flex-col">
@@ -70,16 +65,16 @@ function BookDetailInfo({
       <BookAuthor authorList={authors} />
       <div className="h-[1px] w-full bg-gray-1 max-w-[525px] my-20 mobile:my-12"></div>
       <div className="text-14 text-gray-3">
-        {publisher} | {publishedAt}
+        {publisher} | {publishedDate}
       </div>
       <Spacing height={[12, 12, 12]} />
 
       <div role="rating" className="flex gap-6">
-        <BookRating rating={rating} size="md" />
+        <BookRating rating={averageRating} size="md" />
         <span className="relative top-12 text-gray-3 text-14">
-          ({reviewNum})
+          ({reviewCount})
         </span>
-        <span className="text-green font-bold text-[24px]">{rating}</span>
+        <span className="text-green font-bold text-[24px]">{averageRating}</span>
       </div>
       <Spacing height={[12, 12, 12]} />
       <BookPrice

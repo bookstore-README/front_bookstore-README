@@ -5,7 +5,7 @@ function BookDetailImg({ imageUrl }: { imageUrl?: string | null }) {
   return (
     <article
       role="img"
-      className="bg-gray-5 relative w-[525px] h-[797px] tablet:min-w-[334px] tablet:max-w-[334px]
+      className="bg-gray-5 flex relative min-w-[525px] max-w-[525px] h-[797px] tablet:min-w-[334px] tablet:max-w-[334px]
         tablet:h-[526px] mobile:min-w-[330px] mobile:max-w-[330px] mobile:h-[500px]">
       <Image
         src={imageUrl ?? TestImage1}

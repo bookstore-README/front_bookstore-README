@@ -13,10 +13,10 @@ interface BookDetailCardProps {
   authors: string[];
   bookmarkCount: number;
   isBookmarked: boolean;
-  publishedAt: string;
+  publishedDate: string;
   publisher: string;
   averageRating: number;
-  reviewNum: number;
+  reviewCount: number;
   orderCount: number;
   setOrderCount: (n: number) => void;
 }
@@ -30,10 +30,10 @@ function BookDetailCard({
   authors,
   bookmarkCount,
   isBookmarked,
-  publishedAt,
+  publishedDate,
   publisher,
   averageRating,
-  reviewNum,
+  reviewCount,
   orderCount,
   setOrderCount,
 }: BookDetailCardProps) {
@@ -42,17 +42,17 @@ function BookDetailCard({
       <BookDetailImg imageUrl={bookImgUrl} />
       <article
         role="info"
-        className="flex flex-col gap-57 justify-start items-start mobile:w-full">
+        className="flex flex-col gap-40 mobile:gap-30 justify-start items-start w-full max-w-[525px]">
         <BookDetailInfo
-          title={bookTitle}
-          categoryList={categories}
+          bookTitle={bookTitle}
+          categories={categories}
           authors={authors}
           isBookmarked={isBookmarked}
-          bookmarkNum={bookmarkCount}
-          publishedAt={publishedAt}
+          bookmarkCount={bookmarkCount}
+          publishedDate={publishedDate}
           publisher={publisher}
-          rating={averageRating}
-          reviewNum={reviewNum}
+          averageRating={averageRating}
+          reviewCount={reviewCount}
           price={price}
         />
         <StaticOrderNavigator

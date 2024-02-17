@@ -16,8 +16,8 @@ function StaticOrderNavigator({
 }: OrderNavigatorProps) {
   return (
     <div
-      className="bg-gray-5 rounded-[10px] p-20 w-full max-w-[525px] h-154 tablet:h-150
-        mobile:w-330 mobile:h-130 mx-auto flex flex-col gap-20 mobile:p-15 mobile:gap-10">
+      className="bg-gray-5 rounded-[10px] p-20 w-full max-w-[525px] min-w-[525px] h-154 tablet:h-150 tablet:min-w-330
+        mobile:min-w-330 mobile:h-130 mobile:mx-auto flex flex-col gap-20 mobile:p-15 mobile:gap-10">
       <div className="flex justify-between">
         <OrderBookCount
           count={orderCount}
