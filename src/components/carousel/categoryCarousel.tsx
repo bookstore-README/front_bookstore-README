@@ -77,7 +77,8 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
     setCurrentIndex(boundaryIndex);
     transformCarousel(boundaryIndex);
   };
-  useEffect(resetCurrentIndex, [env]);
+  useEffect(resetCurrentIndex, [env]);  
+
 
   return (
     <div className="relative w-[895px] overflow-hidden bg-white mobile:w-330 tablet:w-[511px]">
@@ -107,7 +108,7 @@ function CategoryCarousel({ data, responsive }: CarouselProps) {
             <div className="relative h-16 w-10">
               <Image
                 src={
-                  currentIndex === maxPage && maxPage !== 0
+                  currentIndex === maxPage
                     ? '/icons/CarouselRightInActivateArrow.svg'
                     : '/icons/CarouselRightActivateArrow.svg'
                 }

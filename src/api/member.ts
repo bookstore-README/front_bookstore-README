@@ -12,7 +12,7 @@ export const postSignup = async (data: Signup) => {
 //로그인
 export const postLogin = async (data: Login) => {
   const result = await instance.post('/member/sign-in', data);
-  return result.data.data;
+  return result.data;
 };
 
 //회원조회

@@ -4,6 +4,7 @@ import KebabDropDownButton from '@/components/button/kebab/kebabDropDownButton';
 import useShowDropDown from '@/hooks/useShowDropDown';
 import { MutableRefObject, useRef } from 'react';
 import router from 'next/router';
+import { signOut } from 'next-auth/react';
 
 function MyPageButton() {
   const ref = useRef() as MutableRefObject<HTMLImageElement>;
@@ -18,8 +19,7 @@ function MyPageButton() {
   };
 
   const handleLogoutClick = () => {
-    // 로그아웃 버튼이 클릭되었을 때 할 동작
-    console.log('로그아웃 버튼 클릭됨');
+    signOut({callbackUrl:'/signin'})
   };
 
   return (

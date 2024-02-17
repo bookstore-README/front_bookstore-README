@@ -11,6 +11,7 @@ import type { NextPage } from 'next';
 import Toast from '@/components/toast/toast';
 import 'react-toastify/dist/ReactToastify.css';
 import InitialContainer from '@/components/container/initialContainer/initialContainer';
+import { SessionProvider } from 'next-auth/react';
 
 const queryClient = new QueryClient();
 
@@ -23,17 +24,22 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
-
+  
   return (
     <QueryClientProvider client={queryClient}>
-      <InitialContainer />
-      <HydrationBoundary state={pageProps.dehydratedState}>
-        {getLayout(<Component {...pageProps} />)}
-      </HydrationBoundary>
-      <Toast />
-      <ReactQueryDevtools initialIsOpen={false} />
+      <SessionProvider session={session}>
+        <InitialContainer />
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          {getLayout(<Component {...pageProps} />)}
+        </HydrationBoundary>
+        <Toast />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </SessionProvider>
     </QueryClientProvider>
   );
 }

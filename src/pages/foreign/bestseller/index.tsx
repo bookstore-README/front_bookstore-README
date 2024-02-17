@@ -1,6 +1,5 @@
 import { useGetBook } from '@/api/book';
 import BookOverViewCardList from '@/components/card/bookOverviewCard/bookOverViewCardList';
-import Header from '@/components/header';
 import BestSellerPageLayout from '@/components/layout/bestSellerLayout';
 import Sidebar from '@/components/sidebar/sidebar';
 import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';

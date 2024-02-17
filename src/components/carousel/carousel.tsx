@@ -63,6 +63,7 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
   useEffect(resetCurrentIndex, [env]);
 
+
   return (
     <div className="relative w-[1200px] overflow-hidden bg-white mobile:w-360 tablet:w-[768px]">
       <div
@@ -90,7 +91,7 @@ function Carousel({ data, responsive }: CarouselProps) {
             />
           </div>
         </button>
-        <div className="mx-27 overflow-x-hidden scroll-smooth mobile:mx-0 tablet:mx-16">
+        <div className="mx-27 w-full overflow-x-hidden scroll-smooth mobile:mx-0 tablet:mx-16">
           <div
             className="flex scroll-smooth transition-transform"
             ref={ref}
@@ -127,7 +128,7 @@ function Carousel({ data, responsive }: CarouselProps) {
               />
             ))}
           </div>
-        </div>
+        </div> 
         <button
           onClick={btnpressnext}
           className="right-0 flex h-full w-10 items-center justify-center bg-transparent
@@ -135,7 +136,7 @@ function Carousel({ data, responsive }: CarouselProps) {
           <div className="relative h-16 w-10">
             <Image
               src={
-                currentIndex === maxPage && maxPage !== 0
+                (currentIndex === maxPage && maxPage !== 0 || maxPage <0)
                   ? '/icons/CarouselRightInActivateArrow.svg'
                   : '/icons/CarouselRightActivateArrow.svg'
               }

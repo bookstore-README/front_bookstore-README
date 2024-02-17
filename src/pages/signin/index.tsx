@@ -10,7 +10,8 @@ import { checkEmail } from '@/utils/checkSignInSignOut';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
 
 function SignIn() {
   const [isClick, setIsClick] = useState(false);
@@ -26,16 +27,32 @@ function SignIn() {
       password: '',
     },
   });
-  const onSubmit = () => {
-    setError('password', {
-      type: 'manual',
-      message: '아이디나 비밀번호가 일치하지 않습니다.',
+
+  const onSubmit = async (data: FieldValues) => {
+    const { email, password } = data;
+    const result = await signIn('signin-credentials', {
+      email,
+      password,
+      redirect: false,
+      callbackUrl: '/',
     });
+    if (result?.status === 401) {
+      setError('password', {
+        type: 'manual',
+        message: '아이디나 비밀번호가 일치하지 않습니다.',
+      });
+    }
+    if (result?.url && typeof window !== 'undefined') {
+      window.location.href = result.url;
+    }
   };
+
   return (
     <div className="flex-center min-h-dvh w-full bg-white">
       <div className="flex max-w-300 flex-1 flex-col items-center">
-        <p className="mb-57 text-24 font-bold text-green">Read Me</p>
+        <Link href="/" className="mb-57 text-24 font-bold text-green">
+          Read Me
+        </Link>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <fieldset>
             <TextInput

@@ -102,7 +102,7 @@ function SignUp() {
       <div className="flex-center min-h-dvh w-full bg-white">
         <div className="flex max-w-390 flex-1 flex-col items-center px-15">
           <div className="flex-center mb-77 h-64">
-            <p className="font-Inter text-24 font-bold text-green">Read Me</p>
+            <Link href='/' className="font-Inter text-24 font-bold text-green">Read Me</Link>
           </div>
           <p className="mb-40 text-20 font-bold text-black">회원가입</p>
           <div
