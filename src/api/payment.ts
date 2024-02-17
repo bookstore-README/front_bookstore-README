@@ -1,6 +1,6 @@
 import { instance } from 'src/libs/instance';
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
+import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 
 //TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
 
@@ -29,7 +29,7 @@ const postPayment = async (option: PostPaymentOption) => {
 };
 
 export const usePostOrder = (option: PostPaymentOption) => {
-  return usePost(postPayment, option);
+  return useUpdate(postPayment, option);
 };
 
 //주문 수정
@@ -48,7 +48,7 @@ export const putPayment = async (option: PutPaymentOption) => {
 };
 
 export const usePutPayment = (option: PutPaymentOption) => {
-  return usePut(putPayment, option);
+  return useUpdate(putPayment, option);
 };
 
 //주문 삭제

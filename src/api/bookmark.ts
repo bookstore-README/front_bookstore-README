@@ -1,5 +1,5 @@
 import { BookmarkParams, postBookmarkPath } from '@/types/api/bookmark';
-import { useDelete, useFetch, usePost } from '@/utils/reactQuery';
+import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -40,7 +40,7 @@ const postBookmark = async (option: postBookmarkPath) => {
 };
 
 export const usePostBookmark = (option: postBookmarkPath) => {
-  return usePost(postBookmark, option);
+  return useUpdate(postBookmark, option);
 };
 
 //찜 삭제
@@ -49,18 +49,21 @@ const deleteBookmark = async (bookmarkId: string) => {
   return result.data;
 };
 
-
 // 해당 userID로 찜 list조회
-export const getBookMarkList = async (offset:number, limit: number) => {
-  const result = await instance.get(`/bookmark?offset=${offset}&limit=${limit}&sort=price`)
-  return result.data  
-}   
+export const getBookMarkList = async (offset: number, limit: number) => {
+  const result = await instance.get(
+    `/bookmark?offset=${offset}&limit=${limit}&sort=price`,
+  );
+  return result.data;
+};
 
-// 찜 아이템(개별, 다중 삭제)  
-export const deleteBookMarkItem = async (bookmarkId:string) => {
-  const result = await instance.delete(`/bookmark?bookmarkIds=${encodeURI(bookmarkId)}`)  
-  return result.data
-}
+// 찜 아이템(개별, 다중 삭제)
+export const deleteBookMarkItem = async (bookmarkId: string) => {
+  const result = await instance.delete(
+    `/bookmark?bookmarkIds=${encodeURI(bookmarkId)}`,
+  );
+  return result.data;
+};
 
 export const useDeleteBookmark = (bookmarkId: string) => {
   return useDelete(deleteBookmark, bookmarkId);

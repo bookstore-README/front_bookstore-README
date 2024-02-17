@@ -1,6 +1,6 @@
 import { QUERY_KEY } from '@/constants/queryKey';
 import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
-import { useFetch, usePut, usePostType } from '@/utils/reactQuery';
+import { useFetch, useUpdate, useUpdateType } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //회원가입
@@ -26,21 +26,17 @@ export const useGetMember = (id: number) => {
 };
 
 //비밀번호 수정
-export const putPassword = async (newPassword: string) => {
+export const putPassword = async (newPassword: ChangePassword) => {
   const result = await instance.put('/member/password', newPassword);
   return result.data;
 };
 
-// export const usePutPassword = (
-//   { newPassword }: ChangePassword,
-//   { onSuccess, onError, onSettled }: usePostType,
-// ) => {
-//   return usePut(
-//     putPassword,
-//     { newPassword },
-//     { onSuccess, onError, onSettled },
-//   );
-// };
+export const usePutPassword = (
+  newPassword: ChangePassword,
+  { onSuccess, onError, onSettled }: useUpdateType,
+) => {
+  return useUpdate(putPassword, newPassword, { onSuccess, onError, onSettled });
+};
 
 //프로필이미지 수정
 const putProfileImage = async (data: ChangeImage) => {
@@ -49,5 +45,5 @@ const putProfileImage = async (data: ChangeImage) => {
 };
 
 export const usePutProfileImage = (data: ChangeImage) => {
-  return usePut(putProfileImage, data);
+  return useUpdate(putProfileImage, data);
 };

@@ -4,7 +4,7 @@ import {
   PostCommunityData,
   PutCommunityOption,
 } from '@/types/api/community';
-import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
+import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
@@ -32,7 +32,7 @@ const postCommunity = async (data: PostCommunityData) => {
 };
 
 export const usePostCommunity = (data: PostCommunityData) => {
-  return usePost(postCommunity, data);
+  return useUpdate(postCommunity, data);
 };
 
 //글 삭제
@@ -55,5 +55,5 @@ const putCommunity = async (option: PutCommunityOption) => {
 };
 
 export const usePutCommunity = (option: PutCommunityOption) => {
-  return usePut(putCommunity, option);
+  return useUpdate(putCommunity, option);
 };

@@ -1,5 +1,5 @@
 import { BookParams, putBookPath } from '@/types/api/book';
-import { useFetch, usePut } from '@/utils/reactQuery';
+import { useFetch, useUpdate } from '@/utils/reactQuery';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -29,5 +29,5 @@ const putBookView = async (option: putBookPath) => {
 };
 
 export const usePutBook = (option: putBookPath) => {
-  return usePut(putBookView, option);
+  return useUpdate(putBookView, option);
 };

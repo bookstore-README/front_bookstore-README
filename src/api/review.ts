@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
+import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //리뷰조회, 단일조회
@@ -28,7 +28,7 @@ const postReview = async (option: PostReviewOption) => {
 };
 
 export const usePostReview = (option: PostReviewOption) => {
-  return usePost(postReview, option);
+  return useUpdate(postReview, option);
 };
 
 //리뷰 수정
@@ -47,7 +47,7 @@ const putReview = async (option: PutReviewOption) => {
 };
 
 export const usePutReview = (option: PutReviewOption) => {
-  return usePut(putReview, option);
+  return useUpdate(putReview, option);
 };
 
 //리뷰 삭제

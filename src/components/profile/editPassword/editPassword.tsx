@@ -30,9 +30,9 @@ function EditPassword() {
       return passwordValue === value || '비밀번호가 다릅니다';
     },
   };
-
+  const newPassword = getValues('checkPassword');
   const { changePassword, isPending } = useEditPassword({
-    newPassword: getValues('checkPassword'),
+    newPassword: newPassword,
   });
 
   const onSubmit = () => {
@@ -96,7 +96,9 @@ function EditPassword() {
               )}
             </div>
           </div>
-          <RegisterButton type="submit">비밀번호 변경</RegisterButton>
+          <RegisterButton type="submit" disabled={!isPending}>
+            비밀번호 변경
+          </RegisterButton>
         </form>
       </div>
     </FormProvider>

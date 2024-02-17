@@ -1,5 +1,10 @@
 import { PostBasketParams } from '@/types/api/basket';
-import { useDelete, useFetch, usePost, usePostType } from '@/utils/reactQuery';
+import {
+  useDelete,
+  useFetch,
+  useUpdate,
+  useUpdateType,
+} from '@/utils/reactQuery';
 import { QUERY_KEY } from 'src/constants/queryKey';
 import { instance } from 'src/libs/instance';
 
@@ -29,9 +34,9 @@ export const postBasket = async ({ bookId, token }: PostBasketParams) => {
 
 export const usePostBasket = (
   { bookId, token }: PostBasketParams,
-  { onSuccess, onError, onSettled }: usePostType = {},
+  { onSuccess, onError, onSettled }: useUpdateType = {},
 ) => {
-  return usePost(
+  return useUpdate(
     postBasket,
     { bookId, token },
     { onSuccess, onError, onSettled },

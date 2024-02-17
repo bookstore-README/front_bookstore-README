@@ -26,38 +26,15 @@ export const useDelete = <T>(
   return mutation;
 };
 
-export interface usePostType {
+export interface useUpdateType {
   onSuccess?: (data: any) => void;
   onError?: (error: any) => void;
   onSettled?: (data?: any, error?: any) => void;
 }
-export const usePost = <T>(
+export const useUpdate = <T>(
   mutationFn: (option: T) => Promise<any>,
   option: T,
-  { onSuccess, onError, onSettled }: usePostType = {},
-) => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: () => mutationFn(option),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries();
-      if (onSuccess) onSuccess(data);
-    },
-    onError: (error) => {
-      if (onError) onError(error);
-    },
-    onSettled: (data, error) => {
-      if (onSettled) onSettled(data, error);
-    },
-  });
-
-  return mutation;
-};
-
-export const usePut = <T>(
-  mutationFn: (option: T) => Promise<any>,
-  option: T,
-  { onSuccess, onError, onSettled }: usePostType = {},
+  { onSuccess, onError, onSettled }: useUpdateType = {},
 ) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({

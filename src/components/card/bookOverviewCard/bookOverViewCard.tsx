@@ -133,7 +133,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
               label="장바구니"
               variant="primary"
               onClick={handleAddToBasket}
-              disabled={isAddToBasketPending}
+              disabled={!isAddToBasketPending}
             />
             <ActionButton
               label="구매하기"
@@ -149,7 +149,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
         basketOnClick={handleAddToBasket}
         buyOnClick={handleAddForPayment}
         // TODO: 구매하기 버튼 pending 값도 함께 넣기
-        disabled={isAddToBasketPending}
+        disabled={!isAddToBasketPending}
       />
     </div>
   );

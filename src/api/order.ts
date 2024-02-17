@@ -1,5 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { useDelete, useFetch, usePost, usePut } from '@/utils/reactQuery';
+import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //TODO: api아직 안나온상태라서 endpoint, params임의로 설정한 값임. 수정필요
@@ -30,7 +30,7 @@ const postOrder = async (option: PostOrderOption) => {
 };
 
 export const usePostOrder = (option: PostOrderOption) => {
-  return usePost(postOrder, option);
+  return useUpdate(postOrder, option);
 };
 
 //주문 수정
@@ -49,7 +49,7 @@ const putOrder = async (option: PutOrderOption) => {
 };
 
 export const usePutOrder = (option: PutOrderOption) => {
-  return usePut(putOrder, option);
+  return useUpdate(putOrder, option);
 };
 
 //주문 삭제
