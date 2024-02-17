@@ -11,6 +11,9 @@ import BookTitle from '@/components/book/bookTitle/bookTitle';
 import formatDate from '@/hooks/useFormatDate';
 import { useAddToBasket } from '@/hooks/api/useAddToBasket';
 import MobileBookOverViewCard from './bookOverviewMobile';
+import { useSetAtom } from 'jotai';
+import { basketItemList } from '@/store/state';
+import { CartItem } from '@/types/cartType';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
@@ -22,7 +25,17 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     bookId: book.bookId,
     token: token,
   });
-
+  const setNowPayItem = useSetAtom(basketItemList);
+  const setNowPayItemList: CartItem[] = [
+    {
+      basketId: book.bookId,
+      bookImgUrl: book.bookImgUrl,
+      bookTitle: book.bookTitle,
+      price: book.price,
+      authors: book.authors,
+      clicked: 1,
+    },
+  ];
   const handleAddToBookmark = () => {
     setIsLiked(!isLiked);
     if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
@@ -34,9 +47,10 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   };
 
   const handleAddForPayment = () => {
-    //TODO
-    //1. 유저결제 정보에 저장(상품id 넘겨주기)
-    router.push('/payment'); //결제페이지로 이동
+    setNowPayItem(setNowPayItemList);
+    //atom에 저장된거 확인했음!
+
+    router.push('/order');
   };
 
   return (
@@ -148,7 +162,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
       <MobileBookOverViewCard
         basketOnClick={handleAddToBasket}
         buyOnClick={handleAddForPayment}
-        // TODO: 구매하기 버튼 pending 값도 함께 넣기
         disabled={isAddToBasketPending}
       />
     </div>

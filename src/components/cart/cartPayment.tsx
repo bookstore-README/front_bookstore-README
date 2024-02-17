@@ -1,17 +1,17 @@
-import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';  
-import { CartItem } from '@/types/cartType';  
-import {useSetAtom } from 'jotai';
+import CartPaymentModal from '@/components/modal/cart/cartPaymentModal';
+import { CartItem } from '@/types/cartType';
+import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { THOUSAND_UNIT } from 'src/constants/price';
-import { basketItemList} from '@/store/state';
+import { basketItemList } from '@/store/state';
 type CartPaymentProps = {
   totalAmount: number;
   totalDiscount: number;
   bookTotalCount: number;
   selectedItemArr: CartItem[];
   wishListData: CartItem[];
-};  
+};
 function CartPayment({
   totalAmount,
   totalDiscount,
@@ -35,18 +35,17 @@ function CartPayment({
       calculateDeliveryFee(totalAmount, totalDiscount)
     );
   };
-     
 
-  const setBasketItemList = useSetAtom(basketItemList)
+  const setBasketItemList = useSetAtom(basketItemList);
 
   const handleMovePayMentPage = () => {
-    setBasketItemList(selectedItemArr)
+    setBasketItemList(selectedItemArr);
     // 결제페이지
-    router.push("/payment")
-  }   
+    router.push('/payment');
+  };
   return (
     <div
-      className="sticky top- mt-127 flex h-fit w-340 flex-col rounded-[10px]
+      className="top- sticky mt-127 flex h-fit w-340 flex-col rounded-[10px]
         border-2 border-solid border-gray-1 p-30 mobile:mb-165 mobile:mt-20 mobile:w-full mobile:p-20
         tablet:w-216 tablet:p-20">
       <div className="mb-20 flex justify-between">
@@ -77,13 +76,12 @@ function CartPayment({
           원
         </span>
       </div>
-      <div className="w-full mobile:fixed left-0 bottom-0 mobile:px-15 mobile:py-10 bg-white">
+      <div className="bottom-0 left-0 w-full bg-white mobile:fixed mobile:px-15 mobile:py-10">
         <button
-          className="w-full text-center bg-green text-white rounded-[5px] py-15"
+          className="w-full rounded-[5px] bg-green py-15 text-center text-white"
           onClick={() => {
             selectedItemArr.length
-              ? 
-                handleMovePayMentPage()                 
+              ? handleMovePayMentPage()
               : handleAlertModalOpenClick();
           }}>
           결제하기({bookTotalCount})
