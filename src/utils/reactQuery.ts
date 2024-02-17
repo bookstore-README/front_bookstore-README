@@ -30,11 +30,12 @@ export interface useUpdateType {
   onSuccess?: (data: any) => void;
   onError?: (error: any) => void;
   onSettled?: (data?: any, error?: any) => void;
+  onMutate?: (data?: any) => void;
 }
 export const useUpdate = <T>(
   mutationFn: (option: T) => Promise<any>,
   option: T,
-  { onSuccess, onError, onSettled }: useUpdateType = {},
+  { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
 ) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
@@ -48,6 +49,9 @@ export const useUpdate = <T>(
     },
     onSettled: (data, error) => {
       if (onSettled) onSettled(data, error);
+    },
+    onMutate: (data) => {
+      if (onMutate) onMutate(data);
     },
   });
 
