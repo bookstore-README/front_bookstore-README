@@ -21,14 +21,18 @@ function RegisterButton({
   text = 'text-17',
 }: ButtonProps) {
   const buttonColor = `${!disabled ? 'bg-gray-2' : color}`;
-  const className = classNames("w-full text-center rounded-[5px] text-white py-8", buttonColor, text, height);
+  const className = classNames(
+    'w-full text-center rounded-[5px] text-white py-8',
+    buttonColor,
+    text,
+    height,
+  );
   return (
     <button
       type={type}
       className={className}
       onClick={onClick}
-      disabled={!disabled}
-      >
+      disabled={!disabled}>
       {children}
     </button>
   );
