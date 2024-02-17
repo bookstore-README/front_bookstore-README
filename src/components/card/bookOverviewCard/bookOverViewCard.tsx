@@ -13,7 +13,7 @@ import { useAddToBasket } from '@/hooks/api/useAddToBasket';
 import MobileBookOverViewCard from './bookOverviewMobile';
 import { useSetAtom } from 'jotai';
 import { CartItem } from '@/types/cartType';
-import { NowPayItem } from '@/store/state';
+import { basketItemList } from '@/store/state';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
@@ -23,7 +23,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
   });
-  const setNowPayItem = useSetAtom(NowPayItem);
+  const setNowPayItem = useSetAtom(basketItemList);
   const setNowPayItemList: CartItem[] = [
     {
       basketId: book.bookId,
