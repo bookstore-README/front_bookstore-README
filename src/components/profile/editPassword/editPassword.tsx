@@ -38,7 +38,6 @@ function EditPassword() {
   const onSubmit = () => {
     changePassword();
   };
-  console.log(isPending);
 
   return (
     <FormProvider {...method}>
