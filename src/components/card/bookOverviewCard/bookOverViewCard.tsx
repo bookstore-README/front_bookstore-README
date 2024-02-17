@@ -12,8 +12,8 @@ import formatDate from '@/hooks/useFormatDate';
 import { useAddToBasket } from '@/hooks/api/useAddToBasket';
 import MobileBookOverViewCard from './bookOverviewMobile';
 import { useSetAtom } from 'jotai';
-import { basketItemList } from '@/store/state';
 import { CartItem } from '@/types/cartType';
+import { NowPayItem } from '@/store/state';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [isLiked, setIsLiked] = useState(false);
@@ -23,7 +23,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
   });
-  const setNowPayItem = useSetAtom(basketItemList);
+  const setNowPayItem = useSetAtom(NowPayItem);
   const setNowPayItemList: CartItem[] = [
     {
       basketId: book.bookId,
