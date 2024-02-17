@@ -6,7 +6,7 @@
 :root {
   --foreground-rgb: 0 0 0;
   --background-start-rgb: 214 219 220;
-  --background-end-rgb: 255 255 255;
+  --background-end-rgb: 255 255 255;  
   --red: 237 28 36;
   --green: 102 197 123;
   --black: 54 54 54;
@@ -16,6 +16,8 @@
   --gray-3: 118 118 118;
   --gray-4: 80 80 80;
   --gray-5: 245 245 245;
+  --gray-6: 232 232 232;
+  
 }
 
 @layer utilities {

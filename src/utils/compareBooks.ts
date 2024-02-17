@@ -1,4 +1,4 @@
-import { CusTomBookType } from '@/types/customPageType'; 
+import { CusTomBookType } from '@/types/customPageType';
 
 export const filteredBooks = (preferredGenreList: CusTomBookType[]) => {
   const filteredPreferredGenreList = preferredGenreList.sort(function (a, b) {

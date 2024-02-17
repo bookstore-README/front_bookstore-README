@@ -1,7 +1,6 @@
 import { PreviewBookInfoSizeProps } from '@/types/previewBookInfoType';
 import { IMAGE_SIZE } from 'src/constants/style/previewBookImageSize';
 
-
 function SkeletonPreviewBookImage({ size }: PreviewBookInfoSizeProps) {
   const STYLE = {
     img: `${IMAGE_SIZE[size].pc} ${IMAGE_SIZE[size].tablet} ${IMAGE_SIZE[size].mobile}`,
@@ -9,7 +8,7 @@ function SkeletonPreviewBookImage({ size }: PreviewBookInfoSizeProps) {
   return (
     <div
       role="container"
-      className={`bg-gray-1 border-2 border-gray-1 flex flex-col animate-pulse ${STYLE.img}`}></div>
+      className={`flex animate-pulse flex-col border-2 border-gray-1 bg-gray-1 ${STYLE.img}`}></div>
   );
 }
 

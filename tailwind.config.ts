@@ -69,6 +69,7 @@ const config: Config = {
         3: 'rgb(var(--gray-3) / <alpha-value>)',
         4: 'rgb(var(--gray-4) / <alpha-value>)',
         5: 'rgb(var(--gray-5) / <alpha-value>)',
+        6: 'rgb(var(--gray-6) / <alpha-value>)',
       },
     },
   },

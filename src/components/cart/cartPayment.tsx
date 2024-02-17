@@ -40,8 +40,8 @@ function CartPayment({
 
   const handleMovePayMentPage = () => {
     setBasketItemList(selectedItemArr);
-    // 결제페이지
-    router.push('/payment');
+    router.push('/order');
+
   };
   return (
     <div

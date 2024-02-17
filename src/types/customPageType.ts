@@ -1,22 +1,27 @@
 export type CusTomBookType = {
   bookId: number;
   bookTitle: string;
-  publishedDate: string;
   bookImgUrl: string;
   authors: string[];
-  description: string;
   categories: string[];
-  averageRating: number;
-  price: number;
-  bookmarkCount: number;
-  reviewCount: number;
-  viewCount: number;
-  publisher: string;
   createDate: string;
   updateDate: string;
+  viewCount: number;
+  bookmarkCount: number;
+  price: number;
 };
 
-export type SelectedBookType = {
+export type SelectedGenre = {
+  categoryId: string;
   title: string;
   selected: boolean;
+};
+
+export type PreferredGenre = {
+  categoryId: string;
+  mainId: number;
+  subId: number;
+  mainName: string;
+  subName: string;
+  link: string;
 };

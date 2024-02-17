@@ -1,18 +1,23 @@
-import { GenreProps } from '@/pages/api/mock';
-export interface GenreButtonProps extends GenreProps {
+
+
+export type CustomGenreButtonProps = {
+  categoryId: string,
+  title: string;
+  selected: boolean;    
   editMode?: boolean;
   onClick: (e: boolean) => void;
 }
 
 function CustomPageGenreButton({
+  categoryId,  
   title,  
   selected,
   editMode,
   onClick,
-}: GenreButtonProps) {
+}: CustomGenreButtonProps) {
   const handleClick = () => {
     if (editMode) onClick(!selected);
-  };
+  };   
 
 
   return (

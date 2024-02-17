@@ -23,6 +23,7 @@ function PreviewBookInfo({
   category,
   itemsStart,
   bookId,
+  isUnit,
 }: PreviewBookInfoProps) {
   const STYLE = {
     img: `${IMAGE_SIZE[size].pc} ${IMAGE_SIZE[size].tablet} ${IMAGE_SIZE[size].mobile}`,
@@ -82,7 +83,7 @@ function PreviewBookInfo({
           <BookAuthors authorList={authorList} alignCenter={alignCenter} />
         )}
         {category && <BookCategory category={category} />}
-        {price && <BookPrice price={price} />}
+        {price && <BookPrice price={price} isUnit={isUnit} />}
       </div>
     </Link>
   );

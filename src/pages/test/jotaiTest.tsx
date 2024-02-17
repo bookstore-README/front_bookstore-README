@@ -5,7 +5,7 @@ import React from 'react'
 function JotaiTest() {   
   const test = useAtomValue(basketItemList)
     
-  console.log("test", test)
+  // console.log("test", test)
   return (
     <div>
       

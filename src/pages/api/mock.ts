@@ -28,7 +28,7 @@ export interface CategoryList {
   categoryList: CategoryProps[];
 }
 
-const createReadMeGenre = (
+ const createReadMeGenre = (
   title: string,
   selected: boolean = false,
 ): GenreProps => ({ title, selected });

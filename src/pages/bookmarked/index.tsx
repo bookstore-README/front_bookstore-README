@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import CheckedCheckBoxIcon from '@/public/icons/CheckedCheckBox.svg';
 import CheckBoxIcon from '@/public/icons/CheckBox.svg';
-import Header from '@/components/header';
+import MainLayout from '@/components/layout/mainLayout';
 
 function BookMarkedPage() {
   const [wishListData, setWishListData] = useState<BookMarkListData[]>([]);
@@ -26,7 +26,6 @@ function BookMarkedPage() {
   useEffect(() => {
     if (data && status === 'success') {
       const bookmarkList = data.pages[data.pages.length - 1].data.bookmarks;
-      console.log('ddd', bookmarkList);
       setWishListData((prev) => [...prev, ...bookmarkList]);
     }
   }, [data]);
@@ -65,10 +64,9 @@ function BookMarkedPage() {
   if (isError) return 'error';
 
   return (
-    <div className="flex w-full flex-col items-center">
-      <Header isLoggedIn={true} />
+    <MainLayout>
       <div className="w-full max-w-[1200px]">
-        <div className="mt-60 flex w-full flex-col px-60 mobile:px-15 tablet:px-40">
+        <div className="mt-20 flex w-full flex-col px-60 mobile:px-15 tablet:px-40">
           <div className="text-20 font-bold text-black">
             찜목록{wishListData.length > 0 && `(${wishListData.length})`}
           </div>
@@ -148,7 +146,7 @@ function BookMarkedPage() {
                       </div>
                     </div>
                     <div className="flex gap-x-20 rounded-[10px]">
-                      <PreviewBookInfo size="sm" />
+                      <PreviewBookInfo size="sm" image={item.bookImgUrl} />
                       <div className="mobile:w- flex w-274 flex-col gap-y-8 mobile:w-147">
                         <div className="line-clamp-2 break-all text-15 font-bold text-black">
                           {item.bookTitle}
@@ -179,7 +177,7 @@ function BookMarkedPage() {
         </div>
       </div>
       <div ref={ref} className="h-5"></div>
-    </div>
+    </MainLayout>
   );
 }
 

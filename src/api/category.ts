@@ -17,3 +17,10 @@ export const getSubCategory = async (mainId: number, subId: number) => {
   const result = await instance.get(`category/${mainId}/${subId}`);
   return result.data;
 }
+
+// 회원 맞춤 카테고리 조회 기능 
+// 회원이 선택한 모든 카테고리를 조회하려면 false, 랜덤 4개를 조회하려면 true
+ export const getCustomCategoryList = async () => {
+  const result = await instance.get("/category/member?isRandom=false");
+  return result.data
+};

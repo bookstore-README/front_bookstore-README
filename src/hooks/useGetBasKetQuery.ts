@@ -8,8 +8,7 @@ function useGetBasKetQuery() {
    select: (data) => {
       return data?.data
     }
-  })
- 
+  })   
     return {
         data, isError, isLoading, isSuccess
     }
