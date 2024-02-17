@@ -1,4 +1,4 @@
-import { SortType } from '@/types/api/book';
+import { BookParams, SortType } from '@/types/api/book';
 const INITIAL_LIMIT = '100';
 const INITIAL_ASCENDING = false;
 
@@ -11,4 +11,14 @@ const useInitialBestNewestParams = ({ sort }: SortType) => {
   return INITIAL_PARAMS;
 };
 
-export { useInitialBestNewestParams };
+const useCategoryCarouselParams = () => {
+  const INITIAL_PARAMS: BookParams = {
+    bookId: "0",
+    limit: "15",
+    sort: "NEWEST",
+    ascending: false,
+  }
+  return INITIAL_PARAMS;
+}
+
+export { useInitialBestNewestParams, useCategoryCarouselParams };

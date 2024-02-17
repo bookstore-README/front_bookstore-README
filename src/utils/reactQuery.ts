@@ -36,6 +36,7 @@ export const useUpdate = <T>(
   mutationFn: (option: T) => Promise<any>,
   option: T,
   { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
+
 ) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
