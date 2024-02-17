@@ -26,25 +26,21 @@ export const useGetMember = (id: number) => {
 };
 
 //비밀번호 수정
-const putPassword = async ({ newPassword, token }: ChangePassword) => {
-  const result = await instance.put('/member/password', newPassword, {
-    headers: {
-      Authorization: token,
-    },
-  });
+export const putPassword = async (newPassword: string) => {
+  const result = await instance.put('/member/password', newPassword);
   return result.data;
 };
 
-export const usePutPassword = (
-  { newPassword, token }: ChangePassword,
-  { onSuccess, onError, onSettled }: usePostType,
-) => {
-  return usePut(
-    putPassword,
-    { newPassword, token },
-    { onSuccess, onError, onSettled },
-  );
-};
+// export const usePutPassword = (
+//   { newPassword }: ChangePassword,
+//   { onSuccess, onError, onSettled }: usePostType,
+// ) => {
+//   return usePut(
+//     putPassword,
+//     { newPassword },
+//     { onSuccess, onError, onSettled },
+//   );
+// };
 
 //프로필이미지 수정
 const putProfileImage = async (data: ChangeImage) => {

@@ -31,14 +31,12 @@ function EditPassword() {
     },
   };
 
-  const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN as string;
-  const { editPassword, isPending } = useEditPassword({
+  const { changePassword, isPending } = useEditPassword({
     newPassword: getValues('checkPassword'),
-    token: token,
   });
 
   const onSubmit = () => {
-    editPassword();
+    changePassword();
   };
 
   return (
