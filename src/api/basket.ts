@@ -19,28 +19,16 @@ export const useGetCart = (memberId: number) => {
 };
 
 //장바구니 추가
-export const postBasket = async ({ bookId, token }: PostBasketParams) => {
-  const result = await instance.post(
-    `/basket/${bookId}`,
-    {},
-    {
-      headers: {
-        Authorization: token,
-      },
-    },
-  );
+export const postBasket = async ({ bookId }: PostBasketParams) => {
+  const result = await instance.post(`/basket/${bookId}`);
   return result.data;
 };
 
 export const usePostBasket = (
-  { bookId, token }: PostBasketParams,
+  { bookId }: PostBasketParams,
   { onSuccess, onError, onSettled }: useUpdateType = {},
 ) => {
-  return useUpdate(
-    postBasket,
-    { bookId, token },
-    { onSuccess, onError, onSettled },
-  );
+  return useUpdate(postBasket, { bookId }, { onSuccess, onError, onSettled });
 };
 
 //장바구니 물건 삭제

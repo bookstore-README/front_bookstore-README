@@ -20,10 +20,8 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const [likeCount, setIsLikeCount] = useState(book.bookmarkCount);
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
-  const token = process.env.NEXT_PUBLIC_ACCESS_TOKEN as string;
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
-    token: token,
   });
   const setNowPayItem = useSetAtom(basketItemList);
   const setNowPayItemList: CartItem[] = [
