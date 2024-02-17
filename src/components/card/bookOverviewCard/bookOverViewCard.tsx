@@ -31,7 +31,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
       bookTitle: book.bookTitle,
       price: book.price,
       authors: book.authors,
-      clicked: 1,
+      count: 1,
     },
   ];
   const handleAddToBookmark = () => {
