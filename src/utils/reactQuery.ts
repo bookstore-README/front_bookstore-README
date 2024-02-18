@@ -28,7 +28,7 @@ export const useDelete = <T>(
 
 export interface useUpdateType {
   onSuccess?: (data: any) => void;
-  onError?: (error: any) => void;
+  onError?: (error: any, variables?: any, context?: any) => void;
   onSettled?: (data?: any, error?: any) => void;
   onMutate?: (data?: any) => void;
 }
@@ -36,7 +36,6 @@ export const useUpdate = <T>(
   mutationFn: (option: T) => Promise<any>,
   option: T,
   { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
-
 ) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({

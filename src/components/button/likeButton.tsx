@@ -7,11 +7,18 @@ interface LikeButtonProps {
   isLiked: boolean;
   width?: number;
   height?: number;
+  disabled?: boolean;
 }
 
-function LikeButton({ onClick, isLiked, width, height }: LikeButtonProps) {
+function LikeButton({
+  onClick,
+  isLiked,
+  width,
+  height,
+  disabled,
+}: LikeButtonProps) {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} disabled={disabled}>
       <Image
         src={isLiked ? HeartFillIcon : HeartEmptyIcon}
         alt="좋아요 이미지"

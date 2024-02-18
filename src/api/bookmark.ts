@@ -38,7 +38,7 @@ export const useGetOptionBookmark = (option: {
 };
 
 //찜 하기
-const postBookmark = async (bookId: number) => {
+export const postBookmark = async (bookId: number) => {
   const result = await instance.post(`/bookmark/${bookId}`);
   return result.data.data;
 };
