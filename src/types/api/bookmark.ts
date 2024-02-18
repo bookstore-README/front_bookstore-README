@@ -7,5 +7,4 @@ export interface BookmarkParams {
 
 export interface postBookmarkPath {
   bookId: number;
-  memberId: number;
 }

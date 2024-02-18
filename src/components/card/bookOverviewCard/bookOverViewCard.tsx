@@ -16,13 +16,14 @@ import { CartItem } from '@/types/cartType';
 import { basketItemList } from '@/store/state';
 
 function BookOverviewCard({ book, rank }: BookOverviewType2) {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(book.bookmarks?.marked);
   const [likeCount, setIsLikeCount] = useState(book.bookmarkCount);
   const router = useRouter();
   const formattedDate = formatDate(book.publishedDate);
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
   });
+
   const setNowPayItem = useSetAtom(basketItemList);
   const setNowPayItemList: CartItem[] = [
     {
@@ -35,9 +36,9 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     },
   ];
   const handleAddToBookmark = () => {
-    setIsLiked(!isLiked);
-    if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
-    else setIsLikeCount((prevCount) => prevCount - 1);
+    // setIsLiked(!isLiked);
+    // if (!isLiked) setIsLikeCount((prevCount) => prevCount + 1);
+    // else setIsLikeCount((prevCount) => prevCount - 1);
   };
 
   const handleAddToBasket = async () => {
@@ -46,8 +47,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
 
   const handleAddForPayment = () => {
     setNowPayItem(setNowPayItemList);
-    //atom에 저장된거 확인했음!
-
     router.push('/order');
   };
 

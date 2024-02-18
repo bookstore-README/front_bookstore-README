@@ -63,16 +63,12 @@ function CartPage() {
   const filteredDataByNotTargetId = (arr: CartItem[], targetId: number) =>
     arr.filter((arrItem) => arrItem.basketId !== targetId);
 
-  const handleDeleteSelectedItems = () => {
+  const handleDeleteSelectedItems = async () => {
     const selectedBookMarkIds = selectedItemArr.map((item) => item.basketId);
-    deleteBasketItemMutation.mutate(selectedBookMarkIds.join(','));
-    const filteredData = wishListData.filter((item) => {
-      return (
-        selectedItemArr
-          .map((picked) => picked.basketId)
-          .indexOf(item.basketId) === -1
-      );
-    });
+    await deleteBasketItemMutation.mutateAsync(selectedBookMarkIds.join(','));
+    const filteredData = wishListData.filter(
+      (item) => !selectedBookMarkIds.includes(item.basketId),
+    );
     setWishListData(filteredData);
     resetSelectedItemArr();
   };
