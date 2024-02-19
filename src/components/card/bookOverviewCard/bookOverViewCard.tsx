@@ -24,7 +24,18 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
   });
-  const { updateBookmark, isBookmarkPending } = useUpdateBookmark(book.bookId);
+  //  const handleBookmarkChange = (isBookmarked:boolean) => {
+  //    if (isBookmarked) {
+  //      setBookmarkCount(bookmarkCount + 1);
+  //    } else {
+  //      setBookmarkCount(bookmarkCount - 1);
+  //    }
+  //  };
+  const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
+    bookId: 23424242,
+    onChangeBookmarkCount: (prevCount) => setBookmarkCount(prevCount),
+    onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
+  });
 
   const setNowPayItem = useSetAtom(basketItemList);
   const setNowPayItemList: CartItem[] = [
@@ -42,11 +53,10 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     isBookmarked
       ? setBookmarkCount((prevCount) => prevCount - 1)
       : setBookmarkCount((prevCount) => prevCount + 1);
-
     updateBookmark();
   };
 
-  const handleAddToBasket = async () => {
+  const handleAddToBasket = () => {
     addToBasket();
   };
 
@@ -73,6 +83,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
             bookId={book.bookId}
           />
         </Link>
+        <div>{book.bookmarks?.marked}</div>
 
         <div
           role="book-info"
