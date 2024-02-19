@@ -1,5 +1,10 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
+import {
+  Signup,
+  Login,
+  ChangePassword,
+  ChangeProfile,
+} from '@/types/api/member';
 import { useFetch, useUpdate, useUpdateType } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
@@ -15,7 +20,7 @@ export const postLogin = async (data: Login) => {
   return result.data;
 };
 
-//회원조회
+//회원조회 (다른회원)
 const getMember = async (id: number) => {
   const result = await instance.get(`/member/${id}`);
   return result.data.data;
@@ -23,6 +28,16 @@ const getMember = async (id: number) => {
 
 export const useGetMember = (id: number) => {
   return useFetch(QUERY_KEY.member, getMember, id);
+};
+
+//회원조회 (로그인한 회원)
+const getLoginMember = async () => {
+  const result = await instance.get(`/member`);
+  return result.data.data;
+};
+
+export const useGetLoginMember = () => {
+  return useFetch(QUERY_KEY.member, getLoginMember, null);
 };
 
 //비밀번호 수정
@@ -39,11 +54,14 @@ export const usePutPassword = (
 };
 
 //프로필이미지 수정
-const putProfileImage = async (data: ChangeImage) => {
+const putProfile = async (data: ChangeProfile) => {
   const result = await instance.put('/member/profile', data);
   return result.data;
 };
 
-export const usePutProfileImage = (data: ChangeImage) => {
-  return useUpdate(putProfileImage, data);
+export const usePutProfile = (
+  data: ChangeProfile,
+  { onSuccess, onError, onSettled }: useUpdateType,
+) => {
+  return useUpdate(putProfile, data, { onSuccess, onError, onSettled });
 };

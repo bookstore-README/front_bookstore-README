@@ -7,22 +7,20 @@ import { TextInput } from '@/components/input/signInput/signInput';
 import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
 import RegisterButton from '@/components/button/register/registerButton';
 import { notify } from '@/components/toast/toast';
+import { useGetLoginMember } from '@/api/member';
 
-function EditProfile({
-  initialProfileImageUrl,
-  initialNickname,
-  email,
-}: EditProfileProps) {
+function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
+  const { data } = useGetLoginMember();
+  console.log(data);
   const imageUploaderRef = useRef<HTMLInputElement>(null);
-  const [profileImageUrl, setProfileImageUrl] = useState<string>(
-    initialProfileImageUrl || '',
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(
+    data?.profileImage,
   );
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
   const method = useForm<EditProfileType>({
     mode: 'onSubmit',
     defaultValues: {
       profileImage: initialProfileImageUrl,
-      nickname: initialNickname,
     },
   });
   const {
@@ -124,7 +122,7 @@ function EditProfile({
             <TextInput
               id="email"
               register={register}
-              value={email}
+              value={data?.email}
               readOnly
               classNames="text-gray-2 focus:border-gray-3"
             />
@@ -145,7 +143,7 @@ function EditProfile({
                 message: NICKNAME_RULES.pattern.message,
               }}
               isError={errors.nickname}
-              defaultValue={initialNickname}
+              defaultValue={data?.nickname}
             />
             {errors.nickname?.message && (
               <p className="w-full text-left text-14 text-red">

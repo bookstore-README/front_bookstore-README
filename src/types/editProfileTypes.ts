@@ -4,9 +4,7 @@ export interface EditProfileType {
 }
 
 export interface EditProfileProps {
-  initialProfileImageUrl?: string | null;
-  initialNickname: string;
-  email: string;
+  initialProfileImageUrl?: string;
 }
 
 export interface EditPasswordType {

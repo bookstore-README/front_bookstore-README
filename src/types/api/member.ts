@@ -14,8 +14,7 @@ export interface ChangePassword {
   newPassword: string;
 }
 
-export interface ChangeImage {
-  memberId: number;
+export interface ChangeProfile {
   nickname: string;
   profileImage: string;
 }
