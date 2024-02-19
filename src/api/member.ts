@@ -6,7 +6,7 @@ import {
   ChangeProfile,
 } from '@/types/api/member';
 import { useFetch, useUpdate, useUpdateType } from '@/utils/reactQuery';
-import { instance } from 'src/libs/instance';
+import { instance, instanceFormData } from 'src/libs/instance';
 
 //회원가입
 export const postSignup = async (data: Signup) => {
@@ -54,13 +54,13 @@ export const usePutPassword = (
 };
 
 //프로필이미지 수정
-const putProfile = async (data: ChangeProfile) => {
-  const result = await instance.put('/member/profile', data);
+const putProfile = async (data: FormData) => {
+  const result = await instanceFormData.put('/member/profile', data);
   return result.data;
 };
 
 export const usePutProfile = (
-  data: ChangeProfile,
+  data: FormData,
   { onSuccess, onError, onSettled }: useUpdateType,
 ) => {
   return useUpdate(putProfile, data, { onSuccess, onError, onSettled });

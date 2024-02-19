@@ -16,5 +16,5 @@ export interface ChangePassword {
 
 export interface ChangeProfile {
   nickname: string;
-  profileImage: string;
+  profileImage: File | null;
 }

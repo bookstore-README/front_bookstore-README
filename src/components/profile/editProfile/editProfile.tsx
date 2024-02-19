@@ -6,12 +6,13 @@ import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/input/signInput/signInput';
 import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
 import RegisterButton from '@/components/button/register/registerButton';
-import { notify } from '@/components/toast/toast';
 import { useGetLoginMember } from '@/api/member';
+import { useEditProfile } from '@/hooks/api/useEditProfile';
 
 function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
+  // 유저 프로필 가져오기
   const { data } = useGetLoginMember();
-  console.log(data);
+
   const imageUploaderRef = useRef<HTMLInputElement>(null);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(
     data?.profileImage,
@@ -38,14 +39,19 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
     },
   };
 
+  const formData = new FormData();
+  formData.append('nickname', getValues('nickname') as string);
+  if (profileImageFile) {
+    formData.append('profileImage', profileImageFile);
+  }
+
+  // 유저 프로필 수정하는 훅사용
+  console.log(profileImageFile);
+  const { editProfile, isPending } = useEditProfile(formData);
+
   const onSubmit = () => {
-    console.log(profileImageFile, getValues('nickname'));
-    // profileImageFile과 닉네임을 서버로 보낼거에용
-    // 성공하면 토스트띄우기
-    notify({
-      type: 'success',
-      text: '프로필을 변경했어요 😘',
-    });
+    // console.log(profileImageFile, getValues('nickname'));
+    editProfile();
   };
 
   const handleClickInput = () => {
@@ -151,7 +157,9 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
               </p>
             )}
           </div>
-          <RegisterButton type="submit">회원정보 수정</RegisterButton>
+          <RegisterButton disabled={!isPending} type="submit">
+            회원정보 수정
+          </RegisterButton>
         </form>
       </div>
     </FormProvider>

@@ -7,6 +7,12 @@ export const instance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+export const instanceFormData = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+});
 
 instance.interceptors.request.use(async (request) => {
   const session = await getSession();
