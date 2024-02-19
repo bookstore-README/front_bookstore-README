@@ -53,9 +53,9 @@ export const usePutPassword = (
   return useUpdate(putPassword, newPassword, { onSuccess, onError, onSettled });
 };
 
-//프로필이미지 수정
+//프로필이미지, 닉네임 수정
 const putProfile = async (data: FormData) => {
-  const result = await instanceFormData.put('/member/profile', data);
+  const result = await instanceFormData.post('/member/profile', data);
   return result.data;
 };
 
