@@ -1,7 +1,7 @@
 import { BookOverviewType2 } from '@/types/bookOverviewType';
 import { THOUSAND_UNIT } from 'src/constants/price';
 import LikeButton from '@/components/button/likeButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookRating from '@/components/book/bookRating/bookRating';
 import ActionButton from '@/components/button/actionButton';
 import Link from 'next/link';
@@ -24,15 +24,9 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   const { addToBasket, isAddToBasketPending } = useAddToBasket({
     bookId: book.bookId,
   });
-  //  const handleBookmarkChange = (isBookmarked:boolean) => {
-  //    if (isBookmarked) {
-  //      setBookmarkCount(bookmarkCount + 1);
-  //    } else {
-  //      setBookmarkCount(bookmarkCount - 1);
-  //    }
-  //  };
+
   const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
-    bookId: 23424242,
+    bookId: book.bookId,
     onChangeBookmarkCount: (prevCount) => setBookmarkCount(prevCount),
     onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
   });
@@ -49,10 +43,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     },
   ];
   const handleAddToBookmark = () => {
-    setIsBookMarked(!isBookmarked);
-    isBookmarked
-      ? setBookmarkCount((prevCount) => prevCount - 1)
-      : setBookmarkCount((prevCount) => prevCount + 1);
     updateBookmark();
   };
 
@@ -64,6 +54,11 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     setNowPayItem(setNowPayItemList);
     router.push('/order');
   };
+
+  // 최신 isBookmarked 상태를 useUpdateBookmark에 넘겨주기 위한 useEffect
+  useEffect(() => {
+    setIsBookMarked(isBookmarked);
+  }, [isBookmarked]);
 
   return (
     <div
