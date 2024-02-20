@@ -40,7 +40,12 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   };
 
   const formData = new FormData();
-  formData.append('nickname', getValues('nickname') as string);
+  formData.append(
+    'nickname',
+    new Blob([JSON.stringify(getValues('nickname'))], {
+      type: 'application/json',
+    }),
+  );
   if (profileImageFile) {
     formData.append('profileImage', profileImageFile);
   }
