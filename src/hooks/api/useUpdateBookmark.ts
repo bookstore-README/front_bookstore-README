@@ -2,7 +2,7 @@ import { usePostBookmark } from '@/api/bookmark';
 import { notify } from '@/components/toast/toast';
 import { QUERY_KEY } from '@/constants/queryKey';
 import { useQueryClient } from '@tanstack/react-query';
-import { count } from 'console';
+import { throttle } from 'lodash';
 
 interface useUpdateBookmarkProps {
   bookId: number;
@@ -20,17 +20,25 @@ export const useUpdateBookmark = ({
   const queryClient = useQueryClient();
   const queryKey = [QUERY_KEY.bookmark];
 
+  // onChangeBookmarkCount 함수를 throttle 처리(1000ms 간격으로 제한)
+  const throttledOnChangeBookmarkCount = throttle((updateFunction) => {
+    onChangeBookmarkCount(updateFunction);
+  }, 1000);
+
   const { mutate, isPending } = usePostBookmark(bookId, {
     onMutate: async (bookId: number) => {
       onChangeBookmarked((prevState) => {
         if (!prevState) {
           // 북마크가 설정되지 않은 경우에만 카운트 증가
-          onChangeBookmarkCount((prevCount) => prevCount + 1);
-        } else onChangeBookmarkCount((prevCount) => prevCount - 1);
+          throttledOnChangeBookmarkCount((prevCount: number) => prevCount + 1);
+        } else {
+          // 북마크가 설정된 경우에만 카운트 감소
+          throttledOnChangeBookmarkCount((prevCount: number) => prevCount - 1);
+        }
         // 북마크 상태를 토글
         return !prevState;
       });
-      await queryClient.cancelQueries();
+      await queryClient.cancelQueries({ queryKey: queryKey });
       const prevOption = queryClient.getQueryData(queryKey);
       queryClient.setQueryData(queryKey, bookId);
       return { prevOption };
@@ -39,9 +47,9 @@ export const useUpdateBookmark = ({
       onChangeBookmarked((prevState) => {
         // 에러 발생 시 이전 북마크 상태로 롤백
         if (!prevState) {
-          onChangeBookmarkCount((prevCount) => prevCount + 1);
+          throttledOnChangeBookmarkCount((prevCount: number) => prevCount + 1);
         } else {
-          onChangeBookmarkCount((prevCount) => prevCount - 1);
+          throttledOnChangeBookmarkCount((prevCount: number) => prevCount - 1);
         }
         return !prevState;
       });
@@ -54,8 +62,8 @@ export const useUpdateBookmark = ({
       });
     },
     onSuccess: () => {
-      // 쿼리 함수의 성공하면 -> 기존 데이터 무효화
-      queryClient.invalidateQueries();
+      // 쿼리 함수의 성공시 기존 데이터 무효화
+      queryClient.invalidateQueries({ queryKey: queryKey });
     },
   });
 
