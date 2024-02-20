@@ -9,6 +9,7 @@ import RegisterButton from '@/components/button/register/registerButton';
 import { useGetMember } from '@/api/member';
 import { useEditProfile } from '@/hooks/api/useEditProfile';
 import { NEXT_PUBLIC_API_URL } from '@/constants/publicApiUrl';
+import { NICKNAME_RULES } from '@/constants/sign';
 
 function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   // 유저 프로필 가져오기
@@ -28,14 +29,6 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
     getValues,
     formState: { errors },
   } = method;
-
-  const NICKNAME_RULES = {
-    required: '닉네임을 입력해주세요',
-    pattern: {
-      value: /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]{3,8}$/i,
-      message: '닉네임은 3자 이상, 8자 이하로 지어주세요.',
-    },
-  };
 
   const currentNickName = { nickname: getValues('nickname') };
   const formData = new FormData();
@@ -76,7 +69,6 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
         };
       });
     }
-
     return Promise.resolve();
   };
 
