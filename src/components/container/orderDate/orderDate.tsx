@@ -19,8 +19,8 @@ export type OrderDateProps = {
   startDate: Date;
   endDate: Date;
   setSelectedItem: Dispatch<SetStateAction<string>>;
-  setStartDate: (startDate:Date)=> void
-  setEndDate: (endDate:Date)=> void  
+  setStartDate: (startDate: Date) => void;
+  setEndDate: (endDate: Date) => void;
   person: Person;
 };
 
@@ -38,8 +38,15 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
   );
 });
 
-function OrderDate({ person, pastDate, startDate, endDate, setSelectedItem, setStartDate, setEndDate}: OrderDateProps) {
-
+function OrderDate({
+  person,
+  pastDate,
+  startDate,
+  endDate,
+  setSelectedItem,
+  setStartDate,
+  setEndDate,
+}: OrderDateProps) {
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
   const aMonthAgo = getDateAgo(30);
@@ -91,7 +98,7 @@ function OrderDate({ person, pastDate, startDate, endDate, setSelectedItem, setS
       <DatePicker
         locale={ko}
         selected={startDate}
-        dateFormat="yy.MM.dd"
+        dateFormat="yyyy.MM.dd"
         onChange={(date) => {
           date && setStartDate(date);
           setSelectedItem('직접 입력');
@@ -102,7 +109,7 @@ function OrderDate({ person, pastDate, startDate, endDate, setSelectedItem, setS
       <DatePicker
         locale={ko}
         selected={endDate}
-        dateFormat="yy.MM.dd"
+        dateFormat="yyyy.MM.dd"
         onChange={(date) => {
           date && setEndDate(date);
           setSelectedItem('직접 입력');
