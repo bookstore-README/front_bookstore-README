@@ -7,12 +7,14 @@ import MainLayout from './mainLayout';
 
 interface MyOrderPageLayoutProps {
   overview: ReactNode;
+  dropDown: ReactNode;
   orderDate?: ReactNode;
   main: ReactNode;
 }
 
 function MyOrderPageLayout({
   overview,
+  dropDown,
   orderDate,
   main,
 }: MyOrderPageLayoutProps) {
@@ -31,13 +33,17 @@ function MyOrderPageLayout({
             className="mb-40 w-[1080px] mobile:w-330 tablet:w-[688px]">
             {overview}
           </div>
-          <div role="order-date" className="mb-20">
-            {orderDate}
-          </div>
-          <div role="content">
-            <div className="h-1" ref={ref} />
-            {main}
-            <ScrollToTopButton />
+          <div role="order-date">
+            <div className="mb-27 flex justify-start gap-8 mobile:flex-col">
+              <div className="z-10 mobile:w-120">{dropDown}</div>
+
+              <div>{orderDate}</div>
+            </div>
+            <div role="content">
+              <div className="h-1" ref={ref} />
+              {main}
+              <ScrollToTopButton />
+            </div>
           </div>
         </div>
       </div>
