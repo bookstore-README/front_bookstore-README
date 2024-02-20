@@ -21,8 +21,8 @@ function ActionButton({
   const ActionButtonClass = cls(
     'w-130 h-40 flex-center rounded-md text-14 font-[500]',
     variant === 'primary'
-      ? 'bg-white border-green border-2 text-green'
-      : 'bg-green border-green border-2 text-white',
+      ? 'bg-white border-primary border-2 text-primary'
+      : 'bg-primary border-primary border-2 text-white',
     mobile ? 'w-140' : '',
   );
   return (

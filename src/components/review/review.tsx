@@ -79,7 +79,7 @@ function Review({
         className="flex w-full max-w-[710px] items-start justify-start text-20 font-bold
           text-gray-4 mobile:w-330">
         리뷰
-        <span className="pl-10 text-20 font-bold text-green">
+        <span className="text-primary pl-10 text-20 font-bold">
           {reviewCount}
         </span>
       </h3>

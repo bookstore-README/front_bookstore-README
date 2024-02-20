@@ -9,8 +9,8 @@ function WritePostButton({ showButton, onClick }: WriteButtonProps) {
 
   return (
     <button
-      className="flex-center relative ml-auto h-40 w-108 rounded-md border border-green
-        text-14 text-green mobile:hidden"
+      className="flex-center text-primary border-primary relative ml-auto h-40 w-108 rounded-md
+        border text-14 mobile:hidden"
       onClick={onClick}>
       글쓰기
     </button>

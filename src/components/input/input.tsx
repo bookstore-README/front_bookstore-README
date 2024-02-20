@@ -27,7 +27,7 @@ function Input({
   description,
 }: InputProps) {
   const className = classNames(
-    'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15 focus:border-green outline-none',
+    'w-full resize-none border border-gray-1 rounded-[10px] px-20 py-15 focus:border-primary outline-none',
     height,
   );
   const { field } = useController({ name, control });

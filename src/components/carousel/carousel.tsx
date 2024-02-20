@@ -63,14 +63,13 @@ function Carousel({ data, responsive }: CarouselProps) {
   };
   useEffect(resetCurrentIndex, [env]);
 
-
   return (
     <div className="relative w-[1200px] overflow-hidden bg-white mobile:w-360 tablet:w-[768px]">
       <div
         className="mx-60 mb-40 flex items-center justify-between mobile:mx-15 mobile:mb-20
           tablet:mx-40">
         <span className="text-20 text-black">신간도서</span>
-        <Link href="/domestic/newest" className="text-16 text-green">
+        <Link href="/domestic/newest" className="text-primary text-16">
           더보기
         </Link>
       </div>
@@ -128,7 +127,7 @@ function Carousel({ data, responsive }: CarouselProps) {
               />
             ))}
           </div>
-        </div> 
+        </div>
         <button
           onClick={btnpressnext}
           className="right-0 flex h-full w-10 items-center justify-center bg-transparent
@@ -136,7 +135,7 @@ function Carousel({ data, responsive }: CarouselProps) {
           <div className="relative h-16 w-10">
             <Image
               src={
-                (currentIndex === maxPage && maxPage !== 0 || maxPage <0)
+                (currentIndex === maxPage && maxPage !== 0) || maxPage < 0
                   ? '/icons/CarouselRightInActivateArrow.svg'
                   : '/icons/CarouselRightActivateArrow.svg'
               }

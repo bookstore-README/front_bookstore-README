@@ -74,13 +74,13 @@ function SideOrderNavigator({
           />
         </div>
         <button
-          className="flex-center h-50 w-135 rounded-[5px] border-2 border-green bg-white text-[17px]
-            font-bold text-green"
+          className="flex-center text-primary border-primary h-50 w-135 rounded-[5px] border-2 bg-white
+            text-[17px] font-bold"
           onClick={handleAddToBasket}>
           장바구니
         </button>
         <button
-          className="flex-center h-50 w-135 rounded-[5px] border-2 border-green bg-green text-[17px]
+          className="flex-center border-primary bg-primary h-50 w-135 rounded-[5px] border-2 text-[17px]
             font-bold text-white"
           onClick={handlePayNowButton}>
           구매하기

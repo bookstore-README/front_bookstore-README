@@ -74,7 +74,7 @@ function BookDetailInfo({
         <span className="relative top-12 text-14 text-gray-3">
           ({reviewCount})
         </span>
-        <span className="text-[24px] font-bold text-green">
+        <span className="text-primary text-[24px] font-bold">
           {averageRating}
         </span>
       </div>

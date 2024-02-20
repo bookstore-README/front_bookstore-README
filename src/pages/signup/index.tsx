@@ -17,12 +17,11 @@ import {
   checkPasswordValidation,
 } from '@/utils/checkSignInSignOut';
 import Link from 'next/link';
-import { FormProvider, useForm } from 'react-hook-form';  
+import { FormProvider, useForm } from 'react-hook-form';
 import useSignUpMutation from '@/hooks/useSignUpMutation';
 import { TERMS_TITLES } from '@/constants/sign';
 
-
-function SignUp() {    
+function SignUp() {
   const method = useForm<SignUpValueType>({
     mode: 'onBlur',
     defaultValues: {
@@ -36,12 +35,11 @@ function SignUp() {
   const {
     register,
     handleSubmit,
-    setError,   
+    setError,
     formState: { errors },
-  } = method;       
+  } = method;
 
-
-  const { createMemberMutation } = useSignUpMutation()  
+  const { createMemberMutation } = useSignUpMutation();
 
   const onSubmit = (data: SignUpValueType) => {
     const { email, password, repassword, nickname, selectAll } = data;
@@ -50,8 +48,8 @@ function SignUp() {
       password: checkPasswordValidation(password),
       repassword: checkMatchPasswordValidation(password, repassword),
       nickname: checkNickNameValidation(nickname),
-      selectAll: selectAll,  
-    }
+      selectAll: selectAll,
+    };
 
     if (!checkValidataion.email) {
       setError('email', {
@@ -80,35 +78,40 @@ function SignUp() {
     }
 
     if (!checkValidataion.selectAll) {
-      alert("약관동의를해주세요")
+      alert('약관동의를해주세요');
     }
 
     const personData = {
-      name: "없어져야하는필드입니다",
+      name: '없어져야하는필드입니다',
       email: email,
       password: password,
-      nickname: nickname,      
-    };  
+      nickname: nickname,
+    };
 
-    const filterValidation = Object.values(checkValidataion).filter((data) => data); 
+    const filterValidation = Object.values(checkValidataion).filter(
+      (data) => data,
+    );
     if (filterValidation.length === Object.values(checkValidataion).length) {
       createMemberMutation.mutate(personData);
-    }      
+    }
+  };
 
-  };  
-
-  return (    
+  return (
     <FormProvider {...method}>
       <div className="flex-center min-h-dvh w-full bg-white">
         <div className="flex max-w-390 flex-1 flex-col items-center px-15">
           <div className="flex-center mb-77 h-64">
-            <Link href='/' className="font-Inter text-24 font-bold text-green">Read Me</Link>
+            <Link
+              href="/"
+              className="font-Inter text-primary text-24 font-bold">
+              Read Me
+            </Link>
           </div>
           <p className="mb-40 text-20 font-bold text-black">회원가입</p>
           <div
             className="mb-40 flex h-125 w-full flex-col items-center justify-center
               rounded-[10px] border-2 border-solid border-gray-1 py-5 text-gray-3">
-            <p className="mb-20 text-center text-12" >
+            <p className="mb-20 text-center text-12">
               SNS로 간편하게 로그인/회원가입
             </p>
             <div className="flex w-184 justify-between">
@@ -121,7 +124,7 @@ function SignUp() {
             onSubmit={handleSubmit(onSubmit)}
             className="flex w-full flex-col">
             <fieldset>
-              <label className="text-gray-6 mb-12 inline-block w-full text-left text-16 font-bold">
+              <label className="mb-12 inline-block w-full text-left text-16 font-bold text-gray-6">
                 이메일
               </label>
               <TextInput
@@ -169,7 +172,7 @@ function SignUp() {
               </div>
             </fieldset>
             <fieldset>
-              <label className="text-gray-6 w-full text-left text-16 font-bold">
+              <label className="w-full text-left text-16 font-bold text-gray-6">
                 닉네임
               </label>
               <p className="mb-12 mt-4 w-full text-left text-15 text-gray-3">
@@ -187,13 +190,17 @@ function SignUp() {
               </div>
             </fieldset>
             <fieldset className="mb-20">
-              <TermsCheckbox title='약관동의' entire='전체동의' checkContent={TERMS_TITLES}/>
+              <TermsCheckbox
+                title="약관동의"
+                entire="전체동의"
+                checkContent={TERMS_TITLES}
+              />
             </fieldset>
             <RegisterButton>회원가입</RegisterButton>
           </form>
           <div className="mt-20 flex gap-x-4">
             <p className="text-gray-3">이미 아이디가 있으신가요?</p>
-            <Link href="/signin" className="font-normal text-green">
+            <Link href="/signin" className="text-primary font-normal">
               로그인
             </Link>
           </div>

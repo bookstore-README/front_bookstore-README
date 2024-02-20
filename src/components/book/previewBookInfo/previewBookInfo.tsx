@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import DefaultImage from '@/public/images/SampleBookCover4.jpeg';
 import BookLabelGrayIcon from '@/public/icons/BookLabelGrayIcon.svg';
-import BookLabelGreenIcon from '@/public/icons/BookLabelIGreenIcon.svg';
+import BookLabelSecondaryIcon from '@/public/icons/BookLabelSecondaryIcon.png';
 import BookLabelBottomIcon from '@/public/icons/BookLabelBottomIcon.svg';
 import BookLabelBottomGrayIcon from '@/public/icons/BookLabelBottomGrayIcon.svg';
 import { PreviewBookInfoProps } from '@/types/previewBookInfoType';
@@ -53,7 +53,7 @@ function PreviewBookInfo({
                     itemsStart
                       ? ranking > 10
                         ? BookLabelGrayIcon
-                        : BookLabelGreenIcon
+                        : BookLabelSecondaryIcon
                       : ranking > 10
                         ? BookLabelBottomGrayIcon
                         : BookLabelBottomIcon

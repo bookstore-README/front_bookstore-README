@@ -9,7 +9,7 @@ import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import CustomPageGenreButton from '@/components/button/genre/customPageGenreButton';
 import Link from 'next/link';
 import { filteredBooks } from '@/utils/compareBooks';
-import ToolTip from '@/components/dropDown/toolTip';  
+import ToolTip from '@/components/dropDown/toolTip';
 import VacantCustomLayout from '@/components/layout/vacantCustomLayout';
 import { useQuery } from '@tanstack/react-query';
 import { getCustomCategoryList } from '@/api/category';
@@ -110,14 +110,14 @@ function CustomPage() {
                 <div className="mt-120 flex h-482 w-full flex-col items-center justify-center gap-y-10 bg-gray-6 mobile:mt-80 mobile:h-205 tablet:h-324">
                   <div className="mb-20 flex flex-col items-center">
                     <div className="text-20">
-                      <span className="font-bold text-green">맞춤 도서</span>
+                      <span className="text-primary font-bold">맞춤 도서</span>
                       <span className="font-bold text-black">
                         를 추천받아 보세요!
                       </span>
                     </div>
                     <div>선호 장르 분석을 통해 도서를 추천해드려요</div>
                   </div>
-                  <div className="rounded-[5px] border-2 border-green bg-white px-45 py-13 text-green">
+                  <div className="text-primary border-primary rounded-[5px] border-2 bg-white px-45 py-13">
                     <Link href="/mypage/setting/selectGenre">
                       선호 장르 선택하러 가기
                     </Link>

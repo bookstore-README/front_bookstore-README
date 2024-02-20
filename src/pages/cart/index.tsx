@@ -141,7 +141,7 @@ function CartPage() {
                   <div
                     key={item.basketId}
                     className={`relative flex flex-1 items-center border-2 pb-43 pr-44 pt-40 mobile:pb-75
-                        mobile:pt-20 ${item.basketId === pickedItemId ? 'border-green' : 'border-gray-1'} rounded-[10px]
+                        mobile:pt-20 ${item.basketId === pickedItemId ? 'border-primary' : 'border-gray-1'} rounded-[10px]
                         bg-white`}>
                     <div
                       className="absolute right-20 top-20 cursor-pointer mobile:right-10 mobile:top-10"

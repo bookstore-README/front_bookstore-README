@@ -1,16 +1,16 @@
 import { CartItem } from '@/types/cartType';
 import { SetStateAction } from 'jotai';
 import Image from 'next/image';
-import React from 'react'   
-import CheckedCheckBoxIcon from "@/public/icons/CheckedCheckBox.svg"
-import CheckBoxIcon from "@/public/icons/CheckBox.svg"
+import React from 'react';
+import CheckedCheckBoxIcon from '@/public/icons/CheckedCheckBox.svg';
+import CheckBoxIcon from '@/public/icons/CheckBox.svg';
 type CartPageProps = {
   wishListData: CartItem[];
   selectedItemArr: CartItem[];
   resetSelectedItemArr: Function;
   setSelectedItemArr: React.Dispatch<SetStateAction<CartItem[]>>;
   handleDeleteSelectedItems: Function;
-};        
+};
 
 function CartPageHeader({
   wishListData,
@@ -18,9 +18,9 @@ function CartPageHeader({
   resetSelectedItemArr,
   setSelectedItemArr,
   handleDeleteSelectedItems,
-}: CartPageProps) {   
+}: CartPageProps) {
   return (
-    <div className="flex justify-between h-20">
+    <div className="flex h-20 justify-between">
       <div className="flex gap-x-8">
         <div
           onClick={() => {
@@ -33,7 +33,7 @@ function CartPageHeader({
           <Image
             src={
               wishListData.length === selectedItemArr.length
-                ? CheckedCheckBoxIcon 
+                ? CheckedCheckBoxIcon
                 : CheckBoxIcon
             }
             alt="체크아이콘"
@@ -52,5 +52,4 @@ function CartPageHeader({
   );
 }
 
-
-export default CartPageHeader
+export default CartPageHeader;

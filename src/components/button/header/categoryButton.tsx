@@ -1,20 +1,17 @@
 import React from 'react';
+
 interface CategoryButtonProps {
   label: string;
   onClick: () => void;
-  style: React.CSSProperties;
+  selected: boolean; // 새로운 props로 선택 여부를 전달합니다.
 }
 
-function CategoryButton({ label, onClick, style }: CategoryButtonProps) {
+function CategoryButton({ label, onClick, selected }: CategoryButtonProps) {
   return (
     <button
       onClick={onClick}
-      style={style}
-      className="border-spacing-20 gap-x-60">
-      <div className="mb-12 font-bold" style={{ color: style.color }}>
-        {label}
-        <div className="h-5 mobile:hidden"></div>
-      </div>
+      className={`flex-center h-60 gap-x-60 border-b-2 font-bold mobile:h-50 ${selected ? ' border-primary text-primary' : 'border-transparent text-black'}`}>
+      {label}
     </button>
   );
 }

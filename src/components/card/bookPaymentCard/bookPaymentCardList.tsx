@@ -6,7 +6,6 @@ interface BookPaymentCardListProps {
 }
 
 function BookPaymentCardList({ bookData, label }: BookPaymentCardListProps) {
-
   return (
     <div
       role="list-container"
@@ -19,7 +18,7 @@ function BookPaymentCardList({ bookData, label }: BookPaymentCardListProps) {
             bookId={data.bookId}
             imageUrl={data.bookImgUrl}
             cost={data.price}
-            count={data.clicked}
+            count={data.count}
             title={data.bookTitle}
           />
         ))}

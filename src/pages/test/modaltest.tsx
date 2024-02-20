@@ -1,9 +1,9 @@
-import AddCommunityCard from "@/components/modal/addCommunityCard";
-import AddReview from "@/components/modal/addReview";
-import AlertModal from "@/components/modal/alertModal";
-import FindAddress from "@/components/modal/findAddress";
-import GetRefund from "@/components/modal/getRefund";
-import { useState } from "react";
+import AddCommunityCard from '@/components/modal/addCommunityCard';
+import AddReview from '@/components/modal/addReview';
+import AlertModal from '@/components/modal/alertModal';
+import FindAddress from '@/components/modal/findAddress';
+import GetRefund from '@/components/modal/getRefund';
+import { useState } from 'react';
 
 function ModalTest() {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
@@ -38,14 +38,14 @@ function ModalTest() {
     <div>
       <button
         onClick={handleReviewModalOpen}
-        className="flex-center h-50 w-full border border-black bg-green">
+        className="flex-center bg-primary h-50 w-full border border-black">
         리뷰 모달 열려라
       </button>
       {isReviewModalOpen && <AddReview onClick={handleReviewModalOpen} />}
 
       <button
         onClick={handleFindAddressModalOpen}
-        className="flex-center h-50 w-full border border-black bg-green">
+        className="flex-center bg-primary h-50 w-full border border-black">
         주소 검색하기 모달 열려라
       </button>
       {isFindAddressModalOpen && (
@@ -54,7 +54,7 @@ function ModalTest() {
 
       <button
         onClick={handleAlertModalOpen}
-        className="flex-center h-50 w-full border border-black bg-green">
+        className="flex-center bg-primary h-50 w-full border border-black">
         삭제하기 모달 열려라
       </button>
       {isAlertModalOpen && (
@@ -67,7 +67,7 @@ function ModalTest() {
 
       <button
         onClick={handleAddCommunityCardModalOpen}
-        className="flex-center h-50 w-full border border-black bg-green">
+        className="flex-center bg-primary h-50 w-full border border-black">
         커뮤니티 글쓰기 모달 열려라
       </button>
       {isAddCommunityCardModalOpen && (
@@ -76,7 +76,7 @@ function ModalTest() {
 
       <button
         onClick={handleGetRefundFormModalOpen}
-        className="flex-center h-50 w-full border border-black bg-green">
+        className="flex-center bg-primary h-50 w-full border border-black">
         환불 모달 열려라
       </button>
       {isGetRefundFormModalOpen && (
@@ -86,4 +86,4 @@ function ModalTest() {
   );
 }
 
-export default ModalTest
+export default ModalTest;

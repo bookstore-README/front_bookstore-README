@@ -1,30 +1,27 @@
-
-
 export type CustomGenreButtonProps = {
-  categoryId: string,
+  categoryId: string;
   title: string;
-  selected: boolean;    
+  selected: boolean;
   editMode?: boolean;
   onClick: (e: boolean) => void;
-}
+};
 
 function CustomPageGenreButton({
-  categoryId,  
-  title,  
+  categoryId,
+  title,
   selected,
   editMode,
   onClick,
 }: CustomGenreButtonProps) {
   const handleClick = () => {
     if (editMode) onClick(!selected);
-  };   
-
+  };
 
   return (
     <button
-      className={`whitespace-nowrap rounded-[53px] w-fit h-33 text-13 border flex-center ${
-        selected ? 'border-green text-green' : 'border-gray-1'
-      } pc:text-14 ${editMode ? 'desktop:hover:border-green desktop:hover:text-green tablet:hover:border-green tablet:hover:text-green' : ''}`}
+      className={`text-13 flex-center h-33 w-fit whitespace-nowrap rounded-[53px] border ${
+        selected ? 'text-primary border-primary' : 'border-gray-1'
+      } pc:text-14 ${editMode ? 'desktop:hover:border-primary desktop:hover:text-primary tablet:hover:text-primary tablet:hover:border-primary' : ''}`}
       onClick={handleClick}>
       <div className="mx-30">{title}</div>
     </button>

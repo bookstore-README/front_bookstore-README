@@ -15,7 +15,7 @@ function SidebarTab({ pageName }: SidebarProps) {
         mobile:right-0 mobile:top-65 mobile:h-[468px] mobile:w-270
         mobile:flex-wrap mobile:gap-5 mobile:rounded-[10px] mobile:border-[1px] mobile:border-gray-1 mobile:p-15">
       <Link
-        className={`block text-[13px] ${subId ? 'text-gray-2' : 'font-bold text-green'}`}
+        className={`block text-[13px] ${subId ? 'text-gray-2' : 'text-primary font-bold'}`}
         href={`/${mainId === 0 ? 'domestic' : 'foreign'}/${pageName ?? ''}`}>
         전체보기
       </Link>
@@ -25,7 +25,7 @@ function SidebarTab({ pageName }: SidebarProps) {
             return (
               <Link
                 className={`block text-[13px] ${
-                  el.subId === subId ? 'font-bold text-green' : 'text-gray-2'
+                  el.subId === subId ? 'text-primary font-bold' : 'text-gray-2'
                 }`}
                 href={`/${mainId === 0 ? 'domestic' : 'foreign'}${el.link}${pageName ? `/${pageName}` : ''}`}
                 key={el?.categoryId}>

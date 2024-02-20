@@ -8,7 +8,7 @@ function useCalculateTotalPrice({ delivery, discount }: useGetTotalPriceProps) {
   const items = useAtomValue(basketItemList);
   const updatedItems = items.map((item) => ({
     ...item,
-    price: item.price * (item.clicked || 1), // 만약 clicked 값이 없으면 1로 설정하여 기본값을 사용
+    price: item.price * (item.count || 1), // 만약 clicked 값이 없으면 1로 설정하여 기본값을 사용
   }));
 
   const bookPrice = updatedItems.reduce(

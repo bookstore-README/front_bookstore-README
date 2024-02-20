@@ -31,30 +31,30 @@ function BookDetailNav({
       <div
         className={`${
           location === 'information'
-            ? 'flex-center h-full border-b-[3px] border-green'
+            ? 'flex-center border-primary h-full border-b-[3px]'
             : 'border-none'
         }`}>
         <button
           id="information"
           onClick={handleClickLocation}
-          className={`font-bold text-gray-4 ${location === 'information' ? 'text-green' : ''}`}>
+          className={`font-bold text-gray-4 ${location === 'information' ? 'text-primary' : ''}`}>
           상품 정보
         </button>
       </div>
       <div
         className={`${
           location === 'review'
-            ? 'flex-center h-full border-b-[3px] border-green'
+            ? 'flex-center border-primary h-full border-b-[3px]'
             : 'border-none'
         }`}>
         <button
           id="review"
           onClick={handleClickLocation}
-          className={`font-bold text-gray-4 ${location === 'review' ? 'text-green' : ''}`}>
+          className={`font-bold text-gray-4 ${location === 'review' ? 'text-primary' : ''}`}>
           리뷰
           <span
             id="review"
-            className={`ml-5 font-bold text-gray-2 ${location === 'review' ? 'text-green' : ''}`}>
+            className={`ml-5 font-bold text-gray-2 ${location === 'review' ? 'text-primary' : ''}`}>
             {reviewNum}
           </span>
         </button>
@@ -62,13 +62,13 @@ function BookDetailNav({
       <div
         className={`${
           location === 'currency'
-            ? 'flex-center h-full border-b-[3px] border-green'
+            ? 'flex-center border-primary h-full border-b-[3px]'
             : 'border-none'
         }`}>
         <button
           id="currency"
           onClick={handleClickLocation}
-          className={`font-bold text-gray-4 ${location === 'currency' ? 'text-green' : ''}`}>
+          className={`font-bold text-gray-4 ${location === 'currency' ? 'text-primary' : ''}`}>
           배송/교환/환불
         </button>
       </div>

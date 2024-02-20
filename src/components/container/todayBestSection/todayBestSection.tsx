@@ -36,14 +36,14 @@ const STYLE = {
 
 function TodayBestSection() {
   const { data, isLoading, isError } = useGetBook({
-    endpoint: "0/main",
+    endpoint: '0/main',
     params: {
-      bookId: "0",
-      limit: "6",
-      sort: "POPULATION",
+      bookId: '0',
+      limit: '6',
+      sort: 'POPULATION',
       ascending: false,
-    }
-  })
+    },
+  });
   const bookList: Array<BookData> = data ? data.data.books : [];
   const { dynamicWid } = useWindowInnerWidth();
 
@@ -86,7 +86,7 @@ function TodayBestSection() {
         ${STYLE.container}`}>
       <div
         role="colored-background"
-        className={`flex-center bg-gray-1 ${STYLE['colored-background']}`}>
+        className={`flex-center bg-pink ${STYLE['colored-background']}`}>
         <h1 role="title" className={`absolute font-bold ${STYLE.title}`}>
           실시간 인기 도서
         </h1>

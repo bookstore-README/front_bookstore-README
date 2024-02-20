@@ -8,7 +8,7 @@ function MoreLink({ isVisible }: MoreLinkProps) {
 
   return (
     <Link
-      className="absolute right-10 top-[-50px] cursor-pointer p-4 text-green mobile:hidden
+      className="text-primary absolute right-10 top-[-50px] cursor-pointer p-4 mobile:hidden
         tablet:hidden"
       href="/custom">
       더보기

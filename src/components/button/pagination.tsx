@@ -36,7 +36,7 @@ function Pagination({
         {pageArrays[currentPageArrayIndex]?.map((page) => (
           <span
             key={page + 1}
-            className={`${currentPage === page ? 'text-green' : 'text-gray-4'}`}
+            className={`${currentPage === page ? 'text-primary' : 'text-gray-4'}`}
             style={{ cursor: 'pointer' }}
             onClick={() => changeCurrentPage(page)}>
             {page}{' '}

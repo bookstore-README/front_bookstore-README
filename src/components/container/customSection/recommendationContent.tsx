@@ -2,7 +2,7 @@ function RecommendationContent() {
   return (
     <div>
       <div className="flex text-20 font-bold">
-        <span className="text-green">맞춤도서</span>
+        <span className="text-primary">맞춤도서</span>
         <div>를 추천받아 보세요!</div>
       </div>
       <div className="mb-30 text-14 text-gray-4">

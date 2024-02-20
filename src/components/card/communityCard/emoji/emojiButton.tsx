@@ -17,8 +17,8 @@ function EmojiButton({ emoji, count }: EmojiButtonProps) {
 
   return (
     <div
-      className={`flex-center h-25 w-45 gap-6 rounded-[12px] border-[1px] border-solid px-10 py-5 hover:border-green tablet:h-24 ${
-        isClick ? 'border-green' : 'border-[#dbdbdb]'
+      className={`flex-center hover:border-primary h-25 w-45 gap-6 rounded-[12px] border-[1px] border-solid px-10 py-5 tablet:h-24 ${
+        isClick ? 'border-primary' : 'border-[#dbdbdb]'
       }`}
       onClick={handleCountToggle}>
       <Image

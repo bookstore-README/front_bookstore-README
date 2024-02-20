@@ -58,7 +58,7 @@ function MyReviewCard({ book, review }: MyReviewType) {
             {isSummarized && (
               <button
                 onClick={() => setIsSummarized(false)}
-                className="absolute bottom-23 right-20 whitespace-nowrap text-14 text-green
+                className="text-primary absolute bottom-23 right-20 whitespace-nowrap text-14
                 mobile:-bottom-3 mobile:right-0">
                 더보기
               </button>

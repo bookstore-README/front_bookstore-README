@@ -96,7 +96,7 @@ function BookMarkedPage() {
                     key={item.bookmarkId}
                     className={`relative flex items-center border-2 pb-43 pr-82 pt-40 ${
                       item.bookmarkId === pickedNum
-                        ? 'border-green'
+                        ? 'border-primary'
                         : 'border-gray-1'
                     } rounded-[10px] bg-white`}>
                     <div

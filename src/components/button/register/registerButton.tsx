@@ -16,7 +16,7 @@ function RegisterButton({
   onClick,
   children,
   disabled = true,
-  color = 'bg-green',
+  color = 'bg-primary',
   height = 'h-50',
   text = 'text-17',
 }: ButtonProps) {

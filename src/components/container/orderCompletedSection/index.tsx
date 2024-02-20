@@ -1,7 +1,7 @@
 import BookPaymentCardList from '@/components/card/bookPaymentCard/bookPaymentCardList';
 import InfoCard from '@/components/card/infoCard';
 import TitleContentCard from '@/components/card/titleContentCard';
-import { bookOrderTestData2} from '@/pages/api/mock/bookOrderMock';
+import { bookOrderTestData2 } from '@/pages/api/mock/bookOrderMock';
 import { DELIVERY_INFO, PAYMENT_INFO } from 'src/constants/payment';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
 
@@ -39,12 +39,16 @@ function OrderCompletedSection() {
             <TotalPriceCard
               checkbox={false}
               button={false}
-              color="text-green"
+              color="text-primary"
             />
           </div>
         </div>
         <div className="w-full mobile:hidden tablet:hidden pc:mt-47 pc:h-screen">
-          <TotalPriceCard checkbox={false} button={false} color="text-green" />
+          <TotalPriceCard
+            checkbox={false}
+            button={false}
+            color="text-primary"
+          />
         </div>
       </div>
     </div>

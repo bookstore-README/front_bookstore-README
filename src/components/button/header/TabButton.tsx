@@ -11,9 +11,9 @@ function TabButton({ selected, onClick, title, isSmall }: TabButtonProps) {
   const fontStyle = `${isSmall ? 'text-16 mobile:text-12' : 'text-18 mobile:text-14'}`;
   const selectedStyle =
     selected && isSmall
-      ? 'border border-b-2 border-x-transparent border-b-green border-t-white text-green'
+      ? 'border border-b-2 border-x-transparent border-b-primary border-t-white text-primary'
       : selected
-        ? 'text-green'
+        ? 'text-primary'
         : '';
   return (
     <button

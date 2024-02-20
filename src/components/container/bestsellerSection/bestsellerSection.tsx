@@ -20,7 +20,7 @@ function BestSellerSection({ page, bookList }: BestSellerSectionProps) {
         `}>
       <div className="flex justify-between mobile:mb-20 tablet:mb-40 pc:mb-50">
         <div className="text-20 font-bold">베스트셀러</div>
-        <Link href="/domestic/bestseller" className="text-green">
+        <Link href="/domestic/bestseller" className="text-primary">
           더보기
         </Link>
       </div>

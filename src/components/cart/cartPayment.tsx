@@ -35,15 +35,8 @@ function CartPayment({
   const setBasketItemList = useSetAtom(basketItemList);
 
   const handleMovePayMentPage = () => {
-    // selectedItemArr 배열의 각 항목에 clicked 값이 없는 경우 4로 설정
-    const modifiedItemList = selectedItemArr.map((item) => ({
-      ...item,
-      clicked: item.count,
-    }));
-
     // 수정된 배열을 사용하여 setBasketItemList 함수 호출
-    setBasketItemList(modifiedItemList);
-
+    setBasketItemList(selectedItemArr);
     // 페이지 이동
     router.push('/order');
   };
@@ -73,8 +66,8 @@ function CartPayment({
         <span>{totalDiscount.toString().replace(THOUSAND_UNIT, ',')}원</span>
       </div>
       <div className="mb-40 flex justify-between mobile:mb-10">
-        <span className="text-15 font-bold text-green">결제 금액</span>
-        <span className="text-25 font-bold text-green">
+        <span className="text-primary text-15 font-bold">결제 금액</span>
+        <span className="text-25 text-primary font-bold">
           {calculatePaymentFee(totalAmount, totalDiscount)
             .toString()
             .replace(THOUSAND_UNIT, ',')}
@@ -83,7 +76,7 @@ function CartPayment({
       </div>
       <div className="bottom-0 left-0 w-full bg-white mobile:fixed mobile:px-15 mobile:py-10">
         <button
-          className="w-full rounded-[5px] bg-green py-15 text-center text-white"
+          className="bg-primary w-full rounded-[5px] py-15 text-center text-white"
           onClick={() => {
             selectedItemArr.length > 0
               ? handleMovePayMentPage()

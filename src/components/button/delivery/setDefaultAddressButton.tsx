@@ -16,7 +16,7 @@ function SetDefaultAddressButton() {
       <div className="flex-center relative mr-10 inline-flex">
         <button
           className={`flex-center flex h-20 w-20 rounded-[2px] ${
-            isClicked ? 'bg-green' : 'border border-gray-1'
+            isClicked ? 'bg-primary' : 'border border-gray-1'
           }`}
           onClick={handleClick}>
           <Image

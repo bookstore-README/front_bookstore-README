@@ -15,9 +15,15 @@ interface CheckedStates {
   [key: string]: boolean;
 }
 
-function TermsCheckbox({ title, entire, checkContent, useFormContextProps = true, showLastButton = true }: TermsCheckboxProps) {
-  const formMethods = useFormContextProps ? useFormContext() : null
-  
+function TermsCheckbox({
+  title,
+  entire,
+  checkContent,
+  useFormContextProps = true,
+  showLastButton = true,
+}: TermsCheckboxProps) {
+  const formMethods = useFormContextProps ? useFormContext() : null;
+
   const [checkedStates, setCheckedStates] = useState<CheckedStates>(
     checkContent.reduce((acc, title) => ({ ...acc, [title]: false }), {}),
   );
@@ -46,7 +52,7 @@ function TermsCheckbox({ title, entire, checkContent, useFormContextProps = true
   return (
     <div className="w-full">
       {title && <span className="inline-block pb-8 font-bold">{title}</span>}
-      <div className="relative flex h-48 items-center gap-8 border-0 border-b-[1px] border-b-[#DBDBDB]">
+      <div className="relative flex h-48 items-center gap-8 border-0 border-b-[1px] border-b-gray-1">
         <label htmlFor="selectAll" className="font-medium text-15">
           <Image
             src={CheckIcon}
@@ -61,8 +67,8 @@ function TermsCheckbox({ title, entire, checkContent, useFormContextProps = true
             {...formMethods?.register('selectAll')}
             checked={Object.values(checkedStates).every(Boolean)}
             onChange={handleSelectAll}
-            className="mt-0.5 relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2 border-solid
-              border-gray-3 p-1 checked:border-0 checked:bg-green"
+            className="mt-0.5 checked:bg-primary relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2
+              border-solid border-gray-3 p-1 checked:border-0"
           />
           {entire}
         </label>
@@ -70,7 +76,9 @@ function TermsCheckbox({ title, entire, checkContent, useFormContextProps = true
 
       <div>
         {checkContent.map((content, index) => (
-          <div key={content} className="flex h-48 items-center justify-between gap-5">
+          <div
+            key={content}
+            className="flex h-48 items-center justify-between gap-5">
             <div className="relative flex items-center gap-8">
               <label
                 htmlFor={`id.${content}`}
@@ -88,8 +96,8 @@ function TermsCheckbox({ title, entire, checkContent, useFormContextProps = true
                   type="checkbox"
                   checked={checkedStates[content]}
                   onChange={() => handleIndividualCheck(content)}
-                  className="mt-0.5 relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2 border-solid
-                    border-gray-3 p-1 checked:border-0 checked:bg-green"
+                  className="mt-0.5 checked:bg-primary relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2
+                    border-solid border-gray-3 p-1 checked:border-0"
                 />
                 {content}
               </label>

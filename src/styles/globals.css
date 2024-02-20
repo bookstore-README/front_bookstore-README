@@ -6,7 +6,7 @@
 :root {
   --foreground-rgb: 0 0 0;
   --background-start-rgb: 214 219 220;
-  --background-end-rgb: 255 255 255;  
+  --background-end-rgb: 255 255 255;
   --red: 237 28 36;
   --green: 102 197 123;
   --black: 54 54 54;
@@ -17,7 +17,9 @@
   --gray-4: 80 80 80;
   --gray-5: 245 245 245;
   --gray-6: 232 232 232;
-  
+  --primary: 31 65 114;
+  --secondary: 255 150 150;
+  --light-pink: 250 243 243;
 }
 
 @layer utilities {
@@ -57,7 +59,7 @@ body {
     color: --gray-3;
   }
   input {
-    accent-color: green;
+    accent-color: var(--primary);
   }
   .flex-center {
     @apply flex items-center justify-center;

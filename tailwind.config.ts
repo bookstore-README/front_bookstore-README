@@ -63,6 +63,7 @@ const config: Config = {
       },
       black: 'rgb(var(--black) / <alpha-value>)',
       white: 'rgb(var(--white) / <alpha-value>)',
+      pink: 'rgb(var(--light-pink) / <alpha-value>)',
       gray: {
         1: 'rgb(var(--gray-1) / <alpha-value>)',
         2: 'rgb(var(--gray-2) / <alpha-value>)',
@@ -71,6 +72,8 @@ const config: Config = {
         5: 'rgb(var(--gray-5) / <alpha-value>)',
         6: 'rgb(var(--gray-6) / <alpha-value>)',
       },
+      primary: 'rgb(var(--primary) / <alpha-value>)',
+      secondary: 'rgb(var(--secondary) / <alpha-value>)',
     },
   },
   plugins: [],
