@@ -20,24 +20,14 @@ export const postLogin = async (data: Login) => {
   return result.data;
 };
 
-//회원조회 (다른회원)
-const getMember = async (id: number) => {
-  const result = await instance.get(`/member/${id}`);
+//회원조회 (id값 있으면 타인조회, 없으면 본인조회)
+const getMember = async (id?: number) => {
+  const result = await instance.get(`/member${id ? `/${id}` : ''}`);
   return result.data.data;
 };
 
-export const useGetMember = (id: number) => {
+export const useGetMember = (id?: number) => {
   return useFetch(QUERY_KEY.member, getMember, id);
-};
-
-//회원조회 (로그인한 회원)
-const getLoginMember = async () => {
-  const result = await instance.get(`/member`);
-  return result.data.data;
-};
-
-export const useGetLoginMember = () => {
-  return useFetch(QUERY_KEY.member, getLoginMember, null);
 };
 
 //비밀번호 수정

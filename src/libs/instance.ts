@@ -7,6 +7,8 @@ export const instance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+// FormData 보내기용 instance
 export const instanceFormData = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
@@ -15,6 +17,15 @@ export const instanceFormData = axios.create({
 });
 
 instance.interceptors.request.use(async (request) => {
+  const session = await getSession();
+  if (session) {
+    request.headers['Authorization'] = `Bearer ${session.accessToken}`;
+  }
+  return request;
+});
+
+// FormData 보내기용 instance 세팅
+instanceFormData.interceptors.request.use(async (request) => {
   const session = await getSession();
   if (session) {
     request.headers['Authorization'] = `Bearer ${session.accessToken}`;

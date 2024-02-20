@@ -6,12 +6,12 @@ import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/input/signInput/signInput';
 import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
 import RegisterButton from '@/components/button/register/registerButton';
-import { useGetLoginMember } from '@/api/member';
+import { useGetMember } from '@/api/member';
 import { useEditProfile } from '@/hooks/api/useEditProfile';
 
 function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   // 유저 프로필 가져오기
-  const { data } = useGetLoginMember();
+  const { data } = useGetMember();
 
   const imageUploaderRef = useRef<HTMLInputElement>(null);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(
@@ -41,7 +41,7 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
 
   const formData = new FormData();
   formData.append(
-    'nickname',
+    'memberUpdateDto',
     new Blob([JSON.stringify(getValues('nickname'))], {
       type: 'application/json',
     }),
