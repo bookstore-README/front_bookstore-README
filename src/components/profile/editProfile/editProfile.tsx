@@ -14,9 +14,11 @@ import { NICKNAME_RULES } from '@/constants/sign';
 function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   // 유저 프로필 가져오기
   const { data } = useGetMember();
+
   const imageUploaderRef = useRef<HTMLInputElement>(null);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
+
   const method = useForm<EditProfileType>({
     mode: 'onSubmit',
     defaultValues: {
@@ -42,7 +44,7 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
     formData.append('profileImage', profileImageFile);
   }
 
-  // 유저 프로필 수정하는 훅사용
+  // editProfile => mutate 함수
   const { editProfile, isPending } = useEditProfile(formData);
 
   const onSubmit = () => {
@@ -55,6 +57,7 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
     }
   };
 
+  // 미리보기 이미지 체인저 함수
   const handleImageChange = (file: File): Promise<void> => {
     if (file) {
       const reader = new FileReader();
