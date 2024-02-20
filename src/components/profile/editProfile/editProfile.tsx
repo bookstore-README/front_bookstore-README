@@ -4,14 +4,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useEffect, useRef, useState } from 'react';
 import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/input/signInput/signInput';
-import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
+import { EditProfileType } from '@/types/editProfileTypes';
 import RegisterButton from '@/components/button/register/registerButton';
 import { useGetMember } from '@/api/member';
 import { useEditProfile } from '@/hooks/api/useEditProfile';
-import { NEXT_PUBLIC_API_URL } from '@/constants/publicApiUrl';
 import { NICKNAME_RULES } from '@/constants/sign';
 
-function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
+function EditProfile() {
   // 유저 프로필 가져오기
   const { data } = useGetMember();
 
@@ -19,12 +18,11 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
 
-  console.log(data?.nickname);
   const method = useForm<EditProfileType>({
     mode: 'onSubmit',
     defaultValues: {
       nickname: data?.nickname,
-      profileImage: initialProfileImageUrl,
+      profileImage: data?.ImageProfile,
     },
   });
   const {
@@ -37,13 +35,13 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   const currentNickName = { nickname: getValues('nickname') };
   const formData = new FormData();
   formData.append(
-    'memberUpdateDto',
+    'update',
     new Blob([JSON.stringify(currentNickName)], {
       type: 'application/json',
     }),
   );
   if (profileImageFile) {
-    formData.append('profileImage', profileImageFile);
+    formData.append('profileImage', profileImageFile || null);
   }
 
   // editProfile => mutate 함수
@@ -78,18 +76,13 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   };
 
   useEffect(() => {
-    if (data?.profileImage) {
-      const initialProfileImage = data.profileImage;
-      const url = `${NEXT_PUBLIC_API_URL}${initialProfileImage}`;
-      setProfileImageUrl(url);
-    }
-  }, [data]);
-
-  useEffect(() => {
     if (data?.nickname) {
       method.setValue('nickname', data.nickname);
     }
-  }, [data?.nickname, method]);
+    if (data?.profileImage) {
+      setProfileImageUrl(data?.profileImage);
+    }
+  }, [data?.nickname, method, data?.profileImage]);
 
   return (
     <FormProvider {...method}>
@@ -108,9 +101,7 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
             className="relative h-200 w-200 cursor-pointer rounded-full bg-gray-2"
             onClick={handleClickInput}>
             <Image
-              src={
-                initialProfileImageUrl || profileImageUrl || DefaultUserProfile
-              }
+              src={profileImageUrl || DefaultUserProfile}
               alt="프로필 이미지"
               className="rounded-full"
               fill
@@ -168,7 +159,7 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
             />
             {errors.nickname?.message && (
               <p className="w-full text-left text-14 text-red">
-                {errors.nickname.message}
+                {errors?.nickname?.message}
               </p>
             )}
           </div>
