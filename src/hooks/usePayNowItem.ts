@@ -1,12 +1,12 @@
 // 구매하기 버튼 로직.
 
-import { useAtom } from "jotai";
-import { useRouter } from "next/router";
+import { useAtom } from 'jotai';
+import { useRouter } from 'next/router';
 
-import { PayMentAtom } from "@/types/cartType";
-import { basketItemList } from "@/store/state";
+import { PayMentAtom } from '@/types/cartType';
+import { basketItemList } from '@/store/state';
 
-interface PayNowItemProps{
+interface PayNowItemProps {
   bookId: number;
   bookImgUrl: string;
   bookTitle: string;
@@ -15,7 +15,14 @@ interface PayNowItemProps{
   count?: number;
 }
 
-function usePayNowItem({bookId, bookImgUrl, bookTitle, price, authors, count=1}: PayNowItemProps) {
+function usePayNowItem({
+  bookId,
+  bookImgUrl,
+  bookTitle,
+  price,
+  authors,
+  count = 1,
+}: PayNowItemProps) {
   const [, setNowPayItem] = useAtom(basketItemList);
   const router = useRouter();
   const setNowPayItemList: PayMentAtom[] = [
@@ -25,7 +32,7 @@ function usePayNowItem({bookId, bookImgUrl, bookTitle, price, authors, count=1}:
       bookTitle: bookTitle,
       price: price,
       authors: authors,
-      clicked: count,
+      count: count,
     },
   ];
 
@@ -34,7 +41,7 @@ function usePayNowItem({bookId, bookImgUrl, bookTitle, price, authors, count=1}:
     router.push('/order');
   };
 
-  return {handlePayNowButton}
+  return { handlePayNowButton };
 }
 
-export default usePayNowItem
+export default usePayNowItem;

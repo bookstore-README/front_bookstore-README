@@ -135,7 +135,7 @@ function Carousel({ data, responsive }: CarouselProps) {
           <div className="relative h-16 w-10">
             <Image
               src={
-                (currentIndex === maxPage && maxPage !== 0) || maxPage < 0
+                currentIndex === maxPage
                   ? '/icons/CarouselRightInActivateArrow.svg'
                   : '/icons/CarouselRightActivateArrow.svg'
               }

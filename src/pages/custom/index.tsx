@@ -23,7 +23,9 @@ function CustomPage() {
     queryKey: ['category'],
     queryFn: () => getCustomCategoryList(),
     select: (data) => data.data,
+    initialData: { data: { memberCategory: [] } },
   });
+
   const genreList = useMemo(() => {
     try {
       return cusTomSelectedGenreListQuery.data.memberCategory.map(
@@ -52,7 +54,7 @@ function CustomPage() {
   });
 
   useEffect(() => {
-    if (cusTomSelectedGenreListQuery?.data?.memberCategory) {
+    if (cusTomSelectedGenreListQuery.data.memberCategory.length) {
       const item = cusTomSelectedGenreListQuery.data.memberCategory[0];
       const obj = {
         categoryId: item.categoryId,
@@ -167,7 +169,7 @@ export const CustomPageContentsLayout = ({
         <div className="text-20 font-bold text-black">
           내 취향대로 인기도서 골라보기
         </div>
-        <ToolTip toolTipText="찜한횟수, 조회수 순위입니다">
+        <ToolTip toolTipText="찜한횟수, 조회수, 책 이름 순입니다">
           <div>
             <Image
               src="/icons/Info.svg"

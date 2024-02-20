@@ -17,10 +17,10 @@ function CartPage() {
   const [selectedItemArr, setSelectedItemArr] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalDiscount, setTotalDisCount] = useState(0);
-  const resetSelectedItemArr = () => setSelectedItemArr([]);
   const { data, isError, isLoading, isSuccess } = useGetBasKetQuery();
   const deleteBasketItemMutation = useDeleteBasketQuery();
 
+  const resetSelectedItemArr = () => setSelectedItemArr([]);
   const calcBookPlusCount = (
     wishList: CartItem[],
     item: CartItem,
@@ -92,9 +92,10 @@ function CartPage() {
 
   useEffect(() => {
     if (data && isSuccess) {
-      setWishListData(data);
+      setWishListData([...data]);
+      setSelectedItemArr([...data]);
     }
-  }, [data]);
+  }, [isSuccess]);
 
   if (isError) return <div>Error loading data</div>;
 
@@ -169,15 +170,15 @@ function CartPage() {
                     <div
                       className="mx-20 mobile:mx-10"
                       onClick={() => {
-                        setSelectedItemArr((prev) => [...prev, item]);
                         const targetIdx = selectedItemArr.findIndex(
                           (clickedItem) =>
                             clickedItem.basketId === item.basketId,
                         );
-
                         if (targetIdx !== -1) {
                           selectedItemArr.splice(targetIdx, 1);
                           setSelectedItemArr([...selectedItemArr]);
+                        } else {
+                          setSelectedItemArr((prev) => [...prev, item]);
                         }
                       }}>
                       <div className="cursor-pointer">
