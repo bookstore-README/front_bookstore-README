@@ -19,9 +19,11 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
 
+  console.log(data?.nickname);
   const method = useForm<EditProfileType>({
     mode: 'onSubmit',
     defaultValues: {
+      nickname: data?.nickname,
       profileImage: initialProfileImageUrl,
     },
   });
@@ -82,6 +84,12 @@ function EditProfile({ initialProfileImageUrl }: EditProfileProps) {
       setProfileImageUrl(url);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (data?.nickname) {
+      method.setValue('nickname', data.nickname);
+    }
+  }, [data?.nickname, method]);
 
   return (
     <FormProvider {...method}>
