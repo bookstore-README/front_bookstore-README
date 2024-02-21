@@ -26,7 +26,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   });
 
   const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
-    bookId: 42423431,
+    bookId: book.bookId,
     onChangeBookmarkCount: () => {
       if (isBookmarked) {
         setBookmarkCount((prev) => prev - 1);
