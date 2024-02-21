@@ -3,10 +3,13 @@ import GenreButton from '@/components/button/genre/genreButton';
 import { ReadMeGenreList } from '@/pages/api/mock';
 import EditToggleButton from '@/components/button/editToggleButton';
 import { notify } from '@/components/toast/toast';
+import { getCustomCategoryList } from '@/api/category';
 
 function GenreSection() {
   const [isEditMode, setEditMode] = useState(false);
   const genres = ReadMeGenreList.genreList;
+  const data = getCustomCategoryList();
+  console.log(data);
 
   const handleEditModeToggle = () => {
     setEditMode((prev) => !prev);

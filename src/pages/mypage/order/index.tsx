@@ -9,7 +9,7 @@ import {
 import OrderDate from '@/components/container/orderDate/orderDate';
 import { useState } from 'react';
 import DropDown from '@/components/dropDown/dropDown';
-import { ORDER_DROPDOWN_MENUS } from '@/constants/\borderDropDownMenus';
+import { ORDER_DROPDOWN_MENUS } from '@/constants/orderDropDownMenus';
 const { orderData } = bookOrderTestData;
 
 function MyOrderPage() {

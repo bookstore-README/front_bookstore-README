@@ -1,7 +1,7 @@
 import { QUERY_KEY } from '@/constants/queryKey';
-import { Signup, Login, ChangePassword, ChangeImage } from '@/types/api/member';
+import { Signup, Login, ChangePassword } from '@/types/api/member';
 import { useFetch, useUpdate, useUpdateType } from '@/utils/reactQuery';
-import { instance } from 'src/libs/instance';
+import { instance, instanceFormData } from 'src/libs/instance';
 
 //회원가입
 export const postSignup = async (data: Signup) => {
@@ -15,13 +15,13 @@ export const postLogin = async (data: Login) => {
   return result.data;
 };
 
-//회원조회
-const getMember = async (id: number) => {
-  const result = await instance.get(`/member/${id}`);
+//회원조회 (id값 있으면 타인조회, 없으면 본인조회)
+const getMember = async (id?: number) => {
+  const result = await instance.get(`/member${id ? `/${id}` : ''}`);
   return result.data.data;
 };
 
-export const useGetMember = (id: number) => {
+export const useGetMember = (id?: number) => {
   return useFetch(QUERY_KEY.member, getMember, id);
 };
 
@@ -38,12 +38,15 @@ export const usePutPassword = (
   return useUpdate(putPassword, newPassword, { onSuccess, onError, onSettled });
 };
 
-//프로필이미지 수정
-const putProfileImage = async (data: ChangeImage) => {
-  const result = await instance.put('/member/profile', data);
+//프로필이미지, 닉네임 수정
+const putProfile = async (data: FormData) => {
+  const result = await instanceFormData.post('/member/profile', data);
   return result.data;
 };
 
-export const usePutProfileImage = (data: ChangeImage) => {
-  return useUpdate(putProfileImage, data);
+export const usePutProfile = (
+  data: FormData,
+  { onSuccess, onError, onSettled }: useUpdateType,
+) => {
+  return useUpdate(putProfile, data, { onSuccess, onError, onSettled });
 };

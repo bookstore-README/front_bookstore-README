@@ -4,10 +4,10 @@ export default function Document() {
   return (
     <Html lang="ko">
       <Head>
-        <meta
+        {/* <meta
           http-equiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
-        />
+        /> */}
       </Head>
       <body>
         <Main />
