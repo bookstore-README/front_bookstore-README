@@ -17,7 +17,7 @@ function GenreButton({
     <button
       className={`text-13 flex-center h-33 w-fit whitespace-nowrap rounded-[53px] border ${
         selected ? 'border-black' : 'border-gray-1'
-      } pc:text-14 ${editMode ? 'hover:border-primary hover:text-primary' : ''}`}
+      } pc:text-14 ${editMode ? 'hover:border-primary hover:text-primary active:border-secondary active:text-secondary' : ''}`}
       onClick={onClick}
       disabled={disabled}>
       <div className="mx-30">{title}</div>
