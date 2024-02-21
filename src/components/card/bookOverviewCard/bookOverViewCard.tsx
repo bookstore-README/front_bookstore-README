@@ -26,8 +26,14 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
   });
 
   const { updateBookmark, isBookmarkPending } = useUpdateBookmark({
-    bookId: book.bookId,
-    onChangeBookmarkCount: (prevCount) => setBookmarkCount(prevCount),
+    bookId: 42423431,
+    onChangeBookmarkCount: () => {
+      if (isBookmarked) {
+        setBookmarkCount((prev) => prev - 1);
+      } else {
+        setBookmarkCount((prev) => prev + 1);
+      }
+    },
     onChangeBookmarked: (prevState) => setIsBookMarked(prevState),
   });
 
@@ -54,11 +60,6 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
     setNowPayItem(setNowPayItemList);
     router.push('/order');
   };
-
-  // 최신 isBookmarked 상태를 useUpdateBookmark에 넘겨주기 위한 useEffect
-  useEffect(() => {
-    setIsBookMarked(isBookmarked);
-  }, [isBookmarked]);
 
   return (
     <div
