@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import GenreButton from '@/components/button/genre/genreButton';
 import { MemberCategoryType } from '@/pages/api/mock';
 import EditToggleButton from '@/components/button/editToggleButton';
-import { notify } from '@/components/toast/toast';
 import { useGetCustomCategoryList } from '@/api/category';
 import { useAtom } from 'jotai';
 import { CategoryListAtom } from '@/store/state';
+import { useSelectGenre } from '@/hooks/api/useSelectGenre';
 interface CustomCategoryListResponse {
   data?: {
     data: {
@@ -24,37 +24,31 @@ function GenreSection() {
   if (response.data && response.data.data) {
     memberCategory = response.data.data.memberCategory;
   }
-  // 유저가 선택한 카테고리의 subId 리스트
+  // 유저가 선택한 카테고리Id 리스트
   const [selectedGenreIds, setSelectedGenreIds] = useState(
-    memberCategory.map((selectedGenre) => selectedGenre.subId),
+    memberCategory.map((selectedGenre) => selectedGenre.categoryId),
   );
+  // 선택된 장르들의 카테고리 id를 서버로 보내는 훅
+  const { selectGenre, isPending } = useSelectGenre(selectedGenreIds);
 
-  const handleGenreClick = (subId: number) => {
+  const handleGenreClick = (categoryId: number) => {
+    if (!isEditMode) return;
     setSelectedGenreIds((prevSelectedIds) => {
-      const isSelected = prevSelectedIds.includes(subId);
+      const isSelected = prevSelectedIds.includes(categoryId);
       if (isSelected) {
         // 이미 선택된 경우, 배열에서 제거
-        return prevSelectedIds.filter((id) => id !== subId);
+        return prevSelectedIds.filter((id) => id !== categoryId);
       } else {
         // 선택되지 않은 경우, 배열에 추가
-        return [...prevSelectedIds, subId];
+        return [...prevSelectedIds, categoryId];
       }
     });
   };
 
-  console.log(selectedGenreIds);
-
   const handleEditModeToggle = () => {
     setEditMode((prev) => !prev);
-
-    // 성공시 토스트 메시지 띄우기
-    // TODO: isEditMode 조건을 api 연결 성공시로 변경
-    if (isEditMode) {
-      notify({
-        type: 'success',
-        text: '선호장르를 변경했어요 ⭐️',
-      });
-    }
+    if (!isEditMode) return;
+    selectGenre();
   };
 
   const getButtonLayoutClass = () => {
@@ -76,9 +70,10 @@ function GenreSection() {
           <GenreButton
             key={index}
             title={category.subName ?? ''}
-            selected={selectedGenreIds.includes(category.subId || 0)}
+            selected={selectedGenreIds.includes(category.categoryId || 0)}
             editMode={isEditMode}
-            onClick={() => handleGenreClick(category.subId || 0)}
+            onClick={() => handleGenreClick(category.categoryId || 0)}
+            disabled={isPending}
           />
         ))}
       </div>
