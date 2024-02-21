@@ -5,6 +5,7 @@ export interface KebabDropDownButtonProps {
   color?: string;
   onClickTitle1?: () => void; // onClick prop 추가
   onClickTitle2?: () => void; // onClick prop 추가
+  id?: number;
 }
 
 function KebabDropDownButton({

@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 import { useGetBook, usePutBook } from '@/api/book';
+import { useGetIsBookmarked } from '@/api/bookmark';
 import MainLayout from '@/components/layout/mainLayout';
 import BookDetailCard from '@/components/card/bookDetailCard/bookDetailCard';
 import BookDetailNav from '@/components/button/bookDetailNav';
@@ -13,32 +14,47 @@ import Spacing from '@/components/container/spacing/spacing';
 import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
 import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
 import SkeletonBookDetailCard from '@/components/skeleton/bookDetailCard/skeleton';
+import useClickLikeButton from '@/hooks/useClickLikeButton';
 
 type BookDetailNavLocationType = 'information' | 'review' | 'currency';
 
 export default function BookDetailPage() {
   const router = useRouter();
+  const { status } = useSession();
   const { bookId } = router.query;
   // 페이지 하단 상품정보, 리뷰, 배송교환환불 탭을 나타내는 state
   const [location, setLocation] =
     useState<BookDetailNavLocationType>('information');
   // 책 구매 수량 state
   const [orderCount, setOrderCount] = useState(1);
+
   const { data, isLoading, isError } = useGetBook({
     endpoint: `${bookId}/detail`,
     params: {
       bookId: String(bookId),
     },
   });
+  let bookData = data?.data;
 
-  // 로그인 한 상태라면 조회수 1 증가
-  const { status } = useSession();
-  const { mutate } = usePutBook({
+  // 로그인 한 상태라면 찜 여부 체크하기
+  const { data: bookmarkData } = useGetIsBookmarked({
+    bookId: String(bookId),
+    enabled: status === 'authenticated',
+  });
+  const { bookmarkState, handleBookmarkClick } = useClickLikeButton({
+    bookId: String(bookId),
+    bookmarkId: bookmarkData?.bookmarkId ?? -1,
+    isBookmarked: bookmarkData?.marked ?? false,
+  });
+
+  const { mutate: handleViewCountMutate } = usePutBook({
     bookId: Number(bookId),
   });
+
   useEffect(() => {
     if (status === 'authenticated') {
-      mutate();
+      // 로그인 한 상태라면 조회수 1 증가
+      handleViewCountMutate();
     }
   }, [status]);
 
@@ -50,17 +66,18 @@ export default function BookDetailPage() {
         ) : (
           <BookDetailCard
             bookId={bookId as string}
-            bookImgUrl={data?.data.bookImgUrl}
-            bookTitle={data?.data.bookTitle}
-            price={data?.data.price}
-            categories={data?.data.categories}
-            authors={data?.data.authors}
-            bookmarkCount={data?.data.bookmarkCount}
-            isBookmarked={false}
-            publishedDate={data?.data.publishedDate}
-            publisher={data?.data.publisher}
-            averageRating={data?.data.averageRating}
-            reviewCount={data?.data.reviewCount}
+            bookImgUrl={bookData.bookImgUrl}
+            bookTitle={bookData.bookTitle}
+            price={bookData.price}
+            categories={bookData.categories}
+            authors={bookData.authors}
+            bookmarkCount={bookData.bookmarkCount}
+            isBookmarked={bookmarkState}
+            handleBookmarkClick={handleBookmarkClick}
+            publishedDate={bookData.publishedDate}
+            publisher={bookData.publisher}
+            averageRating={bookData.averageRating}
+            reviewCount={bookData.reviewCount}
             orderCount={orderCount}
             setOrderCount={setOrderCount}
           />
@@ -81,9 +98,9 @@ export default function BookDetailPage() {
             {location === 'review' && (
               <Review
                 bookId={bookId as string}
-                ratingDist={data?.data.ratingDist}
-                averageRating={data?.data.averageRating}
-                reviewCount={data?.data.reviewCount}
+                ratingDist={bookData.ratingDist}
+                averageRating={bookData.averageRating}
+                reviewCount={bookData.reviewCount}
               />
             )}
             {location === 'currency' && <RefundTerm />}
@@ -92,11 +109,12 @@ export default function BookDetailPage() {
           <div className="hidden pc:flex pc:pt-50">
             <SideOrderNavigator
               bookId={bookId as string}
-              bookImgUrl={data?.data.bookImgUrl ?? '/.'}
-              bookTitle={data?.data.bookTitle}
-              authors={data?.data.authors}
-              isBookmarked={false}
-              price={data?.data.price ?? 0}
+              bookImgUrl={bookData?.bookImgUrl ?? './'}
+              bookTitle={bookData?.bookTitle}
+              authors={bookData?.authors}
+              isBookmarked={bookmarkState}
+              handleBookmarkClick={handleBookmarkClick}
+              price={bookData?.price ?? 0}
               orderCount={orderCount}
               setOrderCount={setOrderCount}
             />
@@ -105,11 +123,12 @@ export default function BookDetailPage() {
 
         <FooterOrderNavitgator
           bookId={bookId as string}
-          bookImgUrl={data?.data.bookImgUrl ?? '/.'}
-          bookTitle={data?.data.bookTitle}
-          authors={data?.data.authors}
-          isBookmarked={false}
-          price={data?.data.price ?? 0}
+          bookImgUrl={bookData?.bookImgUrl ?? './'}
+          bookTitle={bookData?.bookTitle}
+          authors={bookData?.authors}
+          isBookmarked={bookmarkState}
+          handleBookmarkClick={handleBookmarkClick}
+          price={bookData?.price ?? 0}
           orderCount={orderCount}
           setOrderCount={setOrderCount}
         />

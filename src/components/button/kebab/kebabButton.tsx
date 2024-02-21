@@ -7,7 +7,7 @@ import KebabDropDownButton, {
 } from '@/components/button/kebab/kebabDropDownButton';
 import AlertModal from '@/components/modal/alertModal';
 
-function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
+function KebabButton({ title1, title2, id }: KebabDropDownButtonProps) {
   const ref = useRef() as MutableRefObject<HTMLImageElement>;
   const [showOptions, setShowOptions] = useShowDropDown(ref, false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,6 +41,7 @@ function KebabButton({ title1, title2 }: KebabDropDownButtonProps) {
           title="정말 삭제하시겠습니까?"
           description="삭제한 글은 복구할 수 없습니다."
           onClick={handleAlertModalOpenClick}
+          id={id}
         />
       )}
     </>

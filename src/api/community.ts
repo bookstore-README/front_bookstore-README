@@ -8,15 +8,15 @@ import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
-const getCommunity = async (option: GetCommunityOption) => {
-  const { memberId, params } = option;
+export const getCommunity = async (option: GetCommunityOption) => {
+  const { endpoint, params } = option;
   const result = await instance.get(
-    `community${memberId ? `/${memberId}` : ''}`,
+    `community${endpoint ? `/${endpoint}` : ''}`,
     {
       params,
     },
   );
-  return result.data;
+  return result.data.data;
 };
 
 export const useGetCommunity = (option: GetCommunityOption) => {
@@ -36,12 +36,12 @@ export const usePostCommunity = (data: PostCommunityData) => {
 };
 
 //글 삭제
-const deleteCommunity = async (communityId: number) => {
+const deleteCommunity = async (communityId?: number) => {
   const result = await instance.delete(`community/${communityId}`);
   return result.data;
 };
 
-export const useDeleteCommunity = (communityId: number) => {
+export const useDeleteCommunity = (communityId?: number) => {
   return useDelete(deleteCommunity, communityId);
 };
 

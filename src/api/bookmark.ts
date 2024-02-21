@@ -1,4 +1,4 @@
-import { BookmarkParams, postBookmarkPath } from '@/types/api/bookmark';
+import { BookmarkParams, deleteBookmarkPath, postBookmarkPath } from '@/types/api/bookmark';
 import {
   useDelete,
   useFetch,
@@ -77,6 +77,16 @@ export const deleteBookMarkItem = async (bookmarkId: string) => {
   return result.data;
 };
 
-export const useDeleteBookmark = (bookmarkId: string) => {
-  return useDelete(deleteBookmark, bookmarkId);
+export const useDeleteBookmark = (option: deleteBookmarkPath) => {
+  return useUpdate(deleteBookMarkItem, option.bookmarkId, option);
+};
+
+// 해당 책에 대한 찜 여부 조회
+const getIsBookmarked = async (bookId: string) => {
+  const result = await instance.get(`/bookmark/${bookId}/check`);
+  return result.data.data;
+};
+
+export const useGetIsBookmarked = ({ bookId="", enabled = true }) => {
+  return useFetch(QUERY_KEY.bookmark, getIsBookmarked, bookId, enabled);
 };

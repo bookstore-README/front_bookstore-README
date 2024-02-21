@@ -18,6 +18,7 @@ export interface GetCommunityParams {
 }
 
 export interface GetCommunityOption {
+  endpoint?: number;
   memberId?: number;
   params?: GetCommunityParams;
 }

@@ -36,6 +36,18 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      keyframes: {
+        rotating: {
+          '0%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(90deg)' },
+          '50%': { transform: 'rotate(180deg)' },
+          '75%': { transform: 'rotate(270deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        }
+      },
+      animation: {
+        rotating : 'rotating 5s infinite'
+      }
     },
 
     fontSize: {

@@ -3,7 +3,7 @@
  */
 
 function StyledTitle({ title = '' }) {
-  return <h3 className="text-gray-6 text-16 font-bold">{title}</h3>;
+  return <h3 className="text-16 font-bold text-gray-4">{title}</h3>;
 }
 
 function RefundTerm() {

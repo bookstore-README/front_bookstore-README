@@ -1,21 +1,36 @@
-import CommunityCard from '@/components/card/communityCard/communityCard';
 import MainLayout from '@/components/layout/mainLayout';
 import PageTab from '@/components/header/pageTab';
-import { CommunityCardProps } from '@/types/communityCardType';
-import CommunityCardList from '../card/communityCard/communityCardList';
+import CommunityCardList from '@/components/card/communityCard/communityCardList';
+import useInfinite from '@/hooks/useInfinite';
+import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
+import { getCommunity } from '@/api/community';
+import AddCommunityButton from '../button/addcommunityButton';
+import SkeletonCommunityCard from '../skeleton/communityCard/skeleton';
 
 interface CommunityLayoutProps {
-  communityData: CommunityCardProps[];
   isSelected: string;
   kebab?: boolean;
+  memberId?: number;
 }
 
-//TODO : api나오면 useInfiniteQuery에서 data받아서 infinityscroll구현
 function CommunityLayout({
-  communityData,
   isSelected,
   kebab,
+  memberId,
 }: CommunityLayoutProps) {
+  const [ref, isIntersecting] = useInfinite();
+  const { data, hasNextPage, isRefetching } = useCustomInfiniteQuery({
+    endpoint: `${memberId ? `${memberId}` : ''}`,
+    queryKey: ['community', `${memberId}`],
+    queryFunc: getCommunity,
+    initialCursorId: 0,
+    limit: 12,
+    cursorName: 'cursorId',
+    getNextPageParamsFunc: (lastPage) =>
+      lastPage.cursorId === -1 ? undefined : lastPage.cursorId,
+    refetchTrigger: isIntersecting,
+  });
+  
   return (
     <MainLayout>
       <div className="mb-198 flex flex-col">
@@ -26,9 +41,23 @@ function CommunityLayout({
           addHref="/community/writeme"
           isSelected={isSelected}
         />
-        <CommunityCardList communityData={communityData} kebab={kebab} />
-        {/* <div className='h-100 w-300 border border-1 border-red' ref={ref}/> */}
+        {isRefetching ? (
+          <div className="grid auto-rows-auto grid-cols-3 gap-20 mobile:grid-cols-1 tablet:grid-cols-2 mb-20">
+            {Array.from({
+              length: 6,
+            }).map((_, index) => (
+              <SkeletonCommunityCard key={index}/>
+            ))}
+          </div>
+        ) : (
+            //@ts-ignore
+          <CommunityCardList communityData={data?.pages} kebab={kebab} />
+        )}
       </div>
+      <AddCommunityButton />
+      <div
+        className={`h-5 w-300 ${hasNextPage ? 'block' : 'hidden'}`}
+        ref={ref}/>
     </MainLayout>
   );
 }

@@ -1,24 +1,19 @@
 import ModalLayout from '@/components/modal/modalLayout';
 import RegisterButton from '@/components/button/register/registerButton';
+import { useDeleteCommunity } from '@/api/community';
+import { useSession } from 'next-auth/react';
 
 interface AlertModalProps {
   title: string;
   description: string;
   onClick: () => void;
+  id?: number;
 }
-function AlertModal({ title, description, onClick }: AlertModalProps) {
-  //TODO : community data fetching 연결되면 id값은 없어질 예정
-  let id = 1
-  // const queryClient = useQueryClient();
-  // const mutation = useMutation({
-  //   mutationFn: (id : number) => deleteCommunity(id),
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries();
-  //   }
-  // })
+function AlertModal({ title, description, onClick, id }: AlertModalProps) {  
+  const mutation = useDeleteCommunity(id)
 
-  const handleDelete = (id : number) => {
-    // mutation.mutate(id);
+  const handleDelete = () => {
+    mutation.mutate();
   }
 
   return (
@@ -34,7 +29,7 @@ function AlertModal({ title, description, onClick }: AlertModalProps) {
           <RegisterButton type="button" color="bg-gray-2" onClick={onClick}>
             취소
           </RegisterButton>
-          <RegisterButton type="button" color="bg-red" onClick={() => handleDelete(id)}>
+          <RegisterButton type="button" color="bg-red" onClick={handleDelete}>
             삭제
           </RegisterButton>
         </div>

@@ -1,28 +1,28 @@
 import Image from 'next/image';
 import CameraImageIcon from '@/public/icons/CameraImageIcon.svg';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DefaultUserProfile from '@/public/images/DefaultUserProfile.png';
 import { TextInput } from '@/components/input/signInput/signInput';
-import { EditProfileProps, EditProfileType } from '@/types/editProfileTypes';
+import { EditProfileType } from '@/types/editProfileTypes';
 import RegisterButton from '@/components/button/register/registerButton';
-import { notify } from '@/components/toast/toast';
+import { useGetMember } from '@/api/member';
+import { useEditProfile } from '@/hooks/api/useEditProfile';
+import { NICKNAME_RULES } from '@/constants/sign';
 
-function EditProfile({
-  initialProfileImageUrl,
-  initialNickname,
-  email,
-}: EditProfileProps) {
+function EditProfile() {
+  // 유저 프로필 가져오기
+  const { data } = useGetMember();
+
   const imageUploaderRef = useRef<HTMLInputElement>(null);
-  const [profileImageUrl, setProfileImageUrl] = useState<string>(
-    initialProfileImageUrl || '',
-  );
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
+
   const method = useForm<EditProfileType>({
     mode: 'onSubmit',
     defaultValues: {
-      profileImage: initialProfileImageUrl,
-      nickname: initialNickname,
+      nickname: data?.nickname,
+      profileImage: data?.ImageProfile,
     },
   });
   const {
@@ -32,22 +32,23 @@ function EditProfile({
     formState: { errors },
   } = method;
 
-  const NICKNAME_RULES = {
-    required: '닉네임을 입력해주세요',
-    pattern: {
-      value: /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]{3,8}$/i,
-      message: '닉네임은 3자 이상, 8자 이하로 지어주세요.',
-    },
-  };
+  const currentNickName = { nickname: getValues('nickname') };
+  const formData = new FormData();
+  formData.append(
+    'update',
+    new Blob([JSON.stringify(currentNickName)], {
+      type: 'application/json',
+    }),
+  );
+  if (profileImageFile) {
+    formData.append('profileImage', profileImageFile || null);
+  }
+
+  // editProfile => mutate 함수
+  const { editProfile, isPending } = useEditProfile(formData);
 
   const onSubmit = () => {
-    console.log(profileImageFile, getValues('nickname'));
-    // profileImageFile과 닉네임을 서버로 보낼거에용
-    // 성공하면 토스트띄우기
-    notify({
-      type: 'success',
-      text: '프로필을 변경했어요 😘',
-    });
+    editProfile();
   };
 
   const handleClickInput = () => {
@@ -56,6 +57,7 @@ function EditProfile({
     }
   };
 
+  // 미리보기 이미지 체인저 함수
   const handleImageChange = (file: File): Promise<void> => {
     if (file) {
       const reader = new FileReader();
@@ -70,9 +72,17 @@ function EditProfile({
         };
       });
     }
-
     return Promise.resolve();
   };
+
+  useEffect(() => {
+    if (data?.nickname) {
+      method.setValue('nickname', data.nickname);
+    }
+    if (data?.profileImage) {
+      setProfileImageUrl(data?.profileImage);
+    }
+  }, [data?.nickname, method, data?.profileImage]);
 
   return (
     <FormProvider {...method}>
@@ -124,7 +134,7 @@ function EditProfile({
             <TextInput
               id="email"
               register={register}
-              value={email}
+              value={data?.email}
               readOnly
               classNames="text-gray-2 focus:border-gray-3"
             />
@@ -145,15 +155,17 @@ function EditProfile({
                 message: NICKNAME_RULES.pattern.message,
               }}
               isError={errors.nickname}
-              defaultValue={initialNickname}
+              defaultValue={data?.nickname}
             />
             {errors.nickname?.message && (
               <p className="w-full text-left text-14 text-red">
-                {errors.nickname.message}
+                {errors?.nickname?.message}
               </p>
             )}
           </div>
-          <RegisterButton type="submit">회원정보 수정</RegisterButton>
+          <RegisterButton disabled={!isPending} type="submit">
+            회원정보 수정
+          </RegisterButton>
         </form>
       </div>
     </FormProvider>

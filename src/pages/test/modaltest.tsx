@@ -3,6 +3,7 @@ import AddReview from '@/components/modal/addReview';
 import AlertModal from '@/components/modal/alertModal';
 import FindAddress from '@/components/modal/findAddress';
 import GetRefund from '@/components/modal/getRefund';
+import SkeletonCommunityCard from '@/components/skeleton/communityCard/skeleton';
 import { useState } from 'react';
 
 function ModalTest() {
@@ -82,6 +83,8 @@ function ModalTest() {
       {isGetRefundFormModalOpen && (
         <GetRefund onClick={handleGetRefundFormModalOpen} />
       )}
+
+      <SkeletonCommunityCard />
     </div>
   );
 }

@@ -1,13 +1,30 @@
 import CommunityCardList from '@/components/card/communityCard/communityCardList';
-import { communityCards as communityData } from '@/pages/api/mock';
 import MainLayout from '@/components/layout/mainLayout';
+import useInfinite from '@/hooks/useInfinite';
+import useCustomInfiniteQuery from '@/hooks/useCustomInfiniteQuery';
+import { useSession } from 'next-auth/react';
+import { getCommunity } from '@/api/community';
 
 export default function MyCommunityPage() {
-  // TODO: 커뮤니티 데이터 서버에서 받아온 뒤 mock 데이터 교환
+  const { data: session } = useSession();
+  const [ref, isIntersecting] = useInfinite();
+  const { data, hasNextPage, isRefetching } = useCustomInfiniteQuery({
+    endpoint: `${session?.memberId ? `${session?.memberId}` : ''}`,
+    queryKey: ['community', `${session?.memberId}`],
+    queryFunc: getCommunity,
+    initialCursorId: 0,
+    limit: 12,
+    cursorName: 'cursorId',
+    getNextPageParamsFunc: (lastPage) =>
+      lastPage.cursorId === -1 ? undefined : lastPage.cursorId,
+    refetchTrigger: isIntersecting,
+  });
+  
   return (
     <MainLayout>
       <div className="mb-198 mt-20 flex flex-col">
-        <CommunityCardList communityData={communityData} kebab />
+        {//@ts-ignore
+          <CommunityCardList communityData={data?.pages} kebab={true} />}
       </div>
     </MainLayout>
   );

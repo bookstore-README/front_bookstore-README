@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import OrderBookCount from '@/components/cart/orderBookCount';
 import LikeButton from '@/components/button/likeButton';
 import BookPrice from '@/components/book/bookPrice/bookPrice';
@@ -15,6 +13,7 @@ interface SideOrderNavigatorProps {
   price: number;
   bookId: string;
   isBookmarked: boolean;
+  handleBookmarkClick: () => void;
 }
 
 function FooterOrderNavitgator({
@@ -26,9 +25,8 @@ function FooterOrderNavitgator({
   bookTitle,
   authors,
   isBookmarked,
+  handleBookmarkClick,
 }: SideOrderNavigatorProps) {
-  const [checkBookmarked, setIsBookmarked] = useState(isBookmarked || false);
-
   // 구매하기 버튼 함수
   const { handlePayNowButton } = usePayNowItem({
     bookId: Number(bookId),
@@ -44,9 +42,6 @@ function FooterOrderNavitgator({
     count: orderCount,
   });
 
-  const handleBookmarkClick = () => {
-    setIsBookmarked(!checkBookmarked);
-  };
   return (
     <div
       className="sticky bottom-0 z-10 flex h-70 w-full justify-between
@@ -66,20 +61,20 @@ function FooterOrderNavitgator({
       <div className="flex grow items-center justify-end gap-10">
         <div className="flex-center h-50 w-50 rounded-[5px] border-[1px] border-gray-5 mobile:hidden">
           <LikeButton
-            isLiked={checkBookmarked}
+            isLiked={isBookmarked}
             onClick={handleBookmarkClick}
             width={24}
             height={24}
           />
         </div>
         <button
-          className="flex-center text-primary border-primary h-50 w-135 rounded-[5px] border-2 bg-white
-            text-[17px] font-bold mobile:hidden"
+          className="flex-center h-50 w-135 rounded-[5px] border-2 border-primary bg-white text-[17px]
+            font-bold text-primary mobile:hidden"
           onClick={handleAddToBasket}>
           장바구니
         </button>
         <button
-          className="flex-center border-primary bg-primary h-50 w-135 rounded-[5px] border-2 text-[17px]
+          className="flex-center h-50 w-135 rounded-[5px] border-2 border-primary bg-primary text-[17px]
             font-bold text-white"
           onClick={handlePayNowButton}>
           구매하기

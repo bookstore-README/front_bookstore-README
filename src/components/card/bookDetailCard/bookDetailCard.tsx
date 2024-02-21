@@ -13,6 +13,7 @@ interface BookDetailCardProps {
   authors: string[];
   bookmarkCount: number;
   isBookmarked: boolean;
+  handleBookmarkClick: () => void;
   publishedDate: string;
   publisher: string;
   averageRating: number;
@@ -30,6 +31,7 @@ function BookDetailCard({
   authors,
   bookmarkCount,
   isBookmarked,
+  handleBookmarkClick,
   publishedDate,
   publisher,
   averageRating,
@@ -44,10 +46,12 @@ function BookDetailCard({
         role="info"
         className="flex w-full max-w-[525px] flex-col items-start justify-start gap-40 mobile:gap-30">
         <BookDetailInfo
+          bookId={bookId}
           bookTitle={bookTitle}
           categories={categories}
           authors={authors}
           isBookmarked={isBookmarked}
+          handleBookmarkClick={handleBookmarkClick}
           bookmarkCount={bookmarkCount}
           publishedDate={publishedDate}
           publisher={publisher}
