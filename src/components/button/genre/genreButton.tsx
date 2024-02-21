@@ -1,26 +1,17 @@
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { GenreProps } from '@/pages/api/mock';
 export interface GenreButtonProps extends GenreProps {
   editMode?: boolean;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-function GenreButton({
-  title,
-  selected: initialSelected,
-  editMode,
-}: GenreButtonProps) {
-  const [selected, setSelected] = useState(initialSelected);
-
-  const handleClick = () => {
-    if (editMode) setSelected(!selected);
-  };
-
+function GenreButton({ title, selected, editMode, onClick }: GenreButtonProps) {
   return (
     <button
       className={`text-13 flex-center h-33 w-fit whitespace-nowrap rounded-[53px] border ${
         selected ? 'border-black' : 'border-gray-1'
-      } pc:text-14 ${editMode ? 'hover:text-primary hover:border-primary' : ''}`}
-      onClick={handleClick}>
+      } pc:text-14 ${editMode ? 'hover:border-primary hover:text-primary' : ''}`}
+      onClick={onClick}>
       <div className="mx-30">{title}</div>
     </button>
   );
