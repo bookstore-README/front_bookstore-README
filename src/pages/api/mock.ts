@@ -18,17 +18,20 @@ export interface CategoryProps {
   categoryType?: string;
 }
 
-export interface CategoryProps {
-  title: string;
+export interface MemberCategoryType {
+  categoryId: number;
   link: string;
-  categoryType?: string;
+  mainId: number;
+  mainName: string;
+  subId: number;
+  subName: string;
 }
 
 export interface CategoryList {
   categoryList: CategoryProps[];
 }
 
- const createReadMeGenre = (
+const createReadMeGenre = (
   title: string,
   selected: boolean = false,
 ): GenreProps => ({ title, selected });

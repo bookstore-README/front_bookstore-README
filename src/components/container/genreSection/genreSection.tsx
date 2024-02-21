@@ -1,15 +1,31 @@
 import { useState } from 'react';
 import GenreButton from '@/components/button/genre/genreButton';
-import { ReadMeGenreList } from '@/pages/api/mock';
+import { MemberCategoryType, ReadMeGenreList } from '@/pages/api/mock';
 import EditToggleButton from '@/components/button/editToggleButton';
 import { notify } from '@/components/toast/toast';
-import { getCustomCategoryList } from '@/api/category';
+import { useGetCustomCategoryList } from '@/api/category';
+interface CustomCategoryListResponse {
+  data?: {
+    data: {
+      memberCategory: MemberCategoryType[];
+    };
+  };
+}
 
 function GenreSection() {
   const [isEditMode, setEditMode] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
   const genres = ReadMeGenreList.genreList;
-  const data = getCustomCategoryList();
-  console.log(data);
+  const response: CustomCategoryListResponse = useGetCustomCategoryList();
+  let memberCategory: MemberCategoryType[] = [];
+  if (response.data && response.data.data) {
+    memberCategory = response.data.data.memberCategory;
+  }
+  const selectedGenre = memberCategory.map(
+    (selectedGenre) => selectedGenre.subName,
+  );
+  console.log(selectedGenre);
+  // const selectedGenre = memberCategory[index].subId === genre.title;
 
   const handleEditModeToggle = () => {
     setEditMode((prev) => !prev);
@@ -36,7 +52,7 @@ function GenreSection() {
           <GenreButton
             key={index}
             title={genre.title}
-            selected={genre.selected}
+            selected={selectedGenre === genre.title}
             editMode={isEditMode}
           />
         ))}

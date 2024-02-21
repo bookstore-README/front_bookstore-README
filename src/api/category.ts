@@ -1,3 +1,5 @@
+import { QUERY_KEY } from '@/constants/queryKey';
+import { useFetch } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 // 전체 카테고리 리스트 조회
@@ -23,4 +25,8 @@ export const getSubCategory = async (mainId: number, subId: number) => {
 export const getCustomCategoryList = async () => {
   const result = await instance.get('category/member?isRandom=false');
   return result.data;
+};
+
+export const useGetCustomCategoryList = () => {
+  return useFetch(QUERY_KEY.customCategory, getCustomCategoryList, '');
 };

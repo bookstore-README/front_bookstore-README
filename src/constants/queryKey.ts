@@ -9,4 +9,5 @@ export const QUERY_KEY = {
   order: 'order',
   payment: 'payment',
   review: 'review',
-}
+  customCategory: 'customCategory',
+};
