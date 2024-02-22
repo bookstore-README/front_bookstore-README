@@ -4,12 +4,15 @@ import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import { useRouter } from 'next/router';
 interface PaymentButtonProps {
   type?: 'mobile' | 'pc';
+  disabled?: boolean;
 }
 
 interface response {
   success: boolean;
 }
-function PaymentButton({ type }: PaymentButtonProps) {
+function PaymentButton({ type, disabled }: PaymentButtonProps) {
+  console.log('type : ' + type);
+  console.log('diabled : ' + disabled);
   const router = useRouter();
   const bookPrice = useCalculateProductsPrice();
   const delivery = bookPrice > 30000 ? 0 : 3000;
@@ -19,6 +22,8 @@ function PaymentButton({ type }: PaymentButtonProps) {
   });
   // 결제창 함수
   function kakaoPay(useremail: string, username: string) {
+    console.log('type : ' + type);
+    console.log('diabled : ' + disabled);
     if (typeof window !== 'undefined') {
       const IMP = window.IMP;
       const today = new Date();
@@ -62,26 +67,36 @@ function PaymentButton({ type }: PaymentButtonProps) {
   const { data } = useGetMember();
   // 결제 함수 호출
   function handlePaymentButtonClick() {
-    const user_email = data.email;
-    const username = '안윤진';
-    kakaoPay(user_email, username);
+    console.log('type : ' + type);
+    console.log('diabled : ' + disabled);
+    console.log('클릭');
+    // const user_email = data.email;
+    // const username = '안윤진';
+    // kakaoPay(user_email, username);
   }
-  if (type == 'mobile')
-    return (
+  // console.log(disabled);
+
+  return (
+    <>
       <button
-        className="flex-center sticky bottom-0 z-[100] h-70 border-t border-gray-1 bg-white pc:hidden"
+        className="flex-center fixed bottom-0 left-0 z-[100] h-70 w-full bg-white pc:hidden"
+        disabled={disabled}
+        type="submit"
         onClick={handlePaymentButtonClick}>
         <div className="flex-center mx-40 h-50 w-full bg-primary text-white">
-          {totalPrice.toLocaleString()}원 결제하기
+          {totalPrice.toLocaleString()}원 결제하기 {disabled ? 'true' : 'false'}
+          {type}
         </div>
       </button>
-    );
-  return (
-    <button
-      className="flex-center h-70 w-full border-t border-gray-1 bg-primary  text-white mobile:hidden tablet:hidden"
-      onClick={handlePaymentButtonClick}>
-      {totalPrice.toLocaleString()}원 결제하기
-    </button>
+      <button
+        className="flex-center h-70 w-full border-t border-gray-1 bg-primary  text-white mobile:hidden tablet:hidden"
+        type="submit"
+        onClick={handlePaymentButtonClick}
+        disabled={disabled}>
+        {totalPrice.toLocaleString()}원 결제하기 {disabled ? 'true' : 'false'}
+        {type}
+      </button>
+    </>
   );
 }
 

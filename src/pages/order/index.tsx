@@ -21,11 +21,11 @@ export default function Order() {
             <BookPaymentCardList bookData={items} label="주문 상품" />
           </div>
         </div>
-        <div className="sticky top-177 mx-40 mb-180 mobile:mt-80 tablet:mt-80">
+        <div className="sticky top-100 mx-40 mb-180 mobile:relative tablet:relative">
           <TotalPriceCard />
         </div>
 
-        <PaymentButton type="mobile" />
+        {/* <PaymentButton type="mobile" /> */}
       </div>
     </div>
   );

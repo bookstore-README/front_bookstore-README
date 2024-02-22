@@ -10,6 +10,7 @@ interface TermsCheckboxProps {
   checkContent: string[];
   useFormContextProps?: boolean;
   showLastButton?: boolean;
+  onCheckedChange?: (checkedStates: boolean) => void;
 }
 interface CheckedStates {
   [key: string]: boolean;
@@ -21,6 +22,7 @@ function TermsCheckbox({
   checkContent,
   useFormContextProps = true,
   showLastButton = true,
+  onCheckedChange,
 }: TermsCheckboxProps) {
   const formMethods = useFormContextProps ? useFormContext() : null;
 
@@ -47,6 +49,7 @@ function TermsCheckbox({
   useEffect(() => {
     const isAllChecked = Object.values(checkedStates).every(Boolean);
     formMethods?.setValue('selectAll', isAllChecked);
+    if (onCheckedChange) onCheckedChange(isAllChecked);
   }, [checkedStates, formMethods?.setValue]);
 
   return (
@@ -67,8 +70,8 @@ function TermsCheckbox({
             {...formMethods?.register('selectAll')}
             checked={Object.values(checkedStates).every(Boolean)}
             onChange={handleSelectAll}
-            className="mt-0.5 checked:bg-primary relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2
-              border-solid border-gray-3 p-1 checked:border-0"
+            className="mt-0.5 relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2 border-solid
+              border-gray-3 p-1 checked:border-0 checked:bg-primary"
           />
           {entire}
         </label>
@@ -96,8 +99,8 @@ function TermsCheckbox({
                   type="checkbox"
                   checked={checkedStates[content]}
                   onChange={() => handleIndividualCheck(content)}
-                  className="mt-0.5 checked:bg-primary relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2
-                    border-solid border-gray-3 p-1 checked:border-0"
+                  className="mt-0.5 relative float-left mr-8 h-20 w-20 appearance-none rounded-[2px] border-2 border-solid
+                    border-gray-3 p-1 checked:border-0 checked:bg-primary"
                 />
                 {content}
               </label>
