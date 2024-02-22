@@ -1,4 +1,5 @@
 import { QUERY_KEY } from '@/constants/queryKey';
+import { convertDateType } from '@/utils/convertDate';
 import { useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
@@ -50,4 +51,28 @@ const putDelivery = async (option: PutDeliveryOption) => {
 
 export const usePutDelivery = (option: PutDeliveryOption) => {
   return useUpdate(putDelivery, option);
+};
+
+export const getDeliveryList = async (
+  startDate: convertDateType,
+  endDate: convertDateType,
+) => {
+  const startDateFormat = `${startDate.year}-${startDate.month < 10 ? `0${startDate.month}` : startDate.month}-${startDate.day < 10 ? `0${startDate.day}` : startDate.day}`;
+  const endDateFormat = `${endDate.year}-${endDate.month < 10 ? `0${endDate.month}` : endDate.month}-${endDate.day < 10 ? `0${endDate.day}` : endDate.day}`;
+
+  const result = await instance.get(
+    `delivery?deliveryStatus=ALL&startDate=${startDateFormat}&endDate=${endDateFormat}`,
+  );
+  return result.data;
+};
+
+type DeliveryStatus = {
+  deliveryId: number;
+  deliveryStatus: string;
+};
+
+// 회원배송상태변경
+const putDeliveryStatus = async (data: DeliveryStatus) => {
+  const result = await instance.put('delivery', data);
+  return result.data;
 };

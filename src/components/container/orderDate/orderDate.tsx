@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { forwardRef } from 'react';
@@ -21,7 +14,7 @@ export type OrderDateProps = {
   setSelectedItem: Dispatch<SetStateAction<string>>;
   setStartDate: (startDate: Date) => void;
   setEndDate: (endDate: Date) => void;
-  person: Person;
+  // person: Person;
 };
 
 const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
@@ -39,7 +32,7 @@ const CustomOrderInput = forwardRef(function MyInput(props: any, ref) {
 });
 
 function OrderDate({
-  person,
+  // person,
   pastDate,
   startDate,
   endDate,
@@ -78,13 +71,15 @@ function OrderDate({
       setEndDate(endDate);
     }
     if (pastDate === '전체보기') {
-      if (!person.isPurchased) {
-        setStartDate(new Date());
-        setEndDate(new Date());
-      } else if (person.isPurchased === true) {
-        setStartDate(new Date(person.firstPurchasedDate));
-        setEndDate(new Date());
-      }
+      setStartDate(new Date());
+      setEndDate(new Date());
+      // if (!person.isPurchased) {
+      //   setStartDate(new Date());
+      //   setEndDate(new Date());
+      // } else if (person.isPurchased === true) {
+      //   setStartDate(new Date(person.firstPurchasedDate));
+      //   setEndDate(new Date());
+      // }
     }
   }, [pastDate]);
 

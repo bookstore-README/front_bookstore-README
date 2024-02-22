@@ -1,11 +1,9 @@
 import TermsCheckbox from '@/components/container/terms/terms';
 import TotalPrice from '@/components/card/totalPaymentCard/totalPrice';
-import RegisterButton from '@/components/button/register/registerButton';
 import { REQUIRED_FOR_PAYMENT } from 'src/constants/sign';
-import Link from 'next/link';
 import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import useCalculateProductsPrice from '@/hooks/common/useCalculateProductsPrice';
-
+import PaymentButton from '@/components/button/payment/paymentButton';
 interface TotalPriceCardProps {
   checkbox?: boolean;
   button?: boolean;
@@ -13,8 +11,7 @@ interface TotalPriceCardProps {
   delivery?: number;
   discount?: number;
 }
-// tablet:w-688 mobile:w-330
-//TODO : TotalPrice컴포넌트의 price props, RegisterButton 가격 TotalPriceCardProps로 받아야함
+
 function TotalPriceCard({
   checkbox = true,
   button = true,
@@ -30,12 +27,18 @@ function TotalPriceCard({
 
   return (
     <div className="flex w-full flex-col gap-20 rounded-[10px] border border-gray-1 p-30 mobile:p-20 pc:sticky pc:top-280">
-      <TotalPrice title="총 상품 금액" price={bookPrice.toString()} />
-      <TotalPrice title="총 배송비" price={delivery.toString()} />
-      <TotalPrice title="총 할인 금액" price={discount.toString()} />
+      <TotalPrice
+        title="총 상품 금액"
+        price={`${bookPrice.toLocaleString()}원`}
+      />
+      <TotalPrice title="총 배송비" price={`${delivery.toLocaleString()}원`} />
+      <TotalPrice
+        title="총 할인 금액"
+        price={`${discount.toLocaleString()}원`}
+      />
       <TotalPrice
         title="결제 금액"
-        price={totalPrice.toString()}
+        price={`${totalPrice.toLocaleString()}원`}
         font="font-bold"
         text="text-20"
         color={color}
@@ -48,11 +51,8 @@ function TotalPriceCard({
           showLastButton={false}
         />
       )}
-      {button && (
-        <Link className="mobile:hidden tablet:hidden" href="/paymented">
-          <RegisterButton>{totalPrice.toString()}원 결제하기</RegisterButton>
-        </Link>
-      )}
+
+      {button && <PaymentButton />}
     </div>
   );
 }

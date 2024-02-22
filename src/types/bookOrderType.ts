@@ -1,18 +1,24 @@
-import { StaticImageData } from 'next/image';
+export type ChangedOrderBookData = {
+  orderId: number;
+  orderBook: OrderBook[];
+  createTime: string;
+  updateTime: string;
+};
 
-interface BookOrderType {
-  book: {
-    productId: number;
-    title: string;
-    imageUrl?: string | null | StaticImageData;
-    cost: number;
-    authors: string[] | null;
-  };
-  order: {
-    deliveryStatus: string;
-    address: string;
-    orderCount: number;
-  };
-}
+export type OrderBookData = {
+  orderId: number;
+  orderBook: OrderBook[];
+  createTime: string;
+  updateTime: string;
+  deliveryStatus: string;
+};
 
-export type { BookOrderType };
+export type OrderBook = {
+  orderBookId: number;
+  bookId: number;
+  bookImgUrl: string;
+  bookTitle: string;
+  authors: string;
+  price: number;
+  quantity: number;
+};

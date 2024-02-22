@@ -4,9 +4,9 @@ import BookPaymentCardList from '@/components/card/bookPaymentCard/bookPaymentCa
 import { ReactElement } from 'react';
 import MainLayout from '@/components/layout/mainLayout';
 import TotalPriceCard from '@/components/card/totalPaymentCard';
-import Link from 'next/link';
 import { basketItemList } from '@/store/state';
 import { useAtomValue } from 'jotai';
+import PaymentButton from '@/components/button/payment/paymentButton';
 
 export default function Order() {
   const items = useAtomValue(basketItemList);
@@ -24,13 +24,8 @@ export default function Order() {
         <div className="sticky top-177 mx-40 mb-180 mobile:mt-80 tablet:mt-80">
           <TotalPriceCard />
         </div>
-        <Link
-          className="flex-center sticky bottom-0 h-70 w-full border-t border-gray-1 bg-white pc:hidden"
-          href="/paymented">
-          <div className="mx-40 flex w-full">
-            <RegisterButton>결제하기</RegisterButton>
-          </div>
-        </Link>
+
+        <PaymentButton type="mobile" />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { useAtom } from 'jotai';
 import { pointVisibleAtom } from '@/store/state'; // basketItemList 추가
 import { useSession } from 'next-auth/react';
 import useGetBasKetQuery from '@/hooks/useGetBasKetQuery';
+import Script from 'next/script';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -23,6 +24,8 @@ function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <>
+      <Script async src="https://code.jquery.com/jquery-1.12.4.min.js" />
+      <Script async src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" />
       <Header
         isLoggedIn={status === 'authenticated'}
         numItemsOfCart={data?.length} // basketItems의 길이로 업데이트

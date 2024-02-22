@@ -1,15 +1,9 @@
-import { BookOrderType } from '@/types/bookOrderType';
+import { OrderBookData } from '@/types/bookOrderType';
 import BookOrderCard from './bookOrderCard';
 import OrderCount from '@/components/container/orderDate/orderCount';
 
-export interface BookOrderCardListType {
-  bookData: BookOrderType[];
-  orderDate: string;
-  orderId: number;
-}
-
 export interface BookOrderCardListProps {
-  orderData: BookOrderCardListType[];
+  orderData: OrderBookData[];
 }
 
 function BookOrderCardList({ orderData }: BookOrderCardListProps) {
@@ -18,26 +12,24 @@ function BookOrderCardList({ orderData }: BookOrderCardListProps) {
   return (
     <div className="flex max-w-[1080px] flex-col">
       <div className="flex flex-col gap-40">
-        {orderData.map((order, index) => {
-          // orderData.bookData 배열 내의 모든 order.orderCount 값을 누적합산
-          const totalOrderCount = order.bookData.reduce(
-            (acc, curr) => acc + curr.order.orderCount,
-            0,
-          );
-
+        {orderData.map((order) => {
           return (
-            <div key={index} className="flex flex-col gap-20">
+            <div key={order.orderId} className="flex flex-col gap-20">
               <OrderCount
-                orderCount={totalOrderCount}
-                orderDate={order.orderDate}
+                orderCount={order.orderBook.length}
+                orderDate={order.createTime}
                 orderId={order.orderId}
               />
               <div className="flex flex-col gap-20">
-                {order.bookData.map((bookData) => (
+                {order.orderBook.map((bookData) => (
                   <BookOrderCard
-                    key={bookData.book.productId}
-                    book={bookData.book}
-                    order={bookData.order}
+                    key={bookData.bookId}
+                    bookTitle={bookData.bookTitle}
+                    bookImgUrl={bookData.bookImgUrl}
+                    bookPrice={bookData.price}
+                    quantity={bookData.quantity}
+                    authors={bookData.authors}
+                    deliveryStatus={order.deliveryStatus}
                   />
                 ))}
               </div>

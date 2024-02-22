@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
-import { type ReactElement, type ReactNode, useEffect } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import type { NextPage } from 'next';
 import Toast from '@/components/toast/toast';
 import 'react-toastify/dist/ReactToastify.css';

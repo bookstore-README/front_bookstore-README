@@ -1,16 +1,17 @@
-import BookOrderEmptyCard from '@/components/card/bookOrderCard/bookOrderEmptyCard';
+import { getDeliveryList } from '@/api/delivery';
 import BookOrderCardList from '@/components/card/bookOrderCard/bookOrderCardList';
-import OrderOverView from '@/components/container/orderDate/orderOverView';
-import MyOrderPageLayout from '@/components/layout/myOrderLayOut';
-import {
-  bookOrderTestData,
-  orderOverViewData,
-} from '@/pages/api/mock/bookOrderMock';
+import BookOrderEmptyCard from '@/components/card/bookOrderCard/bookOrderEmptyCard';
 import OrderDate from '@/components/container/orderDate/orderDate';
-import { useState } from 'react';
+import OrderOverView from '@/components/container/orderDate/orderOverView';
 import DropDown from '@/components/dropDown/dropDown';
-import { ORDER_DROPDOWN_MENUS } from '@/constants/orderDropDownMenus';
-const { orderData } = bookOrderTestData;
+import MyOrderPageLayout from '@/components/layout/myOrderLayOut';
+import { ORDER_DROPDOWN_MENUS } from '@/constants/ORDER_DROPDOWN_MENUS';
+import { myOrderStatus } from '@/constants/myOrderStatus';
+import { QUERY_KEY } from '@/constants/queryKey';
+import { DeliveryItem, OrderOverViewItem } from '@/types/deliveryType';
+import { convertDate } from '@/utils/convertDate';
+import { useQuery } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
 
 function MyOrderPage() {
   const [startDate, setStartDate] = useState(new Date());
@@ -19,13 +20,39 @@ function MyOrderPage() {
   const onSelectedItem = (menu: string) => setSelectedItem(menu);
   const onStartDate = (startDate: Date) => setStartDate(startDate);
   const onEndDate = (endDate: Date) => setEndDate(endDate);
+  const startDateFormat = convertDate(startDate.toString());
+  const endDateFormat = convertDate(endDate.toString());
 
-  const person = {
-    id: 1,
-    name: '유저',
-    isPurchased: false,
-    firstPurchasedDate: new Date().toString(),
-  };
+  const getMyOrderQuery = useQuery({
+    queryKey: [QUERY_KEY.delivery, startDate.toString(), endDate.toString()],
+    queryFn: () => getDeliveryList(startDateFormat, endDateFormat),
+    select: (data) => data.data,
+    initialData: { data: [] },
+  });
+
+  const myOrderList = useMemo(() => {
+    try {
+      const result = getMyOrderQuery?.data?.reduce(
+        (acc: OrderOverViewItem, item: DeliveryItem) => {
+          acc[item.deliveryStatus] += 1;
+          return acc;
+        },
+
+        { ...myOrderStatus },
+      );
+      return result;
+    } catch (error) {
+      return { ...myOrderStatus };
+    }
+  }, [getMyOrderQuery.data]);
+
+  const orderData = getMyOrderQuery?.data?.map((item: DeliveryItem) => {
+    return {
+      ...item.orderDto,
+      deliveryStatus: item.deliveryStatus,
+    };
+  });
+
   return (
     <MyOrderPageLayout
       dropDown={
@@ -37,7 +64,6 @@ function MyOrderPage() {
       }
       orderDate={
         <OrderDate
-          person={person}
           pastDate={selectedItem}
           startDate={startDate}
           endDate={endDate}
@@ -46,9 +72,9 @@ function MyOrderPage() {
           setEndDate={onEndDate}
         />
       }
-      overview={<OrderOverView orderView={orderOverViewData.orderView} />}
+      overview={<OrderOverView orderView={myOrderList} />}
       main={
-        orderData ? (
+        orderData.length > 0 ? (
           <BookOrderCardList orderData={orderData} />
         ) : (
           <BookOrderEmptyCard />
