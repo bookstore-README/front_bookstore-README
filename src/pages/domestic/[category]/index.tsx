@@ -9,6 +9,7 @@ import { responsive } from '@/utils/checkResponsiveEnv';
 import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
 import { BookData } from '@/types/api/book';
+import AdImage from '@/public/images/AdImage.png';
 
 function CategoryPage() {
   const INITIAL_PARAMS = useCategoryCarouselParams();
@@ -34,7 +35,7 @@ function CategoryPage() {
     <SidebarLayout>
       <Spacing height={[0, 0, 20]} />
 
-      <EventSection eventSize="category" />
+      <EventSection eventSize="category" adsImg={AdImage} />
       <Spacing height={[60, 40, 40]} />
       {data && data?.data.books.length > 0 ? (
         <>

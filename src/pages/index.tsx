@@ -8,6 +8,9 @@ import TodayBestSection from '@/components/container/todayBestSection/todayBestS
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import EventSection from '@/components/container/eventSection/eventSection';
+import AdImage from '@/public/images/AdImage.png';
+import EventImage1 from '@/public/images/EventImage1.png';
+
 function Home() {
   const { data: newest } = useGetBook({
     endpoint: '0/main',
@@ -39,7 +42,11 @@ function Home() {
         className="flex-center mb-87 mt-20 w-[1080px] mobile:mb-20 mobile:mt-0 mobile:w-330
           mobile:flex-col mobile:gap-y-10 tablet:mb-80 tablet:w-[688px] tablet:gap-x-20
           pc:gap-x-30">
-        <EventSection eventSize="main" />
+        <EventSection
+          eventSize="main"
+          adsImg={AdImage}
+          eventImg={EventImage1}
+        />
       </div>
       <CustomSection isLoggedIn={true} isGenreSelected={true} />
       <div className="mt-80 mobile:mb-80 tablet:mb-120 pc:mb-140">

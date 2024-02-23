@@ -5,13 +5,12 @@ import Spacing from '@/components/container/spacing/spacing';
 import CategoryCarousel from '@/components/carousel/categoryCarousel';
 import MainCategoryBookList from '@/components/container/categoryBookList/mainCategoryBookList';
 import EventSection from '@/components/container/eventSection/eventSection';
-
 import { responsive } from '@/utils/checkResponsiveEnv';
-
 import { useCategoryCarouselParams } from '@/hooks/useInitialParams';
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
+import AdImage from '@/public/images/AdImage.png';
 
 export default function ForeignPage() {
   const INITIAL_PARAMS = useCategoryCarouselParams();
@@ -36,7 +35,7 @@ export default function ForeignPage() {
     <SidebarLayout>
       <Spacing height={[0, 0, 20]} />
 
-      <EventSection eventSize="category" />
+      <EventSection eventSize="category" adsImg={AdImage} />
       <Spacing height={[60, 40, 40]} />
 
       {data ? (
