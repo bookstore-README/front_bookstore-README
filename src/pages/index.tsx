@@ -7,6 +7,7 @@ import { responsive } from '@/utils/checkResponsiveEnv';
 import TodayBestSection from '@/components/container/todayBestSection/todayBestSection';
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
+import EventSection from '@/components/container/eventSection/eventSection';
 function Home() {
   const { data: newest } = useGetBook({
     endpoint: '0/main',
@@ -38,14 +39,7 @@ function Home() {
         className="flex-center mb-87 mt-20 w-[1080px] mobile:mb-20 mobile:mt-0 mobile:w-330
           mobile:flex-col mobile:gap-y-10 tablet:mb-80 tablet:w-[688px] tablet:gap-x-20
           pc:gap-x-30">
-        <div
-          className="bg-gray-1 mobile:h-174 mobile:w-330 tablet:h-304 tablet:w-[511px] pc:h-480
-            pc:w-[803px]"
-        />
-        <div
-          className="bg-gray-1 mobile:h-90 mobile:w-330 tablet:h-304 tablet:w-157 pc:h-[480px]
-            pc:w-[247px]"
-        />
+        <EventSection eventSize="main" />
       </div>
       <CustomSection isLoggedIn={true} isGenreSelected={true} />
       <div className="mt-80 mobile:mb-80 tablet:mb-120 pc:mb-140">
