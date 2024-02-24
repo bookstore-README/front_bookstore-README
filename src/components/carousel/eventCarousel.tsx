@@ -3,21 +3,18 @@ import { useEffect, useRef, useState } from 'react';
 
 interface EventCarouselProps {
   eventImages?: (string | StaticImageData)[];
-  eventLink?: string;
   classNames: string;
 }
 
-function EventCarousel({
-  eventImages = [],
-  eventLink = '/',
-  classNames,
-}: EventCarouselProps) {
+function EventCarousel({ eventImages = [], classNames }: EventCarouselProps) {
   const [currIndex, setCurrIndex] = useState(1); // 시작 인덱스를 1로 설정
   const [currList, setCurrList] = useState<(string | StaticImageData)[]>([]);
+  const [ButtonActiveIndex, setButtonActiveIndex] = useState(-1);
   const carouselRef = useRef<HTMLUListElement>(null);
 
   const updateIndex = (index: number) => {
     setCurrIndex(index + 1);
+    setButtonActiveIndex(index);
   };
 
   useEffect(() => {
@@ -31,6 +28,7 @@ function EventCarousel({
     }
   }, [eventImages]);
 
+  // 이미지 부드럽게 이동시키기
   useEffect(() => {
     const carousel = carouselRef.current;
 
@@ -38,24 +36,24 @@ function EventCarousel({
       carousel.style.transition = 'transform 0.5s ease-in-out';
       carousel.style.transform = `translateX(-${currIndex * 100}%)`;
     }
+    // 첫 이미지와 마지막 이미지 일때
+    // function transitionEndHandler() {
+    //   if (carousel)
+    //     if (currIndex === 0) {
+    //       carousel.style.transition = 'none';
+    //       setCurrIndex(eventImages.length);
+    //     } else if (currIndex === eventImages.length + 1) {
+    //       carousel.style.transition = 'none';
+    //       setCurrIndex(1);
+    //     }
+    // }
 
-    function transitionEndHandler() {
-      if (carousel)
-        if (currIndex === 0) {
-          carousel.style.transition = 'none';
-          setCurrIndex(eventImages.length);
-        } else if (currIndex === eventImages.length + 1) {
-          carousel.style.transition = 'none';
-          setCurrIndex(1);
-        }
-    }
+    // carousel?.addEventListener('transitionend', transitionEndHandler);
 
-    carousel?.addEventListener('transitionend', transitionEndHandler);
-
-    // 클린업 함수
-    return () => {
-      carousel?.removeEventListener('transitionend', transitionEndHandler);
-    };
+    // // 클린업 함수
+    // return () => {
+    //   carousel?.removeEventListener('transitionend', transitionEndHandler);
+    // };
   }, [currIndex, eventImages.length]);
 
   return (
@@ -64,8 +62,8 @@ function EventCarousel({
       <div className="flex-center left-30% absolute bottom-20 z-10 h-20 w-100 gap-10">
         {eventImages.map((_, idx) => (
           <button
-            className="h-10 w-10 rounded-full bg-gray-1 hover:bg-primary active:bg-primary"
-            onClick={() => updateIndex(idx)} // 인덱스 + 1로 설정 (첫 번째와 마지막 이미지가 버퍼 역할을 함)
+            className={`h-10 w-10 rounded-full bg-gray-1 hover:bg-primary active:bg-primary ${ButtonActiveIndex === idx ? 'bg-primary' : ''}`}
+            onClick={() => updateIndex(idx)}
             key={idx}
           />
         ))}
