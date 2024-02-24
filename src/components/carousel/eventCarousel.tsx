@@ -56,6 +56,22 @@ function EventCarousel({ eventImages = [], classNames }: EventCarouselProps) {
     // };
   }, [currIndex, eventImages.length]);
 
+  useEffect(() => {
+    // 자동 슬라이드 전환 기능
+    const intervalId = setInterval(() => {
+      setCurrIndex((prevIndex) => {
+        const nextIndex = prevIndex >= eventImages.length ? 1 : prevIndex + 1;
+        setButtonActiveIndex(nextIndex - 1); // 활성 버튼 인덱스 업데이트
+        return nextIndex; // 다음 슬라이드로 이동
+      });
+    }, 3000); // 3초마다 실행
+
+    // 클린업 함수
+    return () => {
+      clearInterval(intervalId); // 컴포넌트가 언마운트 될 때 인터벌을 제거
+    };
+  }, [currIndex, eventImages.length]);
+
   return (
     <div
       className={`relative flex flex-col items-center justify-end rounded-[10px] bg-gray-5 ${classNames} overflow-x-hidden`}>
