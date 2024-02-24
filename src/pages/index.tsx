@@ -44,7 +44,7 @@ function Home() {
         <EventSection
           eventSize="main"
           adsImg={AdImage}
-          eventImgs={EVENT_IMAGES.pc}
+          eventImgs={EVENT_IMAGES}
         />
       </div>
       <CustomSection isLoggedIn={true} isGenreSelected={true} />

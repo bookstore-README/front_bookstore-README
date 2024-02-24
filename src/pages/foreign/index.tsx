@@ -38,7 +38,7 @@ export default function ForeignPage() {
       <EventSection
         eventSize="category"
         adsImg={AdImage}
-        eventImgs={EVENT_IMAGES.pc}
+        eventImgs={EVENT_IMAGES}
       />
       <Spacing height={[60, 40, 40]} />
 

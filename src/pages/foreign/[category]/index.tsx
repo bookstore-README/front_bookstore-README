@@ -37,7 +37,7 @@ function CategoryPage() {
       <EventSection
         eventSize="category"
         adsImg={AdImage}
-        eventImgs={EVENT_IMAGES.pc}
+        eventImgs={EVENT_IMAGES}
       />
       {data && data?.data.books.length > 0 ? (
         <>

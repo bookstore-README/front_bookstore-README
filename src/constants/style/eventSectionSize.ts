@@ -4,8 +4,8 @@ export const EVENT_SECTION_SIZE = {
     event: 'w-247 h-480 tablet:w-157 tablet:h-304 mobile:w-330 mobile:h-90',
   },
   category: {
-    ad: 'w-[525px] h-[483px] tablet:w-297 tablet:h-275 mobile:w-330 mobile:h-178',
+    ad: 'w-[620px] h-[483px] tablet:w-334 tablet:h-275 mobile:w-330 mobile:h-178',
     event:
-      'w-[340px] h-[483px] tablet:w-194 tablet:h-275 mobile:w-330 mobile:h-90',
+      'w-[254px] h-[483px] tablet:w-157 tablet:h-275 mobile:w-330 mobile:h-90',
   },
 };

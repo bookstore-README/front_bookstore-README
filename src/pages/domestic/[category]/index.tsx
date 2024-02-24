@@ -38,7 +38,7 @@ function CategoryPage() {
       <EventSection
         eventSize="category"
         adsImg={AdImage}
-        eventImgs={EVENT_IMAGES.pc}
+        eventImgs={EVENT_IMAGES}
       />
       <Spacing height={[60, 40, 40]} />
       {data && data?.data.books.length > 0 ? (

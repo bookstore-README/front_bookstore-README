@@ -1,14 +1,16 @@
 import AdvertisementCard from '@/components/card/advertisementCard/advertisementCard';
 import EventCarousel from '@/components/carousel/eventCarousel';
 import { EVENT_SECTION_SIZE } from '@/constants/style/eventSectionSize';
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
+import { StaticImageData } from 'next/image';
 
 interface EventSectionProps {
   adsLink?: string;
   adsImg?: string | StaticImageData;
   eventLink?: string;
-  eventImgs?: string[] | StaticImageData[];
+  eventImgs?: {
+    pc: StaticImageData[] | string[];
+    mobile: StaticImageData[] | string[];
+  };
   eventSize: 'main' | 'category';
 }
 
