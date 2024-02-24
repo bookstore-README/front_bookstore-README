@@ -4,12 +4,18 @@ import { REQUIRED_FOR_PAYMENT } from 'src/constants/sign';
 import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import useCalculateProductsPrice from '@/hooks/common/useCalculateProductsPrice';
 import PaymentButton from '@/components/button/payment/paymentButton';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+
 interface TotalPriceCardProps {
   checkbox?: boolean;
   button?: boolean;
   color?: string;
   delivery?: number;
   discount?: number;
+}
+interface FormDataType {
+  selectAll: boolean;
 }
 
 function TotalPriceCard({
@@ -24,9 +30,15 @@ function TotalPriceCard({
     delivery: delivery,
     discount: discount,
   });
+  const [isAllChecked, setIsAllChecked] = useState(false);
+
+  // 약관동이 체크가 변할때마다 감지하여 isAllChecked를 변경
+  const handleCheckedChange = (checkedStates: boolean) => {
+    setIsAllChecked(checkedStates);
+  };
 
   return (
-    <div className="flex w-full flex-col gap-20 rounded-[10px] border border-gray-1 p-30 mobile:p-20 pc:sticky pc:top-280">
+    <div className="flex w-full flex-col gap-20 rounded-[10px] border border-gray-1 p-30 mobile:static mobile:p-20 tablet:static pc:sticky pc:top-280">
       <TotalPrice
         title="총 상품 금액"
         price={`${bookPrice.toLocaleString()}원`}
@@ -49,10 +61,10 @@ function TotalPriceCard({
           checkContent={REQUIRED_FOR_PAYMENT}
           useFormContextProps={false}
           showLastButton={false}
+          onCheckedChange={handleCheckedChange}
         />
       )}
-
-      {button && <PaymentButton />}
+      {button && <PaymentButton isAllChecked={isAllChecked} />}
     </div>
   );
 }

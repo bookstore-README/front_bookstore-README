@@ -31,6 +31,9 @@ function MyReviewCard({
   const handleEditModalOpenClick = () => {
     setIsEditModalOpen(!isEditModalOpen);
   };
+  const handleAlertModalOpenClick = () => {
+    setIsAlertModalOpen(!isAlertModalOpen);
+  };
 
   return (
     <div className="flex min-h-140 w-full max-w-[1080px] flex-col mobile:min-h-115 mobile:w-330 tablet:max-w-[710px]">

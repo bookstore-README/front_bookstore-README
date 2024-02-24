@@ -1,15 +1,16 @@
 import { useGetMember } from '@/api/member';
+import { notify } from '@/components/toast/toast';
 import useCalculateProductsPrice from '@/hooks/common/useCalculateProductsPrice';
 import useCalculateTotalPrice from '@/hooks/common/useCalculateTotalPrice';
 import { useRouter } from 'next/router';
 interface PaymentButtonProps {
-  type?: 'mobile' | 'pc';
+  isAllChecked?: boolean;
 }
 
 interface response {
   success: boolean;
 }
-function PaymentButton({ type }: PaymentButtonProps) {
+function PaymentButton({ isAllChecked }: PaymentButtonProps) {
   const router = useRouter();
   const bookPrice = useCalculateProductsPrice();
   const delivery = bookPrice > 30000 ? 0 : 3000;
@@ -62,26 +63,38 @@ function PaymentButton({ type }: PaymentButtonProps) {
   const { data } = useGetMember();
   // 결제 함수 호출
   function handlePaymentButtonClick() {
-    const user_email = data.email;
-    const username = '안윤진';
-    kakaoPay(user_email, username);
+    if (isAllChecked) {
+      const user_email = data.email;
+      const username = '안윤진';
+      kakaoPay(user_email, username);
+    } else {
+      notify({
+        type: 'error',
+        text: '모든약관에 동의하셔야 합니다. ✅',
+      });
+    }
   }
-  if (type == 'mobile')
-    return (
-      <button
-        className="flex-center sticky bottom-0 z-[100] h-70 border-t border-gray-1 bg-white pc:hidden"
-        onClick={handlePaymentButtonClick}>
-        <div className="flex-center mx-40 h-50 w-full bg-primary text-white">
-          {totalPrice.toLocaleString()}원 결제하기
-        </div>
-      </button>
-    );
+
   return (
-    <button
-      className="flex-center h-70 w-full border-t border-gray-1 bg-primary  text-white mobile:hidden tablet:hidden"
-      onClick={handlePaymentButtonClick}>
-      {totalPrice.toLocaleString()}원 결제하기
-    </button>
+    <>
+      <div className="borer-primary border-t-1 fixed bottom-0 left-0 z-[100] w-full border bg-white px-40 py-10 pc:hidden">
+        <button
+          className="flex-center h-50 w-full rounded border bg-white "
+          type="submit"
+          onClick={handlePaymentButtonClick}>
+          <div className="flex-center  h-50 w-full bg-primary text-white">
+            {totalPrice.toLocaleString()}원 결제하기
+          </div>
+        </button>
+      </div>
+
+      <button
+        className="flex-center mt-20 h-50 w-full rounded border-t  border-gray-1 bg-primary text-white mobile:hidden tablet:hidden"
+        type="submit"
+        onClick={handlePaymentButtonClick}>
+        {totalPrice.toLocaleString()}원 결제하기
+      </button>
+    </>
   );
 }
 

@@ -11,6 +11,7 @@ import EventSection from '@/components/container/eventSection/eventSection';
 import { AdImage, EVENT_IMAGES } from '@/constants/eventImages';
 
 function Home() {
+  const { status } = useSession();
   const { data: newest } = useGetBook({
     endpoint: '0/main',
     params: {
@@ -47,7 +48,7 @@ function Home() {
           eventImgs={EVENT_IMAGES}
         />
       </div>
-      <CustomSection isLoggedIn={true} isGenreSelected={true} />
+      <CustomSection isLoggedIn={status === 'authenticated'} />
       <div className="mt-80 mobile:mb-80 tablet:mb-120 pc:mb-140">
         <Carousel data={newestList} responsive={responsive} />
       </div>
