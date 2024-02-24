@@ -8,7 +8,7 @@ interface EventCarouselProps {
 }
 
 function EventCarousel({
-  eventImages = [], // 기본값으로 빈 배열 설정
+  eventImages = [],
   eventLink = '/',
   classNames,
 }: EventCarouselProps) {
@@ -58,11 +58,10 @@ function EventCarousel({
     };
   }, [currIndex, eventImages.length]);
 
-  console.log(currList);
   return (
     <div
-      className={`relative flex flex-col items-center justify-end rounded-[10px] bg-gray-5 ${classNames} `}>
-      <div className="flex-center left-30% absolute bottom-20 h-20 w-100 gap-10">
+      className={`relative flex flex-col items-center justify-end rounded-[10px] bg-gray-5 ${classNames} overflow-x-hidden`}>
+      <div className="flex-center left-30% absolute bottom-20 z-10 h-20 w-100 gap-10">
         {eventImages.map((_, idx) => (
           <button
             className="h-10 w-10 rounded-full bg-gray-1 hover:bg-primary active:bg-primary"
@@ -71,9 +70,11 @@ function EventCarousel({
           />
         ))}
       </div>
-      <ul className="flex h-full w-full" ref={carouselRef}>
+      <ul
+        className="relative flex h-full w-full scroll-smooth transition-transform"
+        ref={carouselRef}>
         {currList.map((image, idx) => (
-          <li key={idx} className="flex h-full w-full">
+          <li key={idx} className="relative flex w-full flex-shrink-0">
             <Image
               src={image}
               alt={`이벤트 이미지 ${idx}`}
