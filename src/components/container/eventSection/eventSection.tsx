@@ -1,4 +1,5 @@
 import AdvertisementCard from '@/components/card/advertisementCard/advertisementCard';
+import EventCarousel from '@/components/carousel/eventCarousel';
 import { EVENT_SECTION_SIZE } from '@/constants/style/eventSectionSize';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -6,20 +7,16 @@ import Link from 'next/link';
 interface EventSectionProps {
   adsLink?: string;
   adsImg?: string | StaticImageData;
-
   eventLink?: string;
-  eventImg?: string | StaticImageData;
-
+  eventImgs?: string[] | StaticImageData[];
   eventSize: 'main' | 'category';
 }
 
 function EventSection({
   adsLink,
   adsImg,
-
   eventLink,
-  eventImg,
-
+  eventImgs,
   eventSize,
 }: EventSectionProps) {
   const STYLE = {
@@ -33,18 +30,8 @@ function EventSection({
         adsLink={adsLink}
         classNames={STYLE.ad}
       />
-      <Link href={eventLink || '/'}>
-        <div
-          className={`flex-center relative rounded-[10px] bg-gray-5 ${STYLE.event}`}>
-          {eventImg ? (
-            <Image src={eventImg} alt="" fill />
-          ) : (
-            <span className="text-[13px] font-bold text-gray-2">
-              이벤트 준비 중입니다.
-            </span>
-          )}
-        </div>
-      </Link>
+
+      <EventCarousel eventImages={eventImgs} classNames={STYLE.event} />
     </section>
   );
 }

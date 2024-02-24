@@ -8,8 +8,7 @@ import TodayBestSection from '@/components/container/todayBestSection/todayBestS
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import EventSection from '@/components/container/eventSection/eventSection';
-import AdImage from '@/public/images/AdImage.png';
-import EventImage1 from '@/public/images/EventImage1.png';
+import { AdImage, EVENT_IMAGES } from '@/constants/eventImages';
 
 function Home() {
   const { data: newest } = useGetBook({
@@ -45,7 +44,7 @@ function Home() {
         <EventSection
           eventSize="main"
           adsImg={AdImage}
-          eventImg={EventImage1}
+          eventImgs={EVENT_IMAGES.pc}
         />
       </div>
       <CustomSection isLoggedIn={true} isGenreSelected={true} />
