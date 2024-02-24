@@ -9,6 +9,7 @@ import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import EventSection from '@/components/container/eventSection/eventSection';
 import { AdImage, EVENT_IMAGES } from '@/constants/eventImages';
+import { useSession } from 'next-auth/react';
 
 function Home() {
   const { status } = useSession();
