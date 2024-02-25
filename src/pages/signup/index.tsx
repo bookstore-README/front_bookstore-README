@@ -123,7 +123,7 @@ function SignUp() {
             onSubmit={handleSubmit(onSubmit)}
             className="flex w-full flex-col">
             <fieldset>
-              <label className="mb-12 inline-block w-full text-left text-16 font-bold text-gray-6">
+              <label className="mb-12 inline-block w-full text-left text-16 font-bold">
                 이메일
               </label>
               <TextInput
@@ -171,7 +171,7 @@ function SignUp() {
               </div>
             </fieldset>
             <fieldset>
-              <label className="w-full text-left text-16 font-bold text-gray-6">
+              <label className="w-full text-left text-16 font-bold">
                 닉네임
               </label>
               <p className="mb-12 mt-4 w-full text-left text-15 text-gray-3">
