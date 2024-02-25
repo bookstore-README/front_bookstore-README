@@ -48,10 +48,6 @@ function TermsCheckbox({
     setCheckedStates((prev) => ({ ...prev, [termsTitle]: !prev[termsTitle] }));
   };
 
-  const handleOpenModal = (title: string, content: string) => {
-    setIsModalOpen({ isOpen: !isModalOpen.isOpen, title, content });
-  };
-
   useEffect(() => {
     const isAllChecked = Object.values(checkedStates).every(Boolean);
     formMethods?.setValue('selectAll', isAllChecked);
