@@ -64,7 +64,6 @@ function TotalPriceCard({
             PAYMENT_TERMS_CONTENT.termsOfUse,
           ]}
           useFormContextProps={false}
-          showLastButton={false}
           onCheckedChange={handleCheckedChange}
         />
       )}
