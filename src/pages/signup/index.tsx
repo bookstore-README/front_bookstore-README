@@ -19,7 +19,7 @@ import {
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import useSignUpMutation from '@/hooks/useSignUpMutation';
-import { TERMS_TITLES } from '@/constants/sign';
+import { SING_UP_TERMS_CONTENT } from '@/constants/termsContent';
 
 function SignUp() {
   const method = useForm<SignUpValueType>({
@@ -192,7 +192,11 @@ function SignUp() {
               <TermsCheckbox
                 title="약관동의"
                 entire="전체동의"
-                checkContent={TERMS_TITLES}
+                checkContent={[
+                  SING_UP_TERMS_CONTENT.ageLimit,
+                  SING_UP_TERMS_CONTENT.termsOfUse,
+                  SING_UP_TERMS_CONTENT.userInformation,
+                ]}
               />
             </fieldset>
             <RegisterButton>회원가입</RegisterButton>
