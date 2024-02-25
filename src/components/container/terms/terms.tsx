@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CheckIcon from '@/public/icons/CheckIcon.svg';
 import RightArrowIcon from '@/public/icons/RightArrow.svg';
-import TermsDetailModal from '@/components/modal/termsDetailModal/termsDetailCard';
+import TermsDetailModal from '@/components/modal/termsDetailModal/termsDetailModal';
 
 interface TermsCheckboxProps {
   title?: string;
