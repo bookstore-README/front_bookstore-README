@@ -10,7 +10,6 @@ interface TermsCheckboxProps {
   entire: string;
   checkContent: { title: string; content: string }[];
   useFormContextProps?: boolean;
-  showLastButton?: boolean;
   onCheckedChange?: (checkedStates: boolean) => void;
 }
 interface CheckedStates {
@@ -22,7 +21,6 @@ function TermsCheckbox({
   entire,
   checkContent,
   useFormContextProps = true,
-  showLastButton = true,
   onCheckedChange,
 }: TermsCheckboxProps) {
   const formMethods = useFormContextProps ? useFormContext() : null;
@@ -113,26 +111,25 @@ function TermsCheckbox({
                 {item.title}
               </label>
             </div>
-            {(showLastButton || index !== checkContent.length - 1) &&
-              index > 0 && (
-                <button
-                  className="pr-4"
-                  onClick={() =>
-                    setIsModalOpen({
-                      isOpen: true,
-                      title: item.title,
-                      content: item.content,
-                    })
-                  }
-                  type="button">
-                  <Image
-                    src={RightArrowIcon}
-                    width={18}
-                    height={18}
-                    alt="약관내용 전체보기 버튼"
-                  />
-                </button>
-              )}
+            {index > 0 && (
+              <button
+                className="pr-4"
+                onClick={() =>
+                  setIsModalOpen({
+                    isOpen: true,
+                    title: item.title,
+                    content: item.content,
+                  })
+                }
+                type="button">
+                <Image
+                  src={RightArrowIcon}
+                  width={18}
+                  height={18}
+                  alt="약관내용 전체보기 버튼"
+                />
+              </button>
+            )}
           </div>
         ))}
       </div>
