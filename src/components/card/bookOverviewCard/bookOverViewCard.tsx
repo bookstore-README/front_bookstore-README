@@ -4,7 +4,6 @@ import LikeButton from '@/components/button/likeButton';
 import { useState } from 'react';
 import BookRating from '@/components/book/bookRating/bookRating';
 import ActionButton from '@/components/button/actionButton';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PreviewBookInfo from '@/components/book/previewBookInfo/previewBookInfo';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
