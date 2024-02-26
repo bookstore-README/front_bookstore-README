@@ -67,9 +67,8 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
       className="relative flex h-220 flex-col justify-between rounded-xl border-2 border-gray-1
         p-30 mobile:h-251 mobile:w-330 mobile:p-15 mobile:pb-15 tablet:w-[511px]">
       <div role="book-info-container" className="relative flex">
-        <Link
+        <div
           role="book-img"
-          href={`bookdetail/${book.bookId}`}
           className="h-170 bg-white mobile:h-134 mobile:min-w-93">
           <PreviewBookInfo
             size="sm"
@@ -78,7 +77,7 @@ function BookOverviewCard({ book, rank }: BookOverviewType2) {
             itemsStart
             bookId={book.bookId}
           />
-        </Link>
+        </div>
         <div>{book.bookmarks?.marked}</div>
 
         <div
