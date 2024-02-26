@@ -1,4 +1,5 @@
 import AdImage from '@/public/images/AdImage.png';
+import AdImageCategory from '@/public/images/AdImageCategory.png';
 import EventImage1 from '@/public/images/EventImage1.png';
 import EventImage2 from '@/public/images/EventImage2.png';
 import EventImage3 from '@/public/images/EventImage3.png';
@@ -18,4 +19,9 @@ const EVENT_IMAGES = {
   ],
 };
 
-export { AdImage, EVENT_IMAGES };
+const AD_IMAGES = {
+  main: AdImage,
+  category: AdImageCategory,
+};
+
+export { AD_IMAGES, EVENT_IMAGES };

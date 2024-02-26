@@ -8,7 +8,7 @@ import TodayBestSection from '@/components/container/todayBestSection/todayBestS
 import { useGetBook } from '@/api/book';
 import { BookData } from '@/types/api/book';
 import EventSection from '@/components/container/eventSection/eventSection';
-import { AdImage, EVENT_IMAGES } from '@/constants/eventImages';
+import { AD_IMAGES, EVENT_IMAGES } from '@/constants/eventImages';
 import { useSession } from 'next-auth/react';
 import Footer from '@/components/footer/footer';
 
@@ -46,7 +46,7 @@ function Home() {
           pc:gap-x-30">
         <EventSection
           eventSize="main"
-          adsImg={AdImage}
+          adsImg={AD_IMAGES}
           eventImgs={EVENT_IMAGES}
         />
       </div>

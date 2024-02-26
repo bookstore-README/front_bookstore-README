@@ -9,7 +9,7 @@ import useCheckCategoryUrl from '@/hooks/useCheckCategoryUrl';
 import { responsive } from '@/utils/checkResponsiveEnv';
 import BestSellerSection from '@/components/container/bestsellerSection/bestsellerSection';
 import { BookData } from '@/types/api/book';
-import { AdImage, EVENT_IMAGES } from '@/constants/eventImages';
+import { AD_IMAGES, EVENT_IMAGES } from '@/constants/eventImages';
 
 function CategoryPage() {
   const INITIAL_PARAMS = useCategoryCarouselParams();
@@ -36,7 +36,7 @@ function CategoryPage() {
       <Spacing height={[0, 0, 20]} />
       <EventSection
         eventSize="category"
-        adsImg={AdImage}
+        adsImg={AD_IMAGES}
         eventImgs={EVENT_IMAGES}
       />
       {data && data?.data.books.length > 0 ? (
