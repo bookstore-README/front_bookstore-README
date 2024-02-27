@@ -43,7 +43,7 @@ function Footer() {
       <article className="text-18 font-bold text-gray-4">
         고객센터 1588-1588
       </article>
-      <div className="h-[1px] w-150 bg-gray-1"></div>
+      {/* <div className="h-[1px] w-150 bg-gray-1"></div> */}
       <article className="flex-center gap-20">
         {HYPER_LINKS.map((el) => {
           return (

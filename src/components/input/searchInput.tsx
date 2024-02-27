@@ -5,8 +5,8 @@ function SearchInput() {
   return (
     <div className="relative z-10 inline-flex w-3/6">
       <input
-        className="w-full max-w-full rounded-[71px] border border-gray-1 px-20 py-2 pr-20
-          tablet:h-56 pc:h-56"
+        className="w-full max-w-full rounded-[71px] border border-gray-1 bg-gray-5 px-20 py-2
+          pr-20 tablet:h-56 pc:h-56"
       />
       <button
         className="absolute right-12 top-1/2 h-12 w-12 -translate-y-1/2 transform mobile:right-6
