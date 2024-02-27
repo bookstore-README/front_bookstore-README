@@ -49,7 +49,7 @@ function PreviewBookInfo({
           />
           {ranking && (
             <div
-              className={`shadow-indigo-500/40 absolute shadow-lg ${itemsStart ? 'left-17 top-[-2px]' : ' bottom-[-2px] right-0'}`}>
+              className={`shadow-indigo-500/40 absolute shadow-lg ${itemsStart ? 'left-8 top-[-2px]' : ' bottom-[-2px] right-[-2px]'}`}>
               <Image
                 src={
                   itemsStart
