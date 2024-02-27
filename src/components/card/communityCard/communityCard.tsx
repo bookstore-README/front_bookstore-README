@@ -70,7 +70,7 @@ function CommunityCard({
           />
         )}
       </div>
-      <div className="flex-center h-[180px] w-full overflow-hidden bg-[linear-gradient(180deg,_#DCE7F7_0%,_#F7EAEA_100%)]">
+      <div className="flex-center bg-custom-gradient h-[180px] w-full overflow-hidden">
         <Image
           src={bookCover}
           alt="책표지"
