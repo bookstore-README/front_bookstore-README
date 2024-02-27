@@ -31,7 +31,7 @@ function FindAddressForm() {
   }, [search, addressCurrentPage, refetch]);
 
   return (
-    <div className="flex w-full flex-col gap-20">
+    <div className="flex w-full flex-col gap-20 pb-30">
       <ModalSearchInput
         placeholder="도로명, 지명, 건물명 검색"
         onSearch={handleSearch}
