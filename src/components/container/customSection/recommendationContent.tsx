@@ -1,6 +1,6 @@
 function RecommendationContent() {
   return (
-    <div>
+    <div className="from-cyan-500 to-blue-500 bg-gradient-to-r">
       <div className="flex text-20 font-bold">
         <span className="text-primary">맞춤도서</span>
         <div>를 추천받아 보세요!</div>

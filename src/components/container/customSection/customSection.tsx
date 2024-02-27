@@ -68,7 +68,7 @@ function CustomSection({ isLoggedIn }: CustomSectionProps) {
   if (!isLoggedIn) return <NonLoggedInCustomSection />;
 
   return (
-    <div className="flex-center w-full bg-pink">
+    <div className="flex-center bg-custom-gradient w-full">
       {genreList.length === 0 ? (
         <NonSelectedCustomSection />
       ) : getRandomCustomBookList?.data?.length === 0 ? (

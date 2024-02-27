@@ -3,7 +3,7 @@ import RecommendationContent from './recommendationContent';
 
 function NonLoggedInCustomSection() {
   return (
-    <div className="flex-center w-full flex-col bg-pink mobile:h-205 tablet:h-324 pc:h-482">
+    <div className="flex-center bg-custom-gradient w-full flex-col mobile:h-205 tablet:h-324 pc:h-482">
       <RecommendationContent />
       <Link
         className="flex-center h-50 w-256 rounded-[5px] border border-primary bg-white text-14

@@ -90,4 +90,8 @@ body {
   .text-b-b {
     @apply font-bold text-black;
   }
+
+  .bg-custom-gradient {
+    background: linear-gradient(180deg, #f7faff 1.69%, #fff8f8 100%);
+  }
 }

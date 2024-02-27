@@ -86,7 +86,7 @@ function TodayBestSection() {
         ${STYLE.container}`}>
       <div
         role="colored-background"
-        className={`flex-center bg-pink ${STYLE['colored-background']}`}>
+        className={`flex-center bg-custom-gradient ${STYLE['colored-background']}`}>
         <h1 role="title" className={`absolute font-bold ${STYLE.title}`}>
           실시간 인기 도서
         </h1>
