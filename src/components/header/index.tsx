@@ -41,9 +41,7 @@ function LoggedInHeader() {
   // authenticated 상태인 경우에만 useGetBasKetQuery() 호출
   const { data } = useGetBasKetQuery();
   return (
-    <div
-      className="relative z-10 mx-15 flex h-50 min-w-fit max-w-full items-center
-        justify-between tablet:mx-30 tablet:h-100 pc:mx-60 pc:h-100">
+    <div className="z-10 mx-auto flex h-50 max-w-[1200px] items-center justify-between tablet:mx-30 tablet:h-100 pc:mx-60 pc:h-100">
       <ReadMeButton />
       <HeaderSearchInput />
       <div className="flex items-center gap-10 tablet:gap-20 pc:gap-20">
