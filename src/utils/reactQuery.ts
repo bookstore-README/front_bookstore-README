@@ -37,12 +37,13 @@ export const useUpdate = <T>(
   mutationFn: (option: T) => Promise<any>,
   option: T,
   { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
+  cacheRefetch: boolean = true,
 ) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: () => mutationFn(option),
     onSuccess: (data) => {
-      queryClient.invalidateQueries();
+      cacheRefetch ? queryClient.invalidateQueries() : null;
       if (onSuccess) onSuccess(data);
     },
     onError: (error) => {

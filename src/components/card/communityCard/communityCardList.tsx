@@ -1,19 +1,23 @@
-import { CommunityPagesProps, CommunityCardsProps } from '@/types/communityCardType';
+import {
+  CommunityPagesProps,
+  CommunityCardsProps
+} from '@/types/api/community';
 import CommunityCard from './communityCard';
 
 interface CommunityCardListProps {
   communityData: CommunityPagesProps[];
   kebab?: boolean;
+  profile?: boolean;
 }
 
-function CommunityCardList({ communityData, kebab }: CommunityCardListProps) {
+function CommunityCardList({ communityData, kebab, profile}: CommunityCardListProps) {
   return (
     <>
       {communityData?.map((data, index) => {
         return (
           <div
             key={index}
-            className="grid auto-rows-auto grid-cols-3 gap-20 mobile:grid-cols-1 tablet:grid-cols-2 mb-20">
+            className="mb-20 grid auto-rows-auto grid-cols-3 gap-20 mobile:grid-cols-1 tablet:grid-cols-2">
             {data?.cards.map((card: CommunityCardsProps, index) => {
               return (
                 <CommunityCard
@@ -26,7 +30,10 @@ function CommunityCardList({ communityData, kebab }: CommunityCardListProps) {
                   bookCover={card?.bookInfo.bookImgUrl}
                   bookTitle={card?.bookInfo.bookTitle}
                   review={card?.content}
+                  emojiInfo={card?.emojiInfo}
+                  writer={card.writer}
                   kebab={kebab}
+                  profile={profile}
                 />
               );
             })}

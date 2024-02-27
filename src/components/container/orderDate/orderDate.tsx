@@ -62,10 +62,6 @@ function OrderDate({
       setStartDate(new Date(findMonthAgo));
       setEndDate(new Date());
     }
-    if (pastDate === '직접 입력') {
-      setStartDate(new Date());
-      setEndDate(endDate);
-    }
   }, [pastDate]);
 
   useEffect(() => {

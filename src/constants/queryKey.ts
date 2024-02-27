@@ -10,4 +10,5 @@ export const QUERY_KEY = {
   payment: 'payment',
   review: 'review',
   customCategory: 'customCategory',
+  emoji: 'emoji'
 };

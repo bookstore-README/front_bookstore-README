@@ -4,7 +4,6 @@ import { useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 import { FormData } from '@/hooks/useFormControl';
 
-
 //배달상태조회
 const getDelivery = async (id: number) => {
   const result = await instance.get(`delivery/${id}`);
@@ -60,13 +59,13 @@ export const getDeliveryList = async (
   return result.data;
 };
 
-type DeliveryStatus = {
+export type DeliveryStatus = {
   deliveryId: number;
   deliveryStatus: string;
 };
 
 // 회원배송상태변경
-const putDeliveryStatus = async (data: DeliveryStatus) => {
+export const putDeliveryStatus = async (data: DeliveryStatus) => {
   const result = await instance.put('delivery', data);
   return result.data;
 };

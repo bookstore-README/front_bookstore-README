@@ -1,18 +1,25 @@
 import EmojiButton from '@/components/card/communityCard/emoji/emojiButton';
-import RedHeartEmojiImg from '@/public/images/RedHeartEmoji.png';
-import HappyEmojiImg from '@/public/images/HappyEmoji.png';
-import ExitedEmojiImg from '@/public/images/ExitedEmoji.png';
-import AngryEmojiImg from '@/public/images/AngryEmoji.png';
-import CryEmojiImg from '@/public/images/CryEmoji.png';
+import { EMOJI_ICON } from '@/constants/communityEmoji';
+import { CommunityEmojiInfo } from '@/types/api/community';
 
-function EmojiButtonContainer({ count = 0 }) {
+type EmojiType = keyof typeof EMOJI_ICON;
+interface EmojiButtonContainerProps extends CommunityEmojiInfo {
+  communityId: number;
+}
+
+function EmojiButtonContainer({ emojiId, emojis, communityId }: EmojiButtonContainerProps) {
   return (
     <div className="flex items-center justify-start gap-8 px-20">
-      <EmojiButton emoji={RedHeartEmojiImg} count={count} />
-      <EmojiButton emoji={HappyEmojiImg} count={count} />
-      <EmojiButton emoji={ExitedEmojiImg} count={count} />
-      <EmojiButton emoji={AngryEmojiImg} count={count} />
-      <EmojiButton emoji={CryEmojiImg} count={count} />
+      {emojis.map((emoji, index) => (
+        <EmojiButton
+          key={index}
+          emoji={EMOJI_ICON[emoji.emojiType as EmojiType]}
+          emojiType={emoji.emojiType}
+          count={emoji.emojiNum}
+          status={emoji.memberCheck}
+          communityId={communityId}
+        />
+      ))}
     </div>
   );
 }

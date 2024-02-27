@@ -28,6 +28,7 @@ function useFormControl ({
   onClick,
   initialValue,
 }: UseFormControl) {
+  
   const { control, handleSubmit, watch, getValues } = useForm({
     mode: 'onSubmit',
     defaultValues: initialValue || {},
@@ -58,7 +59,7 @@ function useFormControl ({
   };
 
   useEffect(() => {
-    setIsButtonActive(option ? value && !!option : value);
+    setIsButtonActive(option?.required ? value && !!option : value);
   }, [option, value]);
 
   return { control, handleSubmit, isButtonActive, onSubmit };

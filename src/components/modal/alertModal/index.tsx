@@ -1,6 +1,5 @@
 import ModalLayout from '@/components/modal/modalLayout';
 import RegisterButton from '@/components/button/register/registerButton';
-import { useDeleteCommunity } from '@/api/community';
 import { UseMutationResult } from '@tanstack/react-query';
 
 interface AlertModalProps {

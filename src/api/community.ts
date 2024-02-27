@@ -1,7 +1,12 @@
+import {
+  useDelete,
+  useFetch,
+  useUpdate,
+  useUpdateType,
+} from '@/utils/reactQuery';
 import { QUERY_KEY } from '@/constants/queryKey';
 import { FormData } from '@/hooks/useFormControl';
 import { GetCommunityOption } from '@/types/api/community';
-import { useDelete, useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 
 //커뮤니티 글 전체조회, 내가쓴글 조회,
@@ -57,4 +62,40 @@ const putCommunity = async (putFormData: FormData) => {
 
 export const usePutCommunity = (putFormData: FormData) => {
   return useUpdate(putCommunity, putFormData);
+};
+
+//커뮤니티 이모지 상태 토클
+interface PostCommunityEmoji {
+  type: string;
+  check: boolean;
+  communityId: number;
+}
+
+const postCommunityEmoji = async (data: PostCommunityEmoji) => {
+  const result = await instance.post(
+    `community/${data.communityId}/emoji`,
+    {},
+    {
+      params: {
+        type: data.type,
+        check: String(data.check),
+        communityId: String(data.communityId),
+      },
+    },
+  );
+
+  return result.data;
+};
+
+export const usePostCommunityEmoji = (
+  data: PostCommunityEmoji,
+  { onSuccess, onError, onSettled, onMutate }: useUpdateType = {},
+  cache : boolean,
+) => {
+  return useUpdate(postCommunityEmoji, data, {
+    onSuccess,
+    onError,
+    onSettled,
+    onMutate,
+  }, cache);
 };

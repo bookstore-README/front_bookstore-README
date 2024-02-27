@@ -5,6 +5,15 @@ import BookPrice from '@/components/book/bookPrice/bookPrice';
 import BookTitle from '@/components/book/bookTitle/bookTitle';
 import { useState } from 'react';
 import AddReview from '@/components/modal/addReview';
+
+import {
+  ConFirmButton,
+  ExchangeRefundButton,
+  ReviewButton,
+} from '@/components/button/order/orderPageButton';
+import { DeliveryStatus, putDeliveryStatus } from '@/api/delivery';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 export type BookOrderCardProps = {
   bookId: number;
   bookTitle: string;
@@ -27,7 +36,13 @@ function BookOrderCard({
   deliveryStatus,
 }: BookOrderCardProps) {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
-  
+
+  const queryClient = useQueryClient();
+  const statusMutation = useMutation({
+    mutationFn: (data: DeliveryStatus) => putDeliveryStatus(data),
+    onSuccess: () => queryClient.invalidateQueries(),
+  });
+
   const handleReviewModalOpenClick = () => {
     setIsReviewModalOpen(!isReviewModalOpen);
   };
@@ -39,6 +54,12 @@ function BookOrderCard({
     setIsGetRefundFormModalOpen(!isGetRefundFormModalOpen);
   };
 
+  const conFirmButtonClick = () => {
+    statusMutation.mutate({
+      deliveryId: deliveryId,
+      deliveryStatus: 'CONFIRM',
+    });
+  };
   return (
     <div
       role="card-container"
@@ -81,20 +102,18 @@ function BookOrderCard({
         role="service-div"
         className="flex-center absolute bottom-20 right-20 gap-12 mobile:bottom-0 mobile:left-0
           mobile:right-0">
-        {deliveryStatus !== '구매 확정' && (
-          <button
-            className="flex-center h-40 w-130 rounded-md border-2 border-primary bg-white text-primary
-          mobile:w-full"
-            onClick={handleGetRefundFormModalOpen}>
-            교환/환불
-          </button>
+        {deliveryStatus === '배송 중' && (
+          <ConFirmButton onClick={conFirmButtonClick} />
         )}
-        <button
-          className="flex-center h-40 w-130 rounded-md border-2 border-primary bg-primary text-white
-            mobile:w-full"
-          onClick={handleReviewModalOpenClick}>
-          리뷰쓰기
-        </button>
+        {deliveryStatus === '배송 완료' && (
+          <>
+            <ExchangeRefundButton onClick={handleGetRefundFormModalOpen} />
+            <ReviewButton onClick={handleReviewModalOpenClick} />
+          </>
+        )}
+        {deliveryStatus === '구매확정' && (
+          <ReviewButton onClick={handleReviewModalOpenClick} />
+        )}
         {isGetRefundFormModalOpen && (
           <GetRefund
             onClick={handleGetRefundFormModalOpen}

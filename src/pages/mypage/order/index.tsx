@@ -1,4 +1,8 @@
-import { getDeliveryList } from '@/api/delivery';
+import {
+  DeliveryStatus,
+  getDeliveryList,
+  putDeliveryStatus,
+} from '@/api/delivery';
 import BookOrderCardList from '@/components/card/bookOrderCard/bookOrderCardList';
 import BookOrderEmptyCard from '@/components/card/bookOrderCard/bookOrderEmptyCard';
 import OrderDate from '@/components/container/orderDate/orderDate';
@@ -11,7 +15,7 @@ import { QUERY_KEY } from '@/constants/queryKey';
 import { OrderBookData } from '@/types/bookOrderType';
 import { DeliveryItem, OrderOverViewItem } from '@/types/deliveryType';
 import { convertDate } from '@/utils/convertDate';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 
 function MyOrderPage() {
@@ -59,7 +63,7 @@ function MyOrderPage() {
 
   const orderData = getMyOrderQuery?.data?.map((item: DeliveryItem) => {
     return {
-      deliveryId : item.deliveryId,
+      deliveryId: item.deliveryId,
       ...item.orderDto,
       createDate: item.createDate,
       deliveryStatus: item.deliveryStatus,
