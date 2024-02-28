@@ -64,7 +64,7 @@ https://front-bookstore-readme-virid.vercel.app/
 
 # 시작 가이드
 
-```
+```html
 git clone https://github.com/bookstore-README/front_bookstore-README.git
 
 npm install
