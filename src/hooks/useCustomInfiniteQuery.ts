@@ -34,24 +34,30 @@ function useCustomInfiniteQuery({
   getNextPageParamsFunc,
   selectFunc,
 }: useCustomInfiniteQueryProps) {
-  const { fetchNextPage, isFetchingNextPage, hasNextPage, isRefetching, data } =
-    useInfiniteQuery({
-      queryKey: [...queryKey],
-      queryFn: ({ pageParam = initialCursorId }) => {
-        return queryFunc({
-          endpoint: `${endpoint}`,
-          params: {
-            [cursorName]: String(pageParam),
-            limit: String(limit),
-            sort: String(sort),
-            ascending: String(ascending),
-          },
-        });
-      },
-      initialPageParam: initialCursorId,
-      getNextPageParam: getNextPageParamsFunc,
-      select: selectFunc,
-    });
+  const {
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+    isRefetching,
+    data,
+    isLoading,
+  } = useInfiniteQuery({
+    queryKey: [...queryKey],
+    queryFn: ({ pageParam = initialCursorId }) => {
+      return queryFunc({
+        endpoint: `${endpoint}`,
+        params: {
+          [cursorName]: String(pageParam),
+          limit: String(limit),
+          sort: String(sort),
+          ascending: String(ascending),
+        },
+      });
+    },
+    initialPageParam: initialCursorId,
+    getNextPageParam: getNextPageParamsFunc,
+    select: selectFunc,
+  });
 
   useEffect(() => {
     if (refetchTrigger && !isRefetching && hasNextPage) {
@@ -59,7 +65,7 @@ function useCustomInfiniteQuery({
     }
   }, [refetchTrigger, isRefetching, hasNextPage]);
 
-  return { data, isFetchingNextPage, isRefetching, hasNextPage };
+  return { data, isFetchingNextPage, isRefetching, hasNextPage, isLoading };
 }
 
 export default useCustomInfiniteQuery;

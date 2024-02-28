@@ -74,13 +74,11 @@ function CartPage() {
     setWishListData(filteredData);
     resetSelectedItemArr();
   };
-
   useEffect(() => {
     const totalPrice = selectedItemArr.reduce((acc, item) => {
       acc += item.price * item.count;
       return acc;
     }, 0);
-    console.log(selectedItemArr, totalPrice);
     setTotalAmount(totalPrice);
   }, [selectedItemArr]);
 
@@ -99,7 +97,7 @@ function CartPage() {
 
   if (isError) return <div>Error loading data</div>;
 
-  if (!state) return <CartSkeleton></CartSkeleton>;
+  if (!state) return <CartSkeleton />;
 
   return (
     <MainLayout>

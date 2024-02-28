@@ -26,8 +26,8 @@ function TotalPriceCard({
   price,
   discount = 0,
 }: TotalPriceCardProps) {
-  const bookPrice = price ? price : useCalculateProductsPrice();
-  const delivery = bookPrice > 30000 ? 0 : 3000;
+  const bookPrice = useCalculateProductsPrice();
+  const delivery = bookPrice > 10000 ? 0 : 3000;
   const totalPrice = useCalculateTotalPrice({
     Price: bookPrice,
     delivery: delivery,

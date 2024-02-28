@@ -69,7 +69,6 @@ export const usePutCustomGenre = (
   });
 };
 
-
 // 나의 리뷰 조회
 const getMyReviewList = async (id: number) => {
   const result = await instance.get(`/member/reviews`);

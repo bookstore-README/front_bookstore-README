@@ -32,7 +32,7 @@ function Review({
   averageRating,
   reviewCount,
 }: ReviewProps) {
-  const [selectedOrder, setSelectedOrder] = useState('조회순');
+  const [selectedOrder, setSelectedOrder] = useState('최신순');
   const [currentOrder, setCurrentOrder] = useState(INITIAL_ORDER_STATUS);
   const [reviewCurrentPage] = useAtom(CurrentPageStateAtom);
 
@@ -79,7 +79,7 @@ function Review({
         className="flex w-full max-w-[710px] items-start justify-start text-20 font-bold
           text-gray-4 mobile:w-330">
         리뷰
-        <span className="text-primary pl-10 text-20 font-bold">
+        <span className="pl-10 text-20 font-bold text-primary">
           {reviewCount}
         </span>
       </h3>

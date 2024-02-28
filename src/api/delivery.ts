@@ -4,33 +4,47 @@ import { useFetch, useUpdate } from '@/utils/reactQuery';
 import { instance } from 'src/libs/instance';
 import { FormData } from '@/hooks/useFormControl';
 
+export interface DeliveryOrderBook {
+  bookId: number;
+  quantity: number;
+}
+
+export interface PostDeliveryOption {
+  name: string;
+  phone: string;
+  address: string;
+  message: string;
+  paymentMethod: string;
+  paymentAmount: number;
+  basketIds: (number | undefined)[];
+  orderBooks: DeliveryOrderBook[];
+  basicAddress: boolean;
+  enabled?: any;
+}
+
+export interface DeliveryId {
+  deliveryId: number;
+}
 //배달상태조회
-const getDelivery = async (id?: string) => {
+const getDelivery = async (id: number | null) => {
   const result = await instance.get(`delivery/${id}`);
+  return result.data.data;
   return result.data.data;
 };
 
-export const useGetDelivery = (id?: string) => {
+export const useGetDelivery = (id: number | null) => {
   return useFetch(QUERY_KEY.delivery, getDelivery, id);
 };
 
-//배달 등록
-//TODO : api 나오면 interface type 수정필요
-interface PostDeliveryOption {
-  id: number;
-  data: string;
-}
-
-const postDelivery = async (option: PostDeliveryOption) => {
-  const { id, data } = option;
-  const result = await instance.post(`delivery/${id}`, {
-    data,
+export const postDelivery = async (option: PostDeliveryOption) => {
+  const result = await instance.post(`delivery/`, {
+    option,
   });
   return result.data;
 };
 
 export const usePostDelivery = (option: PostDeliveryOption) => {
-  return useUpdate(postDelivery, option);
+  return useUpdate(postDelivery, option, option.enabled);
 };
 
 //배달상태 수정
@@ -69,3 +83,13 @@ export const putDeliveryStatus = async (data: DeliveryStatus) => {
   const result = await instance.put('delivery', data);
   return result.data;
 };
+
+export async function postAxiosDelivery(params: PostDeliveryOption) {
+  try {
+    const response = await instance.post(`/delivery`, params);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return 'error';
+  }
+}

@@ -46,7 +46,7 @@ function CommunityCardList({
           );
         })
       ) : (
-        <div className="flex-center pt-100 mobile:pt-60">
+        <div className="flex-center pt-100 mobile:pt-60 w-full">
           작성한 커뮤니티글이 없어요!
         </div>
       )}

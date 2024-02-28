@@ -1,14 +1,22 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import CheckIcon from '@/public/icons/CheckIcon.svg';
-/* TODO
-기본 배송지 저장 시 api post/put 요청 연결
-*/
+import { useAtom } from 'jotai';
+import { deliveryInfoAtom } from '@/store/deliveryInfo';
+
 function SetDefaultAddressButton() {
   const [isClicked, setIsClicked] = useState(false);
+  const [isDefault, setIsDefault] = useState(false);
+  const [deliveryInfo, setDeliveryInfo] = useAtom(deliveryInfoAtom);
 
   const handleClick = () => {
-    setIsClicked((prevState) => !prevState); // 이전 상태를 반전시킴
+    // 버튼이 클릭되면 isDefault를 반전시키고, 동시에 deliveryInfo의 isDefault도 변경합니다.
+    setIsClicked((prevState) => !prevState);
+    setIsDefault((prevState) => !prevState); // isDefault 상태를 반전시킴
+    setDeliveryInfo((prevDeliveryInfo) => ({
+      ...prevDeliveryInfo,
+      isDefault: !isDefault, // isDefault 값을 반전시킴
+    }));
   };
 
   return (

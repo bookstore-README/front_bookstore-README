@@ -26,7 +26,7 @@ function CartPayment({
   };
   const calculateDeliveryFee = (totalAmount: number, totalDiscount: number) => {
     if (selectedItemArr.length === 0) return 0;
-    return totalAmount - totalDiscount >= 30000 ? 0 : 3000;
+    return totalAmount - totalDiscount >= 10000 ? 0 : 3000;
   };
 
   const calculatePaymentFee = (totalAmount: number, totalDiscount: number) => {

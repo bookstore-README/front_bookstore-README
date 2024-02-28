@@ -22,7 +22,7 @@ function CommunityLayout({
   profile,
 }: CommunityLayoutProps) {
   const [ref, isIntersecting] = useInfinite();
-  const { data, hasNextPage, isRefetching } = useCustomInfiniteQuery({
+  const { data, hasNextPage, isLoading } = useCustomInfiniteQuery({
     endpoint: `${memberId ? `${memberId}` : ''}`,
     queryKey: ['community', `${memberId}`],
     queryFunc: getCommunity,
@@ -36,14 +36,16 @@ function CommunityLayout({
 
   return (
     <MainLayout>
-      <div className="mb-198 flex flex-col">
-        {isRefetching ? (
+      <div className="mb-198 flex w-[1200px] flex-col items-start mobile:w-[360px] tablet:mx-40 tablet:w-[768px]">
+        <PageTab
+          origin="피드"
+          originHref="/community"
+          add="내 글 보기"
+          addHref="/community/writeme"
+          isSelected={isSelected}
+        />
+        {isLoading ? (
           <>
-            <div className="mb-40 mt-20 flex h-27 w-169 items-center justify-between mobile:mb-27 mobile:mt-6 tablet:mb-36 tablet:mt-16">
-              <div className={`${SKELETON_COMMON_STYLE} h-27 w-40`} />
-              <div className={`${SKELETON_COMMON_STYLE} h-27 w-10`} />
-              <div className={`${SKELETON_COMMON_STYLE} h-27 w-70`} />
-            </div>
             <div className="mb-20 grid auto-rows-auto grid-cols-3 gap-20 mobile:grid-cols-1 tablet:grid-cols-2">
               {Array.from({
                 length: 6,
@@ -54,16 +56,8 @@ function CommunityLayout({
           </>
         ) : (
           <>
-            <PageTab
-              origin="피드"
-              originHref="/community"
-              add="내 글 보기"
-              addHref="/community/writeme"
-              isSelected={isSelected}
-            />
-            {
-              //@ts-ignore
-                <CommunityCardList communityData={data?.pages} kebab={kebab} profile={profile}/>
+            {//@ts-ignore
+              <CommunityCardList communityData={data?.pages} kebab={kebab} profile={profile}/>
             }
           </>
         )}

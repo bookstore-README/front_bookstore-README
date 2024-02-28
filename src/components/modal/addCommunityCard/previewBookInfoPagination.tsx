@@ -6,6 +6,7 @@ import { useGetBook, useGetPageBook } from '@/api/book';
 import { useEffect, useState } from 'react';
 import { BookData} from '@/types/api/book';
 import NoData from '@/components/modal/addCommunityCard/noData';
+import SkeletonPreviewBookInfo from '@/components/skeleton/previewBookInfo/skeleton';
 
 function PreviewBookInfoPagination({ search }: { search: string}) {
   const [CurrentPage] = useAtom(CurrentPageStateAtom);
@@ -43,12 +44,12 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
   useEffect(() => {
     setBookOverviews(data?.books);
   }, [data]);
-  
-  if(!data) return <NoData />;
+
+  if(!data || search.length === 0 ) return <NoData />;
 
   return (
     <>
-      <div className="flex w-[608px] justify-between mobile:w-291">
+      <div className="flex w-[608px] justify-start gap-20 mobile:w-291 mobile:gap-6">
         {(bookOverviews && !chooseBook) &&
           bookOverviews?.map((bookOverview, index) => (
             <PreviewBookInfo
@@ -62,7 +63,7 @@ function PreviewBookInfoPagination({ search }: { search: string}) {
               community={true}
               onClick={() => handleChooseBook(bookOverview.bookId)}
             />
-          ))}
+          ))} 
         {(chooseBook ) && (
           <PreviewBookInfo
             size="xs"

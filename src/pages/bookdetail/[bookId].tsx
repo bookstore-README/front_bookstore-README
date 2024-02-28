@@ -16,6 +16,8 @@ import SideOrderNavigator from '@/components/orderNavigator/sideOrderNavigator';
 import FooterOrderNavitgator from '@/components/orderNavigator/footerOrderNavitgator';
 import SkeletonBookDetailCard from '@/components/skeleton/bookDetailCard/skeleton';
 import { useUpdateBookmark } from '@/hooks/api/useUpdateBookmark';
+import { useAtom } from 'jotai';
+import { CurrentPageArrayIndexAtom, CurrentPageStateAtom } from '@/store/state';
 
 type BookDetailNavLocationType = 'information' | 'review' | 'currency';
 
@@ -29,6 +31,12 @@ export default function BookDetailPage() {
     useState<BookDetailNavLocationType>('information');
   // 책 구매 수량 state
   const [orderCount, setOrderCount] = useState(1);
+  const [currentPageArray, setCurrentPageArray] = useAtom(
+    CurrentPageArrayIndexAtom,
+  );
+  const [currentPageState, setCurrentPageState] = useAtom(CurrentPageStateAtom);
+  setCurrentPageArray(0);
+  setCurrentPageState(1);
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useGetBook({

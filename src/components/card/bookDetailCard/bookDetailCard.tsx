@@ -48,7 +48,6 @@ function BookDetailCard({
     authors: authors,
     isDetail: isDetail,
   });
-
   return (
     <section className="mobile:flex-center flex items-start justify-start gap-20 mobile:flex-col">
       <BookDetailImg imageUrl={bookImgUrl} />

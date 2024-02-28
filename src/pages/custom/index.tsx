@@ -79,7 +79,7 @@ function CustomPage() {
       <div className="w-full max-w-[1200px]">
         <CustomPageContentsLayout>
           <div
-            className="no-scrollbar mb-40 mt-30 flex w-full flex-wrap gap-8
+            className="no-scrollbar mb-40 mt-30 flex w-full flex-wrap gap-8 mobile:w-[95vw]
                   mobile:flex-nowrap mobile:overflow-auto">
             {genreList.length > 0 ? (
               genreList?.map((genre: SelectedGenre) => {
@@ -144,7 +144,7 @@ function CustomPage() {
                   mobile:gap-y-30 mobile:pr-15 tablet:grid-cols-4 tablet:gap-x-20">
               {getRandomOneHundredBookList.data?.map((book: CusTomBookType) => {
                 return (
-                  <div key={book.bookId}>
+                  <div className="flex-center" key={book.bookId}>
                     <PreviewBookInfo
                       size="lg"
                       bookId={book.bookId}
@@ -172,7 +172,7 @@ export const CustomPageContentsLayout = ({
   children,
 }: CustomPageContentsLayoutProps) => {
   return (
-    <div className="w-full px-60 mobile:px-0 mobile:pl-15">
+    <div className="w-full px-60 mobile:px-0 mobile:pl-15 tablet:px-30">
       <div className="mt-20 flex w-full items-center justify-start gap-x-10">
         <div className="text-20 font-bold text-black">
           내 취향대로 인기도서 골라보기

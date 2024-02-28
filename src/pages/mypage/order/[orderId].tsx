@@ -7,12 +7,12 @@ import { DeliveryItem } from '@/types/api/delivery';
 
 function MyPageOrderDetail() {
   const { query } = useRouter();
-  const [deliveryData, setDeliveryData] = useState<DeliveryItem>()
-  const { data } = useGetDelivery(query?.orderId as string);
-  
+  const [deliveryData, setDeliveryData] = useState<DeliveryItem>();
+  const { data } = useGetDelivery(Number(query?.orderId));
+
   useEffect(() => {
-    setDeliveryData(data)
-  }, [data])
+    setDeliveryData(data);
+  }, [data]);
 
   if (!deliveryData) return null;
 

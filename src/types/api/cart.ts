@@ -9,11 +9,13 @@ export type CartItem = {
 };
 
 export type PayMentAtom = {
+  orderBookId?: number;
+  basketId?: number;
   bookId: number;
   bookImgUrl: string;
   bookTitle: string;
   price: number;
   quantity?: number;
-  count?: number;
+  count: number;
   authors: string[];
 };

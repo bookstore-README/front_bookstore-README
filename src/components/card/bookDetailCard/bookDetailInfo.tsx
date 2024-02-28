@@ -49,7 +49,7 @@ function BookDetailInfo({
   return (
     <article
       role="info"
-      className="flex max-w-[525px] grow flex-col items-start justify-start mobile:w-full">
+      className="flex w-full grow flex-col items-start justify-start pc:w-[525px]">
       <BookCategory categories={categories} />
       <Spacing height={[4, 4, 4]} />
       <div className="flex w-full items-center justify-between gap-20">

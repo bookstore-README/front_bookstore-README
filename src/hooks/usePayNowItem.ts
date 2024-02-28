@@ -36,15 +36,16 @@ function usePayNowItem({
       price: price,
       authors: authors,
       quantity: count,
+      count: count,
     },
   ];
 
   const handlePayNowButton = () => {
-    if (status === "unauthenticated") {
-      router.push("/signin");
-    return;
+    if (status === 'unauthenticated') {
+      router.push('/signin');
+      return;
     }
-    
+
     setNowPayItem(setNowPayItemList);
     router.push('/order');
   };
