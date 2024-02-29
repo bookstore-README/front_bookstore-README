@@ -18,7 +18,7 @@ function Home() {
     endpoint: '0/main',
     params: {
       bookId: '0',
-      limit: '6',
+      limit: '18',
       sort: 'NEWEST',
       ascending: false,
     },
