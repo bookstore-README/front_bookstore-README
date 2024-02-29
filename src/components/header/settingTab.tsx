@@ -22,7 +22,7 @@ function SettingTab() {
   };
 
   return (
-    <div className="border-t border-gray-1">
+    <div className="flex-center w-full border-y border-gray-1">
       <div className="flex-center h-69 min-w-fit  max-w-[1200px] gap-48 mobile:h-50">
         <TabButton
           selected={selectedTab === 'editProfile'}
