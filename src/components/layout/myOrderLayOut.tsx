@@ -27,10 +27,10 @@ function MyOrderPageLayout({
   return (
     <MainLayout>
       <div role="container">
-        <div className="mx-auto flex max-w-[1080px] flex-col items-center px-40 py-60">
+        <div className="mx-auto flex max-w-[1080px] flex-col items-center py-40">
           <div
             role="overview"
-            className="mb-40 w-[1080px] w-full mobile:w-330 tablet:w-[688px]">
+            className="mb-40 w-[1080px] mobile:w-330 tablet:w-[688px]">
             {overview}
           </div>
           <div role="order-date" className="w-full">
