@@ -33,13 +33,13 @@ function NavigationTab({ isLoggedIn }: NavigationTabProps) {
   return (
     <>
       <div
-        className="mx-auto flex h-40 min-w-fit max-w-[1200px] items-center tablet:h-70
-          pc:h-70">
+        className="flex h-40 min-w-fit items-center mobile:max-w-360 mobile:justify-start tablet:h-70
+          pc:mx-auto pc:h-70 pc:max-w-[1200px]">
         <div className="flex items-center justify-between text-14 tablet:text-16 pc:text-16">
-          <div className="mx-16 tablet:mx-30 pc:mx-60">
+          <div className="mx-26 tablet:ml-40 pc:ml-70">
             <CategoryTabButton onClick={toggleCategoryTab} />
           </div>
-          <div className="flex gap-18 tablet:gap-30 pc:gap-40">
+          <div className="flex gap-18 tablet:ml-86 tablet:gap-30 pc:ml-106 pc:gap-40">
             <Link href="/domestic/bestseller"> 베스트</Link>
             <Link href="/domestic/newest"> 신간</Link>
             <CustomBookButton isLoggedIn={isLoggedIn} />
